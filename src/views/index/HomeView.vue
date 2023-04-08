@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <h1>Tu galeria de libros</h1>
+    <header class="title__container">
+      <h1 class="title">Tu galeria de documentos</h1>
+    </header>
   </div>
 </template>
 
@@ -11,3 +13,8 @@ export default defineComponent({
   name: 'HomeView',
 });
 </script>
+
+
+<style>
+@import url(styles.css);
+</style>
