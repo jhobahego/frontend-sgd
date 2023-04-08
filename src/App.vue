@@ -1,13 +1,15 @@
 <template>
-  <NavBar />
+  <header class="navbar__container">
+    <NavBar />
+  </header>
   <main>
-    <router-view/>
+    <router-view />
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import NavBar from './components/NavBar.vue';
+import NavBar from './components/navbar/NavBar.vue';
 
 export default defineComponent({
   name: "app",
@@ -17,3 +19,7 @@ export default defineComponent({
 });
 
 </script>
+
+<style>
+@import url(main.css);
+</style>
