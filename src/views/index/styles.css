@@ -1,21 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --white: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
-  --light-blue: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
-  --green: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
-  --light-blue-alpha: linear-gradient(to top, rgba(0, 198, 251, 0.5) 0%, rgba(0, 91, 234, 0.5) 100%);
-}
-
 .home {
   padding: 80px 4em;
 }
 
 .title {
-  color: var(--light-blue);
+  color: blue;
   text-align: center;
+  font-weight: 600;
 }

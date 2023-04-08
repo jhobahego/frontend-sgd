@@ -1,9 +1,9 @@
 <template>
-  <div class="home">
+  <section class="home">
     <header class="title__container">
       <h1 class="title">Tu galeria de documentos</h1>
     </header>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
