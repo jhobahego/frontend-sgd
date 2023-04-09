@@ -30,3 +30,7 @@ export default defineComponent({
   name: 'documentDetalView',
 })
 </script>
+
+<style>
+@import url(detail.css);
+</style>
