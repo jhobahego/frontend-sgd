@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/index/HomeView.vue'
-import AboutView from '../views/about/AboutView.vue'
-import DocumentsView from '../views/documents/DocumentsView.vue'
-import PurchaseView from '../views/documents/PurchaseView.vue'
+import HomeView from '@/views/index/HomeView.vue'
+import AboutView from '@/views/about/AboutView.vue'
+import DocumentsView from '@/views/documents/DocumentsView.vue'
+import PurchaseView from '@/views/documents/PurchaseView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,7 +21,7 @@ const routes: Array<RouteRecordRaw> = [
     component: DocumentsView
   },
   {
-    path: '/documentos/ :id',
+    path: '/documento/comprar',
     name: 'purchaseView',
     component: PurchaseView
   },
