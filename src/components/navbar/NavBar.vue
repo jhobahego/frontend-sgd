@@ -14,10 +14,6 @@
       <li class="navbar__item">
         <router-link class="navbar__link" to="#">Iniciar sesión</router-link>
       </li>
-
-      <li class="navbar__item">
-        <router-link class="navbar__link" to="#">Registrarse</router-link>
-      </li>
     </ul>
   </nav>
 </template>
