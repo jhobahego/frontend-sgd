@@ -3,6 +3,7 @@ import HomeView from '@/views/index/HomeView.vue'
 import AboutView from '@/views/about/AboutView.vue'
 import DocumentsView from '@/views/documents/DocumentsView.vue'
 import PurchaseView from '@/views/documents/PurchaseView.vue'
+import DocumentDetail from '@/views/documents/DocumentDetail.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,7 +22,12 @@ const routes: Array<RouteRecordRaw> = [
     component: DocumentsView
   },
   {
-    path: '/documento/comprar',
+    path: '/documento/:id',
+    name: 'documentDetalView',
+    component: DocumentDetail
+  },
+  {
+    path: '/documentos/comprar',
     name: 'purchaseView',
     component: PurchaseView
   },
