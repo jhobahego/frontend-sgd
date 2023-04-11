@@ -12,7 +12,7 @@
         <router-link class="navbar__link" to="/about">Acerca de</router-link>
       </li>
       <li class="navbar__item">
-        <router-link class="navbar__link" to="#">Iniciar sesión</router-link>
+        <router-link class="navbar__link" to="/autenticacion">Iniciar sesión</router-link>
       </li>
     </ul>
   </nav>
