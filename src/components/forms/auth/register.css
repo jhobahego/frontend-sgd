@@ -1,0 +1,37 @@
+.form__register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register__div {
+  width: 85%;
+  display: flex;
+  gap: .4em;
+}
+
+.register__div--first {
+  margin-top: 1.2em;
+}
+
+.register__input{
+  width: 85%;
+  padding: .4em;
+  border: none;
+  margin-bottom: .8em;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.btn__register {
+  width: 85%;
+  margin: .6em 0;
+  border: none;
+  border-radius: 4px;
+  background: var(--green);
+  font: inherit;
+  color: blue;
+  padding: .6em .6em;
+  font-weight: 600;
+}
