@@ -4,6 +4,7 @@ import AboutView from '@/views/about/AboutView.vue'
 import DocumentsView from '@/views/documents/DocumentsView.vue'
 import PurchaseView from '@/views/documents/PurchaseView.vue'
 import DocumentDetail from '@/views/documents/DocumentDetail.vue'
+import AuthView from '@/views/auth/AuthView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/documentos/comprar',
     name: 'purchaseView',
     component: PurchaseView
+  },
+  {
+    path: '/autenticacion',
+    name: 'authView',
+    component: AuthView
   },
 ]
 
