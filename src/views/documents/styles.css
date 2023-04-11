@@ -3,7 +3,7 @@
   max-width: 1200px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
-  margin: 3em auto;
+  margin: .8em auto;
   gap: 4em;
 }
 
@@ -17,6 +17,7 @@
   max-width: 450px;
   height: auto;
   overflow: hidden;
+  border: 1px solid blue;
 }
 
 .img__container {
