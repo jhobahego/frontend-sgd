@@ -1,0 +1,115 @@
+.auth__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth__card {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4em;
+  margin: 4em 0;
+}
+
+.auth__card--register {
+  width: 80%;
+  gap: 2em;
+  margin: 2em 0;
+}
+
+.auth__info {
+  width: 100%;
+  padding: 8px;
+}
+
+.info__title {
+  font-size: 2em;
+  color: blue;
+  font-weight: 600;
+  margin: .4em 0;
+}
+
+.info__description ,
+.info__slogan {
+  margin-bottom: .4em;
+  color: blue;
+  font-weight: 400;
+  opacity: .7;
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: fit-content;
+  border-radius: 6px;
+  border: 1px solid blue;
+  background: var(--light-blue-alpha);
+}
+
+.auth__form--register {
+  width: 90%;
+}
+
+.btn__switch {
+  max-width: fit-content;
+  margin: 1.2em auto;
+  padding: .8em .8em;
+  color: blue;
+  background: #bdc2e8;
+  font: inherit;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn__container {
+  width: 85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.btn__switch--register {
+  padding: .6em .6em;
+}
+
+@media screen and (max-width: 900px) {
+  .auth__card {
+    width: 80%;
+    gap: .4em;
+  }
+  .info__title {
+    font-size: 22px;
+  }
+
+  .info__description,
+  .info__slogan {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .auth__card {
+    width: 90%;
+    flex-direction: column;
+    gap: 1.5em;
+    margin-top: 1em;
+  }
+  
+  .info__title {
+    text-align: center;
+    font-size: 22px;
+  }
+
+  .info__description,
+  .info__slogan {
+    font-size: 14px;
+    text-align: center;
+  }
+}

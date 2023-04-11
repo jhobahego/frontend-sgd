@@ -54,3 +54,7 @@ export default defineComponent({
 })
 
 </script>
+
+<style>
+@import url(styles.css);
+</style>
