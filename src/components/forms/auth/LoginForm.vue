@@ -14,3 +14,7 @@ export default defineComponent({
   name: "loginForm",
 })
 </script>
+
+<style>
+@import url(login.css);
+</style>

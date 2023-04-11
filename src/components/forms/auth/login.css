@@ -1,0 +1,41 @@
+.form__login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__input{
+  width: 85%;
+  padding: .6em;
+  border: none;
+  margin-bottom: .8em;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.login__input--first {
+  margin-top: 1.2em;
+}
+
+.btn__login {
+  width: 85%;
+  padding: .8em .8em;
+  border: none;
+  margin: .6em 0;
+  border-radius: 4px;
+  background: var(--green);
+  color: blue;
+  font: inherit;
+  font-weight: 600;
+}
+
+span {
+  width: 85%;
+  text-align: center;
+  padding: .4em 0 .8em;
+  color: blue;
+  font-weight: 400;
+  opacity: .8;
+  border-bottom: 1px solid blue;
+}
