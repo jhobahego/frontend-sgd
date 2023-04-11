@@ -12,6 +12,7 @@
   background: var(--light-blue-alpha);
   overflow: hidden;
   border-radius: 8px;
+  border: 1px solid blue;
 }
 
 .img__container {
