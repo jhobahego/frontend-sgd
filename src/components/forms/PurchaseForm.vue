@@ -38,3 +38,7 @@ export default defineComponent ({
   },
 })
 </script>
+
+<style>
+@import url(purchase.css);
+</style>
