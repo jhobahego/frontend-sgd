@@ -14,8 +14,13 @@
 
         <input type="text" placeholder="Correo electronico...">
         <input type="number" placeholder="Cantidad...">
+        <select class="form__select" id="opciones">
+          <option value="compra">compra</option>
+          <option value="prestamo">prestamo</option>
+        </select>
 
         <input type="submit" class="purchase__btn" value="comprar" />
+        <router-link to="#" class="cancel__btn">Cancelar</router-link>
       </form>
     </div>
   </article>
