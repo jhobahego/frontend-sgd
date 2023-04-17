@@ -1,0 +1,35 @@
+.form__card {
+  width: 80%;
+  display: flex;
+  background: var(--light-blue-alpha);
+  justify-content: space-between;
+}
+
+.form__container {
+  padding: .6em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form__select{
+  width: 90%;
+}
+
+.form__body input{
+  width: 90%;
+}
+
+.cancel__btn {
+  text-decoration: none;
+  padding: .4em .6em;
+  background: #bdc2e8;
+}
