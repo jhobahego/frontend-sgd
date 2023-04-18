@@ -16,10 +16,6 @@
       <div class="card__body">
         <h3 class="card__title">{{documento.titulo}}</h3>
         <p class="card__description">{{ documento.descripcion }}</p>
-        <p class="card__description">Autor: {{ documento.autor }}</p>
-        <p class="card__description">Precio: {{ documento.precio }}$</p>
-        <p class="card__description">quedan {{ documento.stock }} documentos</p>
-
         <button class="card__btn" @click.prevent="adquirir()">
           Adquirir
         </button>
