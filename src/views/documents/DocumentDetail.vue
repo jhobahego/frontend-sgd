@@ -6,15 +6,21 @@
       </figure>
 
       <div class="document__info">
-        <h3 class="document__title">The pragmatic programmer</h3>
+        <h3 class="document__title">{{ documento.titulo }}</h3>
         <p class="document__description">
-          From journey to mastery
+          {{ documento.descripcion }}
         </p>
         <p class="document__description">
-          precio: 45$
+          precio: {{ documento.precio }}$
         </p>
         <p class="document__description">
-          stock: 23
+          stock: {{ documento.stock }}
+        </p>
+        <p class="document__description">
+          autor: {{ documento.autor }}
+        </p>
+        <p class="document__description">
+          idioma: {{ documento.idioma }}
         </p>
         <button class="buy__btn">adquirir</button>
       </div>
@@ -25,9 +31,35 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { Document } from '@/interfaces/Document';
+import { obtenerDocumento } from '@/services/DocumentService'
 
 export default defineComponent({
   name: 'documentDetalView',
+
+  data() {
+    return {
+      documento: {} as Document,
+    }
+  },
+
+  methods: {
+    async verDocumento() {
+      const documento_id = this.$route.params.id;
+      const token = localStorage.getItem("token");
+      if(token === null) return this.$router.push("/autenticado");
+
+      const response = await obtenerDocumento(documento_id, token);
+
+      if(response){
+        this.documento = response.data
+      }
+    },
+  },
+
+  created() {
+    this.verDocumento();
+  },
 })
 </script>
 
