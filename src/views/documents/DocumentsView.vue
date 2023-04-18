@@ -16,8 +16,8 @@
       <div class="card__body">
         <h3 class="card__title">{{documento.titulo}}</h3>
         <p class="card__description">{{ documento.descripcion }}</p>
-        <button class="card__btn" @click.prevent="adquirir()">
-          Adquirir
+        <button class="card__btn" @click.prevent="verMas(documento._id)">
+          Ver mas
         </button>
       </div>
     </article>
@@ -50,8 +50,10 @@ export default defineComponent({
         this.documentos = res?.data;
       }
     },
-    adquirir() {
-      alert("Opciones de compra...");
+    verMas(document_id: string | undefined) {
+      if(document_id){
+        this.$router.push(`/documento/${document_id}`);
+      }
     },
   },
 
