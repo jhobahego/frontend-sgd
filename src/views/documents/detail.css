@@ -63,6 +63,9 @@
   padding: .4em .8em;
   border-radius: 6px;
   background: var(--green); 
+  color: blue;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 450px) {
