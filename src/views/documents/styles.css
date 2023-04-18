@@ -10,7 +10,7 @@
 
 .card {
   margin: 0 auto;
-  padding: 0.5em;
+  padding: 0.2em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   background: var(--light-blue-alpha);
@@ -65,16 +65,17 @@
   text-align: center;
   margin-bottom: .6em;
   color: blue;
+  width: 90%;
 }
 
 .card__description {
   text-align: center;
   font-weight: 300;
-  /* cambiar el color de la letra y el tamaño */
   font-size: 14px;
   color: blue;
   opacity: .8;
-  margin: .5em 0;
+  margin-bottom: .5em;
+  width: 90%;
 }
 
 .card__btn {
@@ -82,5 +83,8 @@
   padding: .6em .6em;
   border: none;
   border-radius: 6px;
-  margin-top: 1em;
+  margin-top: 1.3em;
+  color: blue;
+  font-weight: 600;
+  cursor: pointer;
 }
