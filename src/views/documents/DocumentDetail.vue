@@ -22,7 +22,7 @@
         <p class="document__description">
           idioma: {{ documento.idioma }}
         </p>
-        <button class="buy__btn">adquirir</button>
+        <button class="buy__btn" @click.prevent="adquirir()">adquirir</button>
       </div>
 
     </article>
@@ -54,6 +54,10 @@ export default defineComponent({
       if(response){
         this.documento = response.data
       }
+    },
+
+    adquirir() {
+      this.$router.push("/documentos/comprar");
     },
   },
 
