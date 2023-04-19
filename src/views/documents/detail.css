@@ -15,11 +15,6 @@
   border: 1px solid blue;
 }
 
-.img__container {
-  display: inline-block;
-  padding: 4px;
-}
-
 .document__img {
   display: flex;
   align-items: center;
@@ -68,7 +63,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
   .document__card {
     grid-template-columns: 1fr;
   }
