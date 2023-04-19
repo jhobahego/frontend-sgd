@@ -1,12 +1,14 @@
 .form__card {
-  width: 80%;
-  display: flex;
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   background: var(--light-blue-alpha);
-  justify-content: space-between;
+  border: 1px solid blue;
+  border-radius: 6px;
 }
 
 .form__container {
-  padding: .6em;
+  padding: .4em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,22 +16,58 @@
 }
 
 .form__body {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.form__select{
+.form__email,
+.form__quantity{
   width: 90%;
+  padding: .1em .4em;
+  border: none;
+  margin-bottom: .8em;
+  border-radius: 4px;
+  font: inherit;
 }
 
-.form__body input{
+.form__select{
   width: 90%;
+  font: inherit;
+  color: rgba(0, 0, 0, 0.6);
+  padding: .1em;
+  border: none;
+  margin-bottom: .4em;
+  border-radius: 4px;
+}
+
+.purchase__btn {
+  margin: .8em 0;
+  border: none;
+  padding: .4em .8em;
+  border-radius: 6px;
+  background: var(--green); 
+  color: blue;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .cancel__btn {
   text-decoration: none;
   padding: .4em .6em;
   background: #bdc2e8;
+  border-radius: 6px;
+  color: blue;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
 }
