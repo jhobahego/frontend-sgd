@@ -1,0 +1,23 @@
+.purchase__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.purchase__title {
+  text-align: center;
+  color: blue;
+  font-weight: 600;
+  margin: 1.4em 0 .3em;
+}
+
+.purchase__description {
+  color: blue;
+  font-weight: 400;
+  opacity: .8;
+}
+
+.purchase__info {
+  margin-bottom: .5em;
+}
