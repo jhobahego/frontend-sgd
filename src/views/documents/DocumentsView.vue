@@ -11,7 +11,7 @@
 
     <article class="card" v-else>
       <figure class="img__container">
-        <img class="card__img" src="../../assets/libro.jpeg" alt="libro the pragmatic programmer" />
+        <img class="document__img" src="../../assets/libro.jpeg" alt="libro the pragmatic programmer" />
       </figure>
       <div class="card__body">
         <h3 class="card__title">{{documento.titulo}}</h3>
