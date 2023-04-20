@@ -57,7 +57,7 @@ export default defineComponent({
     },
 
     adquirir() {
-      this.$router.push("/documentos/comprar");
+      this.$router.push(`/documentos/comprar/${this.documento._id}`);
     },
   },
 
