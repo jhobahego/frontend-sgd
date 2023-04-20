@@ -6,11 +6,11 @@
 
     <div class="form__container">
       <header class="document__info">
-        <h3 class="document__title">The pragmatic programmer</h3>
-        <p class="document__description">Quedan 30 unidades</p>
-        <p class="document__description">precio: 30$</p>
+        <h3 class="document__title">{{ documento.titulo }}</h3>
+        <p class="document__description">Quedan {{ documento.stock }} unidades</p>
+        <p class="document__description">precio: {{ documento.precio }}$</p>
       </header>
-      <form class="form__body" onsubmit="comprar()">
+      <form class="form__body" @submit.prevent="comprar()">
 
         <input class="form__email" type="text" placeholder="Correo electronico...">
         <input class="form__quantity" type="number" placeholder="Cantidad...">
@@ -29,10 +29,19 @@
 </template>
 
 <script lang="ts">
+import { Document } from '@/interfaces/Document';
 import { defineComponent } from 'vue';
 
 export default defineComponent ({
   name: "purchaseForm",
+
+  props: {
+    documento: {
+      type: Object as () => Document,
+      required: true
+    },
+  },
+
   methods: {
     comprar() {
       alert('TODO: Hacer metodo comprar');
