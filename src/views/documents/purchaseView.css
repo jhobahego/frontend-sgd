@@ -5,6 +5,14 @@
   justify-content: center;
 }
 
+.purchase__info {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .purchase__title {
   text-align: center;
   color: blue;
@@ -16,8 +24,21 @@
   color: blue;
   font-weight: 400;
   opacity: .8;
+  margin-bottom: .3em;
+  text-align: left;
 }
 
 .purchase__info {
-  margin-bottom: .5em;
+  margin-bottom: .2em;
+}
+
+@media screen and (max-width: 600px) {
+  .purchase__info {
+    width: 70%;
+  }
+
+  .purchase__description {
+    font-size: 16px;
+    margin-bottom: .5em;
+  }
 }
