@@ -20,8 +20,8 @@
         </select>
 
         <div class="buttons">
-          <input type="submit" class="purchase__btn" value="comprar" />
-          <router-link to="#" class="cancel__btn">Cancelar</router-link>
+          <button type="submit" class="purchase__btn">adquirir</button>
+          <button @click.prevent="cancelar()" class="cancel__btn">Cancelar</button>
         </div>
       </form>
     </div>
@@ -45,6 +45,10 @@ export default defineComponent ({
   methods: {
     comprar() {
       alert('TODO: Hacer metodo comprar');
+    },
+
+    cancelar() {
+      this.$router.push(`/documento/${this.documento._id}`)
     },
   },
 })
