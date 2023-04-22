@@ -28,6 +28,7 @@
   color: blue;
   font: inherit;
   font-weight: 600;
+  cursor: pointer;
 }
 
 span {
