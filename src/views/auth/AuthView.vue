@@ -56,5 +56,5 @@ export default defineComponent({
 </script>
 
 <style>
-@import url(styles.css);
+@import url(authview.css);
 </style>
