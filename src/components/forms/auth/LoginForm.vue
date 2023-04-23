@@ -25,7 +25,7 @@ export default defineComponent({
     async iniciarSesion() {
       const res = await autenticarUsuario(this.credentials);
       if(res) {
-        localStorage.setItem("token", res.data.access_token);
+        localStorage.setItem("token", res.access_token);
         this.$router.push("/");
       }else{
         alert("credenciales invalidas");

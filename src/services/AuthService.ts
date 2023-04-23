@@ -13,7 +13,7 @@ export const registrarUsuario = async (datos: RegisterUser): Promise<AxiosRespon
   }
 }
 
-export const autenticarUsuario = async (data: LoginUser): Promise<AxiosResponse<Token> | undefined> => {
+export const autenticarUsuario = async (data: LoginUser): Promise<Token | undefined> => {
   const Form = new FormData();
   
   Form.append("username", data.correo);
