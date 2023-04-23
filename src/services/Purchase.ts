@@ -11,7 +11,7 @@ export const adquirirDocumento = async (documento: Document, solicitud: Solicitu
   if(!puedes) return false;
 
   const nuevoDocumento = {...documento};
-  nuevoDocumento.stock -= 1;
+  nuevoDocumento.stock -= solicitud.cantidad;
 
   const documentoActualizado = await actualizarDocumento(nuevoDocumento);
   if(!documentoActualizado) return false;
