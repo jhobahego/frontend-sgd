@@ -12,9 +12,9 @@
       </header>
       <form class="form__body" @submit.prevent="comprar()">
 
-        <input class="form__email" type="text" placeholder="Correo electronico...">
-        <input class="form__quantity" type="number" placeholder="Cantidad...">
-        <select class="form__select" id="opciones">
+        <input class="form__email" type="text" placeholder="Correo electronico..." v-model="solicitud.correo">
+        <input class="form__quantity" type="number" placeholder="Cantidad..." v-model="solicitud.cantidad">
+        <select class="form__select" v-model="solicitud.opcion">
           <option value="compra">compra</option>
           <option value="prestamo">prestamo</option>
         </select>
@@ -29,11 +29,20 @@
 </template>
 
 <script lang="ts">
-import { Document } from '@/interfaces/Document';
 import { defineComponent } from 'vue';
+import { Document } from '@/interfaces/Document';
+import { Solicitud } from '@/interfaces/Solicitud';
+import { adquirirDocumento } from '@/services/Purchase';
+import { haPrestado } from '@/services/Utils';
 
 export default defineComponent ({
   name: "purchaseForm",
+
+  data() {
+    return {
+      solicitud: {} as Solicitud,
+    }
+  },
 
   props: {
     documento: {
@@ -43,8 +52,13 @@ export default defineComponent ({
   },
 
   methods: {
-    comprar() {
-      alert('TODO: Hacer metodo comprar');
+    async comprar() {
+      const documento = await adquirirDocumento(this.documento, this.solicitud);
+      if(documento === false) {
+        return alert("fallo al comprar");
+      } else{
+        return alert('compra exitosa');
+      }
     },
 
     cancelar() {
