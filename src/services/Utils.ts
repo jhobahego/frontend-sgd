@@ -23,7 +23,7 @@ const verificarCorreo = async (correo: string): Promise<boolean> => {
   const usuario = await obtenerUsuarioAutenticado();
   if(!usuario) return false;
 
-  if(correo === usuario.data.correo) return true;
+  if(correo === usuario.correo) return true;
   
   return false;
 }

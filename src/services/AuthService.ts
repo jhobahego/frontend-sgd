@@ -24,13 +24,13 @@ export const autenticarUsuario = async (data: LoginUser): Promise<AxiosResponse<
       'Content-Type': 'application/x-www-form-urlencoded'
     }});
 
-    return respuesta;
+    return respuesta.data;
   } catch (error) {
     console.log(error);
   }
 }
 
-export const obtenerUsuarioAutenticado = async (): Promise<AxiosResponse<RegisterUser> | undefined> => {
+export const obtenerUsuarioAutenticado = async (): Promise<RegisterUser | undefined> => {
   const token = obtenerTokenDeLocalStorage();
   
   try {
@@ -40,7 +40,9 @@ export const obtenerUsuarioAutenticado = async (): Promise<AxiosResponse<Registe
       },
     })
 
-    return respuesta;
+    const usuario = respuesta.data;
+
+    return usuario;
   } catch (error) {
     console.log(`error al obtener usuario autenticado: ${error}`);
   }
