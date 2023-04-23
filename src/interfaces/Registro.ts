@@ -1,5 +1,5 @@
 export interface Registro {
-  registro_id: string,
+  registro_id?: string,
   id_cliente: string,
   nombre_cliente: string,
   id_documento: string,
