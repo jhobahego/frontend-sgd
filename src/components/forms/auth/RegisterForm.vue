@@ -32,7 +32,7 @@ export default defineComponent({
     async registrar() {
       const res = await registrarUsuario(this.usuario);
       if(res) {
-        localStorage.setItem("usuario", res.data.nombres);
+        localStorage.setItem("usuario", res.nombres);
         this.$router.push("/");
       }
       alert("hubo un problema al intentar registrar el usuario");

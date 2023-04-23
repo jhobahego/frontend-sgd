@@ -4,10 +4,10 @@ import { LoginUser, RegisterUser } from '@/interfaces/User'
 import { Token } from '@/interfaces/Token';
 import { obtenerTokenDeLocalStorage } from './Utils';
 
-export const registrarUsuario = async (datos: RegisterUser): Promise<AxiosResponse<RegisterUser> | undefined> => {
+export const registrarUsuario = async (datos: RegisterUser): Promise<RegisterUser | undefined> => {
   try {
-    const usuarioRegistrado = await axios.post("/usuarios/guardar", datos);
-    return usuarioRegistrado
+    const respuesta = await axios.post("/usuarios/guardar", datos);
+    return respuesta.data;
   } catch (error) {
     console.log(error);
   }
