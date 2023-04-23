@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import axios from './Axios'
 import { LoginUser, RegisterUser } from '@/interfaces/User'
 import { Token } from '@/interfaces/Token';
+import { obtenerTokenDeLocalStorage } from './Utils';
 
 export const registrarUsuario = async (datos: RegisterUser): Promise<AxiosResponse<RegisterUser> | undefined> => {
   try {
@@ -22,13 +23,16 @@ export const autenticarUsuario = async (data: LoginUser): Promise<AxiosResponse<
     const respuesta = await axios.post("http://localhost:8000/token", Form, {headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }});
+
     return respuesta;
   } catch (error) {
     console.log(error);
   }
 }
 
-export const obtenerUsuarioAutenticado = async (token: string): Promise<AxiosResponse<RegisterUser> | undefined> => {
+export const obtenerUsuarioAutenticado = async (): Promise<AxiosResponse<RegisterUser> | undefined> => {
+  const token = obtenerTokenDeLocalStorage();
+  
   try {
     const respuesta = await axios.get("/usuarios/perfil", {
       headers: {
@@ -38,6 +42,6 @@ export const obtenerUsuarioAutenticado = async (token: string): Promise<AxiosRes
 
     return respuesta;
   } catch (error) {
-    console.log(error);
+    console.log(`error al obtener usuario autenticado: ${error}`);
   }
 }
