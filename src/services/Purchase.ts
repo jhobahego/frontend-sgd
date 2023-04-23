@@ -19,14 +19,14 @@ export const adquirirDocumento = async (documento: Document, solicitud: Solicitu
   return true;
 }
 
-export const obtenerComprasDeUsuario = async (): Promise<AxiosResponse<Registro> | undefined> => {
+export const obtenerComprasDeUsuario = async (): Promise<Registro | undefined> => {
   const usuario = await obtenerUsuarioAutenticado();
   if(!usuario) return;
 
   const token = obtenerTokenDeLocalStorage();
   if(token == null) return;
   try{
-    const res = await axios.get(`/ventas/usuario/${usuario.data._id}`, {
+    const res = await axios.get(`/ventas/usuario/${usuario._id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
