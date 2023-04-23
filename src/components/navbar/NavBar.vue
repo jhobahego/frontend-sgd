@@ -36,10 +36,7 @@ export default defineComponent({
     },
 
     async obtenerUsuario() {
-      const token = localStorage.getItem("token");
-      if(token == null) return this.autenticado = false;
-
-      const usuario = await obtenerUsuarioAutenticado(token);
+      const usuario = await obtenerUsuarioAutenticado();
       if(usuario === undefined) return this.autenticado = false;
 
       this.autenticado = true;
