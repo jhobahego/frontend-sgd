@@ -4,6 +4,7 @@ export interface LoginUser {
 }
 
 export interface RegisterUser extends LoginUser {
+  _id: string,
   nombres: string,
   apellidos: string,
   ciudad: string,
