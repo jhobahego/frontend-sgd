@@ -4,7 +4,7 @@ import { Document } from "@/interfaces/Document";
 import { obtenerComprasDeUsuario } from "./Purchase";
 
 export const puedesAdquirir = async ({ correo, opcion, cantidad }: Solicitud, documento: Document): Promise<boolean> => {
-  if(documento.stock < 1) return false;
+  if(documento.stock < 1 && cantidad < 1) return false;
   if(opcion === 'prestamo' && cantidad > 1) return false;
   
   const correoValido = await verificarCorreo(correo);
