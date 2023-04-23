@@ -28,10 +28,10 @@ export default defineComponent({
   methods: {
     async obtenerUsuario() {
       const usuario = await obtenerUsuarioAutenticado();
-      if(usuario === undefined) return this.autenticado = false
+      if(usuario === undefined) return this.autenticado = false;
       
-      this.autenticado = true
-      this.username = usuario.data.nombres
+      this.autenticado = true;
+      this.username = usuario.nombres;
     }
   },
 
