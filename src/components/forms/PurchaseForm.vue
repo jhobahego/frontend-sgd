@@ -33,7 +33,6 @@ import { defineComponent } from 'vue';
 import { Document } from '@/interfaces/Document';
 import { Solicitud } from '@/interfaces/Solicitud';
 import { adquirirDocumento } from '@/services/Purchase';
-import { haPrestado } from '@/services/Utils';
 
 export default defineComponent ({
   name: "purchaseForm",
