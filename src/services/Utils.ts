@@ -36,13 +36,8 @@ export const obtenerTokenDeLocalStorage = (): string | null => {
 }
 
 export const haPrestado = async (): Promise<boolean> => {
-  const usuario = await obtenerUsuarioAutenticado();
-  if(!usuario) return false;
-
   const compras = await obtenerComprasDeUsuario();
-  if(!compras) return false;
-
-  if(compras && usuario.data.nombres === compras.data.nombre_cliente) return true;
+  if(compras) return true;
 
   return false;
 }
