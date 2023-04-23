@@ -33,6 +33,7 @@
 import { defineComponent } from 'vue';
 import { Document } from '@/interfaces/Document';
 import { obtenerDocumento } from '@/services/DocumentService'
+import { obtenerTokenDeLocalStorage } from '@/services/Utils';
 
 export default defineComponent({
   name: 'documentDetalView',
@@ -46,8 +47,8 @@ export default defineComponent({
   methods: {
     async verDocumento() {
       const documento_id = this.$route.params.id;
-      const token = localStorage.getItem("token");
-      if(token === null) return this.$router.push("/autenticado");
+      const token = obtenerTokenDeLocalStorage();
+      if(token == null) return this.$router.push("/autenticado");
 
       const response = await obtenerDocumento(documento_id, token);
 
