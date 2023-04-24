@@ -39,7 +39,10 @@ const haPrestado = async (): Promise<boolean> => {
   const compras = await obtenerComprasDeUsuario();
   if(!compras) return false;
   
-  if(compras.tipo_de_adquisicion === "prestamo") return true;
+  compras.forEach(registro => {
+    const { tipo_de_adquisicion, activo } = registro;
+    if(tipo_de_adquisicion === "prestamo" && activo) return true;
+  });
 
   return false;
 }
