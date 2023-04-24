@@ -21,7 +21,7 @@ export const adquirirDocumento = async (documento: Document, solicitud: Solicitu
   return true;
 }
 
-export const obtenerComprasDeUsuario = async (): Promise<Registro | undefined> => {
+export const obtenerComprasDeUsuario = async (): Promise<Registro[] | undefined> => {
   const usuario = await obtenerUsuarioAutenticado();
   if(!usuario) return;
 
