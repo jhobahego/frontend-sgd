@@ -77,8 +77,10 @@ const registrarAdquisicion = async (solicitud: Solicitud, documentoActualizado: 
   const usuario = await obtenerUsuarioAutenticado();
   if(!usuario) return;
   
-  const { _id: id_cliente, nombres: nombre_cliente } = usuario;
   const { cantidad, opcion: tipo_de_adquisicion } = solicitud;
+  const activo = tipo_de_adquisicion === "prestamo" ? true: false;
+  
+  const { _id: id_cliente, nombres: nombre_cliente } = usuario;
   const titulo_documento = documentoActualizado.titulo;
   
   let id_documento = ""
@@ -91,7 +93,7 @@ const registrarAdquisicion = async (solicitud: Solicitud, documentoActualizado: 
     titulo_documento,
     tipo_de_adquisicion,
     cantidad,
-    activo: true,
+    activo,
   }
 
   const registro = await registrarVenta(adquisicion);
