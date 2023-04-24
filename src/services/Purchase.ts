@@ -2,7 +2,6 @@ import { Document } from "@/interfaces/Document"
 import { Registro } from "@/interfaces/Registro";
 import { Solicitud } from "@/interfaces/Solicitud";
 import { obtenerUsuarioAutenticado } from "./AuthService";
-import { AxiosResponse } from "axios";
 import { obtenerTokenDeLocalStorage, puedesAdquirir } from "./Utils";
 import axios from "./Axios";
 
@@ -16,6 +15,9 @@ export const adquirirDocumento = async (documento: Document, solicitud: Solicitu
   const documentoActualizado = await actualizarDocumento(nuevoDocumento);
   if(!documentoActualizado) return false;
 
+  const registro = await registrarAdquisicion(solicitud, documentoActualizado);
+  if(!registro) return false;
+  
   return true;
 }
 
@@ -34,11 +36,10 @@ export const obtenerComprasDeUsuario = async (): Promise<Registro | undefined> =
     return res.data;
   }catch(error) {
     return;
-    // console.log(error);
   }
 }
 
-const actualizarDocumento = async (documento: Document): Promise<AxiosResponse<Document> | undefined> => {
+const actualizarDocumento = async (documento: Document): Promise<Document | undefined> => {
   const token = obtenerTokenDeLocalStorage();
   if(token == null) return;
 
@@ -53,4 +54,46 @@ const actualizarDocumento = async (documento: Document): Promise<AxiosResponse<D
   } catch (error) {
     console.log(`error al actualizar documento: ${error}`);
   }
+}
+
+const registrarVenta = async (adquisicion: Registro): Promise<Registro | undefined> => {
+  const token = obtenerTokenDeLocalStorage();
+  if(token == null) return;
+
+  try {
+    const respuesta = await axios.post("/ventas/guardar", adquisicion, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return respuesta.data;
+  } catch (error) {
+    return;
+  }
+}
+
+const registrarAdquisicion = async (solicitud: Solicitud, documentoActualizado: Document) => {
+  const usuario = await obtenerUsuarioAutenticado();
+  if(!usuario) return;
+  
+  const { _id: id_cliente, nombres: nombre_cliente } = usuario;
+  const { cantidad, opcion: tipo_de_adquisicion } = solicitud;
+  const titulo_documento = documentoActualizado.titulo;
+  
+  let id_documento = ""
+  if(documentoActualizado._id !== undefined) id_documento = documentoActualizado._id;
+
+  const adquisicion = {
+    id_cliente,
+    nombre_cliente,
+    id_documento,
+    titulo_documento,
+    tipo_de_adquisicion,
+    cantidad,
+    activo: true,
+  }
+
+  const registro = await registrarVenta(adquisicion);
+  if(registro) return registro;
 }
