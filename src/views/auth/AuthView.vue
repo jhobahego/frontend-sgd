@@ -11,7 +11,6 @@
         </p>
       </header>
 
-      <!-- debo crear los formularios de registro y login como componentes -->
       <article class="auth__form">
         <LoginForm v-if="!register"/>
   
