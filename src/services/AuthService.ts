@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import axios from './Axios'
 import { LoginUser, RegisterUser } from '@/interfaces/User'
 import { Token } from '@/interfaces/Token';
@@ -32,6 +31,7 @@ export const autenticarUsuario = async (data: LoginUser): Promise<Token | undefi
 
 export const obtenerUsuarioAutenticado = async (): Promise<RegisterUser | undefined> => {
   const token = obtenerTokenDeLocalStorage();
+  if(token == null) return;
   
   try {
     const respuesta = await axios.get("/usuarios/perfil", {
@@ -45,5 +45,6 @@ export const obtenerUsuarioAutenticado = async (): Promise<RegisterUser | undefi
     return usuario;
   } catch (error) {
     console.log(`error al obtener usuario autenticado: ${error}`);
+    return;
   }
 }
