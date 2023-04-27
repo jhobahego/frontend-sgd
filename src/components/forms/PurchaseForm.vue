@@ -55,9 +55,9 @@ export default defineComponent ({
       const documento = await adquirirDocumento(this.documento, this.solicitud);
       if(documento === false) {
         return alert("fallo al comprar");
-      } else{
-        return alert('compra exitosa');
       }
+      alert("compra exitosa")
+      return this.$router.push(`/documentos`)
     },
 
     cancelar() {
