@@ -23,7 +23,7 @@ export const obtenerDocumento = async (documento_id: string | string[], token: s
       }
     });
     return documento;
-  }catch (error) {
+  } catch (error) {
     console.log(error);
   }
 }

@@ -14,14 +14,16 @@ export const registrarUsuario = async (datos: RegisterUser): Promise<RegisterUse
 
 export const autenticarUsuario = async (data: LoginUser): Promise<Token | undefined> => {
   const Form = new FormData();
-  
+
   Form.append("username", data.correo);
   Form.append("password", data.contra);
 
   try {
-    const respuesta = await axios.post("http://localhost:8000/token", Form, {headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }});
+    const respuesta = await axios.post("http://localhost:8000/token", Form, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
 
     return respuesta.data;
   } catch (error) {
@@ -31,8 +33,8 @@ export const autenticarUsuario = async (data: LoginUser): Promise<Token | undefi
 
 export const obtenerUsuarioAutenticado = async (): Promise<RegisterUser | undefined> => {
   const token = obtenerTokenDeLocalStorage();
-  if(token == null) return;
-  
+  if (token == null) return;
+
   try {
     const respuesta = await axios.get("/usuarios/perfil", {
       headers: {
