@@ -6,13 +6,13 @@
     </div>
     <ul class="navbar__items" :class="{ 'navbar__items--visible' : isNavVisible }">
       <li class="navbar__item navbar__item--first" v-if="autenticado">
-        <router-link class="navbar__link" to="/documentos">Documentos</router-link>
+        <router-link class="navbar__link" to="/documentos" @click="cerrarMenu">Documentos</router-link>
       </li>
       <li class="navbar__item">
-        <router-link class="navbar__link" to="/about">Acerca de</router-link>
+        <router-link class="navbar__link" to="/about" @click="cerrarMenu">Acerca de</router-link>
       </li>
       
-      <router-link class="navbar__btn navbar__btn--link" to="/autenticacion" v-if="!autenticado">Iniciar sesión</router-link>
+      <router-link class="navbar__btn navbar__btn--link" to="/autenticacion" v-if="!autenticado" @click="cerrarMenu">Iniciar sesión</router-link>
       <button class="navbar__btn" @click.prevent="cerrarSesion()" v-if="autenticado">Cerrar sesión</button>
     </ul>
   </nav>
@@ -43,9 +43,14 @@ export default defineComponent({
     },
 
     cerrarSesion() {
+      this.cerrarMenu();
       localStorage.removeItem("token");
       this.autenticado = false;
       this.$router.push("/autenticacion");
+    },
+
+    cerrarMenu() {
+      this.isNavVisible = !this.isNavVisible;
     },
   },
 
