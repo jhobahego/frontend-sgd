@@ -33,6 +33,7 @@ import { defineComponent } from 'vue';
 import { Document } from '@/interfaces/Document';
 import { Solicitud } from '@/interfaces/Solicitud';
 import { adquirirDocumento } from '@/services/Purchase';
+import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 
 export default defineComponent ({
   name: "purchaseForm",
@@ -63,6 +64,15 @@ export default defineComponent ({
     cancelar() {
       this.$router.push(`/documento/${this.documento._id}`)
     },
+
+    async obtenerUsuario() {
+      const usuario = await obtenerUsuarioAutenticado();
+      if(usuario) this.solicitud.cliente = usuario
+    },
+  },
+
+  created() {
+    this.obtenerUsuario();
   },
 })
 </script>
