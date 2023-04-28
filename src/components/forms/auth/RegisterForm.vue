@@ -31,7 +31,7 @@ export default defineComponent({
   methods: {
     async registrar() {
       const res = await registrarUsuario(this.usuario);
-      if(res) {
+      if (res) {
         localStorage.setItem("usuario", res.nombres);
         this.$router.push("/");
       }

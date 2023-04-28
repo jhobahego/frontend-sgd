@@ -4,15 +4,16 @@
       <router-link class="navbar__brand" to="/">Inicio</router-link>
       <button class="navbar__toggle" @click="toggleNav">☰</button>
     </div>
-    <ul class="navbar__items" :class="{ 'navbar__items--visible' : isNavVisible }">
+    <ul class="navbar__items" :class="{ 'navbar__items--visible': isNavVisible }">
       <li class="navbar__item navbar__item--first" v-if="autenticado">
         <router-link class="navbar__link" to="/documentos" @click="cerrarMenu">Documentos</router-link>
       </li>
       <li class="navbar__item">
         <router-link class="navbar__link" to="/about" @click="cerrarMenu">Acerca de</router-link>
       </li>
-      
-      <router-link class="navbar__btn navbar__btn--link" to="/autenticacion" v-if="!autenticado" @click="cerrarMenu">Iniciar sesión</router-link>
+
+      <router-link class="navbar__btn navbar__btn--link" to="/autenticacion" v-if="!autenticado"
+        @click="cerrarMenu">Iniciar sesión</router-link>
       <button class="navbar__btn" @click.prevent="cerrarSesion()" v-if="autenticado">Cerrar sesión</button>
     </ul>
   </nav>
@@ -37,7 +38,7 @@ export default defineComponent({
 
     async obtenerUsuario() {
       const usuario = await obtenerUsuarioAutenticado();
-      if(usuario === undefined) return this.autenticado = false;
+      if (usuario === undefined) return this.autenticado = false;
 
       this.autenticado = true;
     },

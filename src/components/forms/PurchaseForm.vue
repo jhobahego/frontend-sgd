@@ -35,7 +35,7 @@ import { Solicitud } from '@/interfaces/Solicitud';
 import { adquirirDocumento } from '@/services/Purchase';
 import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 
-export default defineComponent ({
+export default defineComponent({
   name: "purchaseForm",
 
   data() {
@@ -54,7 +54,7 @@ export default defineComponent ({
   methods: {
     async comprar() {
       const documento = await adquirirDocumento(this.documento, this.solicitud);
-      if(documento === false) {
+      if (documento === false) {
         return alert("fallo al comprar");
       }
       alert("compra exitosa")
@@ -67,7 +67,7 @@ export default defineComponent ({
 
     async obtenerUsuario() {
       const usuario = await obtenerUsuarioAutenticado();
-      if(usuario) this.solicitud.cliente = usuario
+      if (usuario) this.solicitud.cliente = usuario
     },
   },
 

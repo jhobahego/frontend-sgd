@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import PurchaseForm  from '@/components/forms/PurchaseForm.vue'
+import PurchaseForm from '@/components/forms/PurchaseForm.vue'
 import { obtenerDocumento } from '@/services/DocumentService';
 import { Document } from '@/interfaces/Document';
 
@@ -30,7 +30,7 @@ export default defineComponent({
       documento: {} as Document,
     }
   },
-  
+
   components: {
     PurchaseForm,
   },
@@ -38,12 +38,12 @@ export default defineComponent({
   methods: {
     async obtenerDocumentoDeLaApi() {
       const token = localStorage.getItem("token");
-      if(token == null) return this.$router.push("/autenticacion");
+      if (token == null) return this.$router.push("/autenticacion");
 
       const documento_id = this.$route.params.id;
       const response = await obtenerDocumento(documento_id, token);
 
-      if(response) {
+      if (response) {
         this.documento = response.data;
       }
     },
