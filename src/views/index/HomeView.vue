@@ -6,7 +6,7 @@
         <h2 class="title">Tu galeria de documentos</h2>
       </header>
       <article class="records__description" v-for="registro in registros" :key="registro.registro_id">
-        <h3 class="record__title">{{ registro.titulo_documento }}</h3>      
+        <h3 class="record__title">{{ registro.titulo_documento }}</h3>
         <p class="record__type">{{ registro.tipo_de_adquisicion }}</p>
         <p class="record__status">{{ registro.activo }}</p>
       </article>
@@ -22,11 +22,12 @@
 import { Registro } from '@/interfaces/Registro';
 import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 import { obtenerComprasDeUsuario } from '@/services/Purchase';
+import { normalizarRegistros } from '@/services/Utils'
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'HomeView',
-  
+
   data() {
     return {
       username: "",
@@ -38,21 +39,26 @@ export default defineComponent({
   methods: {
     async obtenerUsuario() {
       const usuario = await obtenerUsuarioAutenticado();
-      if(usuario === undefined) {
-        return this.autenticado = false;
-      } else {
-        const registro = await obtenerComprasDeUsuario(usuario);
-        if(registro) this.registros = registro;
-  
-        this.autenticado = true;
-        this.username = usuario.nombres;
+      if (usuario === undefined) {
+        this.autenticado = false;
+        return;
       }
       
+      const registro = await obtenerComprasDeUsuario(usuario);
+      if (!registro) return;
+      
+      const registrosUnicos = normalizarRegistros(registro);
+      if(registrosUnicos) {
+        console.log(registrosUnicos);
+      }
+
+      this.autenticado = true;
+      this.username = usuario.nombres;
     },
   },
 
   created() {
-    this.obtenerUsuario();  
+    this.obtenerUsuario();
   }
 });
 </script>
