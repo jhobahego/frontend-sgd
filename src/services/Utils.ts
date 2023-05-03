@@ -2,6 +2,8 @@ import { Solicitud } from "@/interfaces/Solicitud";
 import { Document } from "@/interfaces/Document";
 import { obtenerComprasDeUsuario } from "./Purchase";
 import { RegisterUser } from "@/interfaces/User";
+import { Registro } from "@/interfaces/Registro";
+import { Galeria } from "@/interfaces/Galeria";
 
 export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Solicitud, documento: Document): Promise<boolean> => {
   if (documento.stock < 1 || cantidad < 1) return false;
@@ -46,4 +48,30 @@ const puedeComprar = (cantidad: number, stock: number): boolean => {
   if (cantidad > stock) return false;
 
   return true;
+}
+
+export const normalizarRegistros = (registros: Registro[]): Galeria => {
+  const registrosUnicos = {} as Galeria;
+  registrosUnicos.compras = [];
+  registrosUnicos.prestamos = [];
+
+  for(const registro of registros) {
+    const { activo, tipo_de_adquisicion } = registro;
+    if(!activo && tipo_de_adquisicion === "prestamo") continue;
+    
+    if (tipo_de_adquisicion === "compra") {
+      const index = registrosUnicos.compras.findIndex(reg => reg.id_documento === registro.id_documento);
+      if (index !== -1) {
+        // Registro nuevo con la cantidad aumentada
+        const nuevoRegistro = Object.assign({}, registro, {cantidad: registrosUnicos.compras[index].cantidad + 1});
+        registrosUnicos.compras.splice(index, 1, nuevoRegistro);
+      } else {
+        registrosUnicos.compras.push(registro);
+      }
+    } else {
+      registrosUnicos.prestamos.push(registro);
+    }
+  }
+
+  return registrosUnicos;
 }
