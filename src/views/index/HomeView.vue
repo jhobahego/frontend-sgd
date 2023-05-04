@@ -1,15 +1,26 @@
 <template>
   <section class="home">
     <div class="records" v-if="autenticado">
+      
       <header class="title__container">
         <h1 class="welcome">Bienvenido {{ username }}</h1>
         <h2 class="title">Tu galeria de documentos</h2>
       </header>
-      <article class="records__description" v-for="registro in registros" :key="registro.registro_id">
-        <h3 class="record__title">{{ registro.titulo_documento }}</h3>
-        <p class="record__type">{{ registro.tipo_de_adquisicion }}</p>
-        <p class="record__status">{{ registro.activo }}</p>
-      </article>
+
+      <section class="records__container">
+        <article class="records__purchases" v-for="registro in registros.compras" :key="registro.registro_id">
+          <img src="../../assets/libro.jpeg" alt="imagen del libro">
+          <h3 class="record__title">{{ registro.titulo_documento }}</h3>
+          <p class="record__description">{{ registro.tipo_de_adquisicion }}</p>
+          <p class="record__description">Documentos comprados: {{ registro.cantidad }}</p>
+        </article>
+        <article class="records__compras" v-for="registro in registros.prestamos" :key="registro.registro_id">
+          <img src="../../assets/libro.jpeg" alt="imagen del libro">
+          <h3 class="record__title">{{ registro.titulo_documento }}</h3>
+          <p class="record__description">{{ registro.tipo_de_adquisicion }}</p>
+        </article>
+      </section>
+
     </div>
     <header class="content" v-if="!autenticado">
       <h1 class="title">Sistema de gestión documental</h1>
@@ -19,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { Registro } from '@/interfaces/Registro';
+import { Galeria } from '@/interfaces/Galeria';
 import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 import { obtenerComprasDeUsuario } from '@/services/Purchase';
 import { normalizarRegistros } from '@/services/Utils'
@@ -32,7 +43,7 @@ export default defineComponent({
     return {
       username: "",
       autenticado: false,
-      registros: [] as Registro[],
+      registros: {} as Galeria,
     }
   },
 
@@ -49,7 +60,7 @@ export default defineComponent({
       
       const registrosUnicos = normalizarRegistros(registro);
       if(registrosUnicos) {
-        console.log(registrosUnicos);
+        this.registros = registrosUnicos;
       }
 
       this.autenticado = true;
