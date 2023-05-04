@@ -51,26 +51,31 @@ const puedeComprar = (cantidad: number, stock: number): boolean => {
 }
 
 export const normalizarRegistros = (registros: Registro[]): Galeria => {
-  const registrosUnicos = {} as Galeria;
-  registrosUnicos.compras = [];
-  registrosUnicos.prestamos = [];
+  const registrosUnicos: Galeria = {compras: [], prestamos: []};
 
-  for(const registro of registros) {
-    const { activo, tipo_de_adquisicion } = registro;
-    if(!activo && tipo_de_adquisicion === "prestamo") continue;
-    
-    if (tipo_de_adquisicion === "compra") {
-      const index = registrosUnicos.compras.findIndex(reg => reg.id_documento === registro.id_documento);
-      if (index !== -1) {
-        // Registro nuevo con la cantidad aumentada
-        const nuevoRegistro = Object.assign({}, registro, {cantidad: registrosUnicos.compras[index].cantidad + 1});
-        registrosUnicos.compras.splice(index, 1, nuevoRegistro);
-      } else {
-        registrosUnicos.compras.push(registro);
-      }
+  const registrosCompraUnicos = registros.filter(
+    (registro) => registro.tipo_de_adquisicion === "compra" && !registro.activo
+  );
+  for (const registro of registrosCompraUnicos) {
+    const index = registrosUnicos.compras.findIndex(
+      (reg) => reg.id_documento === registro.id_documento
+    );
+    if (index === -1) {
+      // No existe un registro con el mismo id_documento, agregar el registro completo
+      registrosUnicos.compras.push(registro);
     } else {
-      registrosUnicos.prestamos.push(registro);
+      // Actualizar la cantidad del registro existente
+      registrosUnicos.compras[index].cantidad += 1;
     }
+  }
+
+  // Filtrar los registros de préstamo y agregarlos al arreglo de préstamos único
+  const registrosPrestamoUnicos = registros.filter(
+    (registro) => registro.tipo_de_adquisicion === "prestamo" && registro.activo
+  );
+
+  for (const registro of registrosPrestamoUnicos) {
+    registrosUnicos.prestamos.push(registro);
   }
 
   return registrosUnicos;
