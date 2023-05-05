@@ -50,7 +50,7 @@ const puedeComprar = (cantidad: number, stock: number): boolean => {
   return true;
 }
 
-export const normalizarRegistros = (registros: Registro[]): Galeria => {
+export const normalizarRegistros = (registros: Registro[]): Registro[] => {
   const registrosUnicos: Galeria = {compras: [], prestamos: []};
 
   const registrosCompraUnicos = registros.filter(
@@ -78,5 +78,5 @@ export const normalizarRegistros = (registros: Registro[]): Galeria => {
     registrosUnicos.prestamos.push(registro);
   }
 
-  return registrosUnicos;
+  return registrosUnicos.compras.concat(registrosUnicos.prestamos);
 }
