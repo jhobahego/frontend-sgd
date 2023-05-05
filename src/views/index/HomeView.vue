@@ -8,16 +8,11 @@
       </header>
 
       <section class="records__container">
-        <article class="records__purchases" v-for="registro in registros.compras" :key="registro.registro_id">
+        <article class="records__purchases" v-for="registro in registros" :key="registro.registro_id">
           <img src="../../assets/libro.jpeg" alt="imagen del libro">
           <h3 class="record__title">{{ registro.titulo_documento }}</h3>
           <p class="record__description">{{ registro.tipo_de_adquisicion }}</p>
-          <p class="record__description">Documentos comprados: {{ registro.cantidad }}</p>
-        </article>
-        <article class="records__compras" v-for="registro in registros.prestamos" :key="registro.registro_id">
-          <img src="../../assets/libro.jpeg" alt="imagen del libro">
-          <h3 class="record__title">{{ registro.titulo_documento }}</h3>
-          <p class="record__description">{{ registro.tipo_de_adquisicion }}</p>
+          <p class="record__description">Documentos adquiridos: {{ registro.cantidad }}</p>
         </article>
       </section>
 
@@ -30,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { Galeria } from '@/interfaces/Galeria';
+import { Registro } from '@/interfaces/Registro';
 import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 import { obtenerComprasDeUsuario } from '@/services/Purchase';
 import { normalizarRegistros } from '@/services/Utils'
@@ -43,7 +38,8 @@ export default defineComponent({
     return {
       username: "",
       autenticado: false,
-      registros: {} as Galeria,
+      esCompra: false,
+      registros: [] as Registro[],
     }
   },
 
