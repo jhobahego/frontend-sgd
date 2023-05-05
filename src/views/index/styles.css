@@ -31,3 +31,57 @@
   text-align: center;
   cursor: pointer;
 }
+
+.title__container {
+  margin-bottom: 2em;
+}
+
+.records {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.records__container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+  align-items: center;
+}
+
+.record__items {
+  background: var(--light-blue-alpha);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.record__items > img {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 1.2em;
+}
+
+.record__info {
+  margin-bottom: 1.2em;
+}
+
+.record__title {
+  margin: .4em 0;
+  color: blue;
+  font-weight: 600;
+}
+
+.record__description {
+  margin-bottom: .2em;
+  color: blue;
+  font-size: 16px;
+  font-weight: 400;
+  opacity: .8;
+}
