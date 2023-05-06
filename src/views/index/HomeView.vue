@@ -1,7 +1,7 @@
 <template>
   <section class="home">
     <div class="records" v-if="autenticado">
-      
+
       <header class="title__container">
         <h1 class="welcome">Bienvenido {{ username }}</h1>
         <h2 class="title">Tu galeria de documentos</h2>
@@ -52,12 +52,12 @@ export default defineComponent({
         this.autenticado = false;
         return;
       }
-      
+
       const registro = await obtenerComprasDeUsuario(usuario);
       if (!registro) return;
-      
+
       const registrosUnicos = normalizarRegistros(registro);
-      if(registrosUnicos) {
+      if (registrosUnicos) {
         this.registros = registrosUnicos;
       }
 
