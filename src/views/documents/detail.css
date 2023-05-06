@@ -52,12 +52,14 @@
 .buy__btn {
   margin-top: 1.5em;
   border: none;
-  padding: .8em .8em;
+  padding: .4em .8em;
   border-radius: 6px;
   background: var(--green); 
   color: blue;
+  font: inherit;
   font-weight: 600;
   cursor: pointer;
+  margin-bottom: .6em;
 }
 
 @media screen and (max-width: 500px) {
