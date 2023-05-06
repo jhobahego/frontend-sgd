@@ -57,6 +57,7 @@
   margin: 0 auto;
   background: var(--light-blue-alpha);
   border-radius: 4px;
+  border: 1px solid blue;
   overflow: hidden;
   display: flex;
   flex-direction: column;
