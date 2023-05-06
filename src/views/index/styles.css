@@ -12,7 +12,7 @@
 
 .title {
   color: blue;
-  text-align: start;
+  text-align: center;
   font-weight: 400;
 }
 
@@ -50,16 +50,19 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1em;
   align-items: center;
+  justify-content: center;
 }
 
 .record__items {
+  margin: 0 auto;
   background: var(--light-blue-alpha);
   border-radius: 4px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 8px;
+  min-width: 240px;
 }
 
 .record__items > img {
