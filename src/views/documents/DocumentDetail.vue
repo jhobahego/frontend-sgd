@@ -23,6 +23,7 @@
           idioma: {{ documento.idioma }}
         </p>
         <button class="buy__btn" @click.prevent="adquirir()">adquirir</button>
+        <button class="cancel__btn" @click.prevent="cancelar()">cancelar</button>
       </div>
 
     </article>
@@ -59,6 +60,10 @@ export default defineComponent({
 
     adquirir() {
       this.$router.push(`/documentos/comprar/${this.documento._id}`);
+    },
+
+    cancelar() {
+      this.$router.push("/documentos");
     },
   },
 
