@@ -12,7 +12,7 @@ export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Soli
   const correoValido = await verificarCorreo(cliente, correo);
   if (!correoValido) return false;
 
-  const yaPresto = await haPrestado(opcion, cliente);
+  const yaPresto = await haPrestado(opcion, cliente, documento);
   if (yaPresto) return false;
 
   const compraValida = puedeComprar(cantidad, documento.stock);
@@ -34,14 +34,14 @@ export const obtenerTokenDeLocalStorage = (): string | null => {
   return token;
 }
 
-const haPrestado = async (opcion: string, cliente: RegisterUser): Promise<boolean> => {
+const haPrestado = async (opcion: string, cliente: RegisterUser, documento: Document): Promise<boolean> => {
   if (opcion !== "prestamo") return false;
 
   const compras = await obtenerComprasDeUsuario(cliente);
   if (!compras) return false;
 
   return compras.some(registro =>
-    registro.tipo_de_adquisicion === "prestamo" && registro.activo);
+    registro.tipo_de_adquisicion === "prestamo" && registro.activo && registro.id_documento === documento._id);
 }
 
 const puedeComprar = (cantidad: number, stock: number): boolean => {
