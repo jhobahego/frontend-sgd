@@ -4,6 +4,7 @@ export interface Document {
   autor: string,
   titulo: string,
   descripcion: string,
+  imagen: string,
   stock: number,
   precio: number,
   categoria: string,

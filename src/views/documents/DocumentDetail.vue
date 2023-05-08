@@ -2,7 +2,7 @@
   <section class="document__container">
     <article class="document__card">
       <figure class="img__container">
-        <img class="document__img" src="@/assets/libro.jpeg" alt="libro the pragmatic programmer">
+        <img class="document__img" :src="documento.imagen" :alt="documento.titulo">
       </figure>
 
       <div class="document__info">

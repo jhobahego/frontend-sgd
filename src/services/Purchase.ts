@@ -75,7 +75,7 @@ const registrarAdquisicion = async (solicitud: Solicitud, documentoActualizado: 
   const activo = tipo_de_adquisicion === "prestamo" ? true : false;
 
   const { _id: id_cliente, nombres: nombre_cliente } = solicitud.cliente;
-  const titulo_documento = documentoActualizado.titulo;
+  const { titulo: titulo_documento, imagen } = documentoActualizado;
 
   let id_documento = ""
   if (documentoActualizado._id !== undefined) id_documento = documentoActualizado._id;
@@ -85,6 +85,7 @@ const registrarAdquisicion = async (solicitud: Solicitud, documentoActualizado: 
     nombre_cliente,
     id_documento,
     titulo_documento,
+    imagen,
     tipo_de_adquisicion,
     cantidad,
     activo,

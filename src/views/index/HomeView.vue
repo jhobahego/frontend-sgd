@@ -9,7 +9,7 @@
 
       <section class="records__container">
         <article class="record__items" v-for="registro in registros" :key="registro.registro_id">
-          <img src="../../assets/libro.jpeg" alt="imagen del libro">
+          <img :src="registro.imagen" :alt="registro.titulo_documento">
           <div class="record__info">
             <h4 class="record__title">{{ registro.titulo_documento }}</h4>
             <p class="record__description">{{ registro.tipo_de_adquisicion }}</p>
