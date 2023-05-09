@@ -1,13 +1,13 @@
 <template>
   <section class="home">
+    <header class="title__container" v-if="autenticado">
+      <h1 class="welcome">Bienvenido {{ username }}</h1>
+      <h2 class="title">Tu galeria de documentos</h2>
+    </header>
     <div class="records" v-if="autenticado">
 
-      <header class="title__container">
-        <h1 class="welcome">Bienvenido {{ username }}</h1>
-        <h2 class="title">Tu galeria de documentos</h2>
-      </header>
 
-      <section class="records__container">
+      <!-- <section class="records__container"> -->
         <article class="record__items" v-for="registro in registros" :key="registro.registro_id">
           <img :src="registro.imagen" :alt="registro.titulo_documento">
           <div class="record__info">
@@ -16,7 +16,7 @@
             <p class="record__description">Documentos adquiridos: {{ registro.cantidad }}</p>
           </div>
         </article>
-      </section>
+      <!-- </section> -->
 
     </div>
     <header class="content" v-if="!autenticado">
@@ -74,5 +74,5 @@ export default defineComponent({
 
 
 <style>
-@import url(styles.css);
+@import url(home.css);
 </style>

@@ -1,5 +1,9 @@
 .home {
   padding: 80px 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .welcome {
@@ -38,20 +42,13 @@
 
 .records {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  gap: 3em;
 }
 
-.records__container {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1em;
-  align-items: center;
-  justify-content: center;
-}
 
 .record__items {
   margin: 0 auto;
@@ -63,7 +60,7 @@
   flex-direction: column;
   align-items: center;
   padding: 8px;
-  min-width: 240px;
+  min-width: 280px;
 }
 
 .record__items > img {
@@ -88,4 +85,11 @@
   font-size: 16px;
   font-weight: 400;
   opacity: .8;
+}
+
+@media only screen and (max-width: 425px) {
+  .record__items {
+    min-width: 250px;
+    max-width: 250px;
+  }
 }
