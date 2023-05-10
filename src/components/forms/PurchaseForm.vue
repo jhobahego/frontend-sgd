@@ -26,6 +26,7 @@
       </form>
     </div>
   </article>
+  <notifications position="bottom right" animation-type="css" width="500px"/>
 </template>
 
 <script lang="ts">
@@ -34,6 +35,7 @@ import { Document } from '@/interfaces/Document';
 import { Solicitud } from '@/interfaces/Solicitud';
 import { adquirirDocumento } from '@/services/Purchase';
 import { obtenerUsuarioAutenticado } from '@/services/AuthService';
+import { notify } from '@kyvg/vue3-notification';
 
 export default defineComponent({
   name: "purchaseForm",
@@ -55,10 +57,23 @@ export default defineComponent({
     async comprar() {
       const documento = await adquirirDocumento(this.documento, this.solicitud);
       if (documento === false) {
-        return alert("fallo al comprar");
+        notify({
+          title: "Fallo al comprar",
+          text: "No se pudo adquirir el documento",
+          type: "error",
+          duration: 2000,
+        })
+        return;
       }
-      alert("compra exitosa")
-      return this.$router.push(`/documentos`)
+      notify({
+        title: "Compra exitosa",
+        text: "Documento agregado a tu galeria",
+        type: "success",
+        duration: 2000,
+      })
+      setTimeout(() => {
+        this.$router.push(`/documentos`)
+      }, 2000) 
     },
 
     cancelar() {

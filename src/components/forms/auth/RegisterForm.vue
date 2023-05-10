@@ -11,6 +11,7 @@
       <input v-model="usuario.pais" class="register__input" type="text" placeholder="país...">
     </div>
     <button type="submit" class="btn__register">Registrarse</button>
+    <notifications position="top right" width="200px" animation-type="css" classes="notify__topright--error"/>
   </form>
 </template>
 
@@ -18,6 +19,7 @@
 import { defineComponent } from 'vue';
 import { RegisterUser } from '@/interfaces/User';
 import { registrarUsuario } from '@/services/AuthService';
+import { notify } from '@kyvg/vue3-notification';
 
 export default defineComponent({
   name: "registerForm",
@@ -35,7 +37,11 @@ export default defineComponent({
         localStorage.setItem("usuario", res.nombres);
         this.$router.push("/");
       }
-      alert("hubo un problema al intentar registrar el usuario");
+      notify({
+        title: "Problema al registrar",
+        text: "Hubo un problema al intentar registrar el usuario",
+        duration: 4000,
+      })
     }
   },
 

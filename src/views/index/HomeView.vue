@@ -1,11 +1,11 @@
 <template>
   <section class="home">
+    <notifications position="top right" animation-type="css" width="400px" :classes="tipoNotificacion"/>
     <header class="title__container" v-if="autenticado">
-      <h1 class="welcome">Bienvenido {{ username }}</h1>
+      <!-- <h1 class="welcome">Bienvenido {{ username }}</h1> -->
       <h2 class="title">Tu galeria de documentos</h2>
     </header>
     <div class="records" v-if="autenticado">
-
 
       <!-- <section class="records__container"> -->
         <article class="record__items" v-for="registro in registros" :key="registro.registro_id">
@@ -31,6 +31,7 @@ import { Registro } from '@/interfaces/Registro';
 import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 import { obtenerComprasDeUsuario } from '@/services/Purchase';
 import { normalizarRegistros } from '@/services/Utils'
+import { notify } from '@kyvg/vue3-notification';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -42,6 +43,7 @@ export default defineComponent({
       autenticado: false,
       esCompra: false,
       registros: [] as Registro[],
+      tipoNotificacion: "",
     }
   },
 
@@ -63,6 +65,13 @@ export default defineComponent({
 
       this.autenticado = true;
       this.username = usuario.nombres;
+      this.tipoNotificacion = "notify__topright--success";
+
+      notify({
+        title: "Sesión iniciada",
+        text: `Bienvenido ${this.username}, has iniciado sesión correctamente`,
+        duration: 4000,
+      })
     },
   },
 

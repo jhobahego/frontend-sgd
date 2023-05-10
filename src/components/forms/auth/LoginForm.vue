@@ -5,6 +5,7 @@
     <input v-model="credentials.contra" class="login__input" type="password" placeholder="contraseña...">
     <button @click.prevent="iniciarSesion()" type="submit" class="btn__login">Iniciar sesión</button>
     <span>¿olvidaste tu contraseña?</span>
+    <notifications position="top right" width="400px" animation-type="css" classes="notify__topright--error"/>
   </form>
 </template>
 
@@ -12,6 +13,7 @@
 import { defineComponent } from 'vue';
 import { LoginUser } from '@/interfaces/User';
 import { autenticarUsuario } from '@/services/AuthService';
+import { notify } from '@kyvg/vue3-notification';
 
 export default defineComponent({
   name: "loginForm",
@@ -29,7 +31,12 @@ export default defineComponent({
         localStorage.setItem("token", res.access_token);
         this.$router.push("/");
       } else {
-        alert("credenciales invalidas");
+        notify({
+        title: "Fallo al iniciar sesión",
+        text: "Correo electronico o contraseña invalidos",
+        type: "error",
+        closeOnClick: true,
+      })
       }
     },
   },
