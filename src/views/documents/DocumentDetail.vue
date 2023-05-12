@@ -1,32 +1,6 @@
 <template>
   <section class="document__container">
-    <article class="document__card">
-      <figure class="img__container">
-        <img class="document__img" :src="documento.imagen" :alt="documento.titulo">
-      </figure>
-
-      <div class="document__info">
-        <h3 class="document__title">{{ documento.titulo }}</h3>
-        <p class="document__description">
-          {{ documento.descripcion }}
-        </p>
-        <p class="document__description">
-          precio: {{ documento.precio }}$
-        </p>
-        <p class="document__description">
-          stock: {{ documento.stock }}
-        </p>
-        <p class="document__description">
-          autor: {{ documento.autor }}
-        </p>
-        <p class="document__description">
-          idioma: {{ documento.idioma }}
-        </p>
-        <button class="buy__btn" @click.prevent="adquirir()">adquirir</button>
-        <button class="cancel__btn" @click.prevent="cancelar()">cancelar</button>
-      </div>
-
-    </article>
+    <Document_detail :documento="documento" />
   </section>
 </template>
 
@@ -35,6 +9,7 @@ import { defineComponent } from 'vue';
 import { Document } from '@/interfaces/Document';
 import { obtenerDocumento } from '@/services/DocumentService'
 import { obtenerTokenDeLocalStorage } from '@/services/Utils';
+import Document_detail from '@/components/document/Document_detail.vue';
 
 export default defineComponent({
   name: 'documentDetalView',
@@ -43,6 +18,10 @@ export default defineComponent({
     return {
       documento: {} as Document,
     }
+  },
+
+  components: {
+    Document_detail,
   },
 
   methods: {

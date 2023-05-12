@@ -4,20 +4,15 @@
       <h1 class="welcome">Bienvenido {{ username }}</h1>
       <h2 class="title">Tu galeria de documentos</h2>
     </header>
-    <div class="records" v-if="autenticado">
-      <article class="record__items" v-for="registro in registros" :key="registro.registro_id">
-        <img :src="registro.imagen" :alt="registro.titulo_documento">
-        <div class="record__info">
-          <h4 class="record__title">{{ registro.titulo_documento }}</h4>
-          <p class="record__description">{{ registro.tipo_de_adquisicion }}</p>
-          <p class="record__description">Documentos adquiridos: {{ registro.cantidad }}</p>
-        </div>
-      </article>
-    </div>
-    <header class="content" v-if="!autenticado">
+
+    <header class="content" v-else>
       <h1 class="title">Sistema de gestión documental</h1>
       <router-link to="/autenticacion" class="sesion">Iniciar sesion</router-link>
     </header>
+
+    <div class="records" v-if="autenticado">
+      <Documents_adquired :registros="registros" />
+    </div>
   </section>
 </template>
 
@@ -26,8 +21,8 @@ import { Registro } from '@/interfaces/Registro';
 import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 import { obtenerComprasDeUsuario } from '@/services/Purchase';
 import { normalizarRegistros } from '@/services/Utils'
-import { notify } from '@kyvg/vue3-notification';
 import { defineComponent } from 'vue';
+import Documents_adquired from '@/components/document/Documents_adquired.vue';
 
 export default defineComponent({
   name: 'HomeView',
@@ -40,6 +35,10 @@ export default defineComponent({
       registros: [] as Registro[],
       tipoNotificacion: "",
     }
+  },
+
+  components: {
+    Documents_adquired,
   },
 
   methods: {
@@ -68,7 +67,6 @@ export default defineComponent({
   }
 });
 </script>
-
 
 <style>
 @import url(home.css);
