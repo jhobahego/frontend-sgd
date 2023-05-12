@@ -2,7 +2,8 @@
   <section class="home">
     <header class="title__container" v-if="autenticado">
       <h1 class="welcome">Bienvenido {{ username }}</h1>
-      <h2 class="title">Tu galeria de documentos</h2>
+      <h2 class="title" v-if="registros.length > 0">Tu galeria de documentos</h2>
+      <h2 class="title" v-else>No has adquirido ningun documento</h2>
     </header>
 
     <header class="content" v-else>
@@ -44,21 +45,17 @@ export default defineComponent({
   methods: {
     async obtenerUsuario() {
       const usuario = await obtenerUsuarioAutenticado();
-      if (usuario === undefined) {
-        this.autenticado = false;
-        return;
-      }
+      this.autenticado = usuario !== undefined;
+
+      if (!usuario) return;
+
+      this.username = usuario?.nombres;
 
       const registro = await obtenerComprasDeUsuario(usuario);
       if (!registro) return;
 
       const registrosUnicos = normalizarRegistros(registro);
-      if (registrosUnicos) {
-        this.registros = registrosUnicos;
-      }
-
-      this.autenticado = true;
-      this.username = usuario.nombres;
+      this.registros = registrosUnicos ?? [];
     },
   },
 
