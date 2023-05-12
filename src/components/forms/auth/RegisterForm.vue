@@ -11,14 +11,14 @@
       <input v-model="usuario.pais" class="register__input" type="text" placeholder="país...">
     </div>
     <button type="submit" class="btn__register">Registrarse</button>
-    <notifications position="top right" width="200px" animation-type="css" classes="notify__topright--error"/>
+    <notifications position="top right" width="200px" animation-type="css" classes="notify__topright--error" />
   </form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { RegisterUser } from '@/interfaces/User';
-import { registrarUsuario } from '@/services/AuthService';
+import { LoginUser, RegisterUser } from '@/interfaces/User';
+import { autenticarUsuario, registrarUsuario } from '@/services/AuthService';
 import { notify } from '@kyvg/vue3-notification';
 
 export default defineComponent({
@@ -33,15 +33,23 @@ export default defineComponent({
   methods: {
     async registrar() {
       const res = await registrarUsuario(this.usuario);
-      if (res) {
+      if (!res) {
+        notify({
+          title: "Problema al registrar",
+          text: "Hubo un problema al intentar registrar el usuario",
+          duration: 4000,
+        })
+        return;
+      }
+
+      const { correo, contra } = this.usuario;
+      const usuario = await autenticarUsuario({ correo, contra } as LoginUser);
+      const token = usuario?.access_token;
+
+      if (token) {
         localStorage.setItem("usuario", res.nombres);
         this.$router.push("/");
       }
-      notify({
-        title: "Problema al registrar",
-        text: "Hubo un problema al intentar registrar el usuario",
-        duration: 4000,
-      })
     }
   },
 
