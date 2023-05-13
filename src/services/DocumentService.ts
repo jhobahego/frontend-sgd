@@ -1,17 +1,19 @@
 import { AxiosResponse } from "axios";
 import axios from './Axios'
 import { Document } from "@/interfaces/Document";
+import { obtenerTokenDeLocalStorage } from "./Utils";
 
-export const obtenerDocumentos = async (token: string): Promise<AxiosResponse<Document[]> | undefined> => {
+export const obtenerDocumentos = async (): Promise<Document[]> => {
+  const token = obtenerTokenDeLocalStorage();
   try {
-    const documentos = await axios.get("/", {
+    const respuesta = await axios.get("/", {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-    return documentos;
+    return respuesta.data;
   } catch (error) {
-    console.log(error);
+    return [];
   }
 }
 

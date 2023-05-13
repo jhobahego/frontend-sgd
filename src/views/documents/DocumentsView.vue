@@ -1,17 +1,10 @@
 <template>
   <section class="card__container">
+    <h2 v-if="documentos.length < 0">No hay documentos disponibles de momento</h2>
 
-    <div v-for="documento in documentos" :key="documento._id">
-      <article class="card card--out" v-if="documento.stock < 1">
-        <h1 class="card__title">{{ documento.titulo }}</h1>
-        <div class="card-body">
-          <p class="card__description">Libro agotado pronto tendremos mas!!!</p>
-        </div>
-      </article>
-
-      <Documents_item :documento="documento" v-else />
+    <div v-for="documento in documentos" :key="documento._id" v-else>e> -->
+      <Documents_item :documento="documento"/>
     </div>
-
   </section>
 </template>
 
@@ -30,13 +23,7 @@ export default defineComponent({
   },
   methods: {
     async cargarDocumentos() {
-      const token = localStorage.getItem("token");
-      if (token === null)
-        return this.$router.push("/autenticacion");
-      const res = await obtenerDocumentos(token);
-      if (res) {
-        this.documentos = res?.data;
-      }
+      this.documentos = await obtenerDocumentos();
     },
   },
   created() {
