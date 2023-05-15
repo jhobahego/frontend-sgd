@@ -2,7 +2,7 @@
   <section class="card__container">
     <h2 v-if="documentos.length < 0">No hay documentos disponibles de momento</h2>
 
-    <div v-for="documento in documentos" :key="documento._id" v-else>e>
+    <div v-for="documento in documentos" :key="documento._id" v-else>
       <Documents_item :documento="documento" />
     </div>
   </section>
