@@ -37,14 +37,11 @@ export default defineComponent({
 
   methods: {
     async obtenerDocumentoDeLaApi() {
-      const token = localStorage.getItem("token");
-      if (token == null) return this.$router.push("/autenticacion");
-
       const documento_id = this.$route.params.id;
-      const response = await obtenerDocumento(documento_id, token);
+      const response = await obtenerDocumento(documento_id);
 
       if (response) {
-        this.documento = response.data;
+        this.documento = response;
       }
     },
   },
