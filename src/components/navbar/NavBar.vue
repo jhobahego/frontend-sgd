@@ -46,6 +46,7 @@ export default defineComponent({
     cerrarSesion() {
       this.cerrarMenu();
       localStorage.removeItem("token");
+      localStorage.removeItem("usuario");
       this.autenticado = false;
       this.$router.push("/autenticacion");
     },
