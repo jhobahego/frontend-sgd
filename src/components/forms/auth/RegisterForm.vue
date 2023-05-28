@@ -45,8 +45,10 @@ export default defineComponent({
       const { correo, contra } = this.usuario;
       const usuario = await autenticarUsuario({ correo, contra } as LoginUser);
       const token = usuario?.access_token;
+      console.log(token)
 
       if (token) {
+        localStorage.setItem("token", token);
         localStorage.setItem("usuario", res.nombres);
         this.$router.push("/");
       }
