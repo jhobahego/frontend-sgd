@@ -4,6 +4,7 @@ import AboutView from '@/views/about/AboutView.vue'
 import DocumentsView from '@/views/documents/DocumentsView.vue'
 import PurchaseView from '@/views/documents/PurchaseView.vue'
 import DocumentDetail from '@/views/documents/DocumentDetail.vue'
+import DocumentForm from '@/views/documents/DocumentFormView.vue'
 import AuthView from '@/views/auth/AuthView.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -36,6 +37,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/autenticacion',
     name: 'authView',
     component: AuthView
+  },
+  {
+    path: '/documentos/guardar',
+    name: 'documentFormView',
+    component: DocumentForm
   },
 ]
 
