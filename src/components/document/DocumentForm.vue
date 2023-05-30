@@ -47,16 +47,14 @@
 
     <button type="submit">agregar documento</button>
   </form>
-  <notifications position="bottom right" animation-type="css" width="500px"/>
+  <notifications position="bottom right" animation-type="css" width="500px" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { Document } from '@/interfaces/Document';
-import axios from '@/services/Axios';
-import { obtenerTokenDeLocalStorage } from '@/services/Utils';
+import { guardarDocumentoEnBD } from '@/services/DocumentService';
 import { notify } from '@kyvg/vue3-notification';
-import { AxiosResponse } from 'axios';
 
 export default defineComponent({
   name: "DocumentForm",
@@ -81,29 +79,18 @@ export default defineComponent({
       form.append("paginas", this.documento.paginas.toString())
       form.append("imagen", this.imagen)
 
-      try {
-        const token = obtenerTokenDeLocalStorage();
-        
-        const res = await axios.post("/documentos/guardar", form, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`
-          }
-        });
-        if(res as AxiosResponse<Document>){
-          const id = res.data._id;
-          notify({
-            title: "Documento guardado",
-            text: `El documento ${this.documento.titulo} se ha guardado correctamente`,
-            type: "success",
-            duration: 2000,
-          })
-          setTimeout(() => {
-            this.$router.push(`documento/${id}`)
-          }, 2000)
-        }
-      } catch(e) {
-        console.log(e)
+      const documento = await guardarDocumentoEnBD(form);
+      const id = documento._id;
+      if (id) {
+        notify({
+          title: "Documento guardado",
+          text: `El documento ${documento.titulo} se ha guardado correctamente`,
+          type: "success",
+          duration: 2000,
+        })
+        setTimeout(() => {
+          this.$router.push(`documento/${id}`)
+        }, 2000)
       }
     },
 
