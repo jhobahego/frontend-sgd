@@ -19,7 +19,7 @@ export const autenticarUsuario = async (data: LoginUser): Promise<Token | undefi
   Form.append("password", data.contra);
 
   try {
-    const respuesta = await axios.post("http://localhost:8000/token", Form, {
+    const respuesta = await axios.post("/token", Form, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
