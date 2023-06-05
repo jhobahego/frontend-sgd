@@ -1,11 +1,11 @@
-import axios from './Axios'
 import { LoginUser, RegisterUser } from '@/interfaces/User'
 import { Token } from '@/interfaces/Token';
 import { obtenerTokenDeLocalStorage } from './Utils';
+import axiosInstance from './Axios';
 
 export const registrarUsuario = async (datos: RegisterUser): Promise<RegisterUser | undefined> => {
   try {
-    const respuesta = await axios.post("/usuarios/guardar", datos);
+    const respuesta = await axiosInstance.post("/usuarios/guardar", datos);
     return respuesta.data;
   } catch (error) {
     console.log(error);
@@ -19,7 +19,7 @@ export const autenticarUsuario = async (data: LoginUser): Promise<Token | undefi
   Form.append("password", data.contra);
 
   try {
-    const respuesta = await axios.post("/token", Form, {
+    const respuesta = await axiosInstance.post("/token", Form, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -36,7 +36,7 @@ export const obtenerUsuarioAutenticado = async (): Promise<RegisterUser | undefi
   if (token == null) return;
 
   try {
-    const respuesta = await axios.get("/usuarios/perfil", {
+    const respuesta = await axiosInstance.get("/usuarios/perfil", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

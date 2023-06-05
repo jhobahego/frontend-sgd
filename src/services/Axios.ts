@@ -1,9 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
+// import dotenv from 'dotenv'
 
-const API_URL = process.env.API_URL;
+// dotenv.config();
+
+// const API_URL = process.env.API_URL;
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: API_URL, // http://localhost:8000
+  baseURL: /*"https://mintic-api.onrender.com",*/ "http://localhost:8000",
   headers: {
     "Content-Type": "application/json",
   }

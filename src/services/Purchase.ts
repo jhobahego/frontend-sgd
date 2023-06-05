@@ -2,8 +2,8 @@ import { Document } from "@/interfaces/Document"
 import { Registro } from "@/interfaces/Registro";
 import { Solicitud } from "@/interfaces/Solicitud";
 import { obtenerTokenDeLocalStorage, puedesAdquirir } from "./Utils";
-import axios from "./Axios";
 import { RegisterUser } from "@/interfaces/User";
+import axiosInstance from "./Axios";
 
 export const adquirirDocumento = async (documento: Document, solicitud: Solicitud): Promise<boolean> => {
   const puedes = await puedesAdquirir(solicitud, documento);
@@ -25,7 +25,7 @@ export const obtenerComprasDeUsuario = async (cliente: RegisterUser): Promise<Re
   const token = obtenerTokenDeLocalStorage();
   if (token == null) return;
   try {
-    const res = await axios.get(`/ventas/usuario/${cliente._id}`, {
+    const res = await axiosInstance.get(`/ventas/usuario/${cliente._id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -41,7 +41,7 @@ const actualizarDocumento = async (documento: Document): Promise<Document | unde
   if (token == null) return;
 
   try {
-    const res = await axios.put(`/documentos/actualizar/${documento._id}`, documento, {
+    const res = await axiosInstance.put(`/documentos/actualizar/${documento._id}`, documento, {
       headers: {
         Authorization: `Bearer ${token}`
       },
@@ -58,7 +58,7 @@ const registrarVenta = async (adquisicion: Registro): Promise<Registro | undefin
   if (token == null) return;
 
   try {
-    const respuesta = await axios.post("/ventas/guardar", adquisicion, {
+    const respuesta = await axiosInstance.post("/ventas/guardar", adquisicion, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -1,12 +1,12 @@
-import axios from './Axios'
 import { Document } from "@/interfaces/Document";
 import { obtenerTokenDeLocalStorage } from "./Utils";
 import { notify } from '@kyvg/vue3-notification';
+import axiosInstance from './Axios'
 
 export const obtenerDocumentos = async (): Promise<Document[]> => {
   const token = obtenerTokenDeLocalStorage();
   try {
-    const respuesta = await axios.get("/", {
+    const respuesta = await axiosInstance.get("/", {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -20,7 +20,7 @@ export const obtenerDocumentos = async (): Promise<Document[]> => {
 export const obtenerDocumento = async (documento_id: string | string[]): Promise<Document> => {
   const token = obtenerTokenDeLocalStorage();
   try {
-    const respuesta = await axios.get(`/documentos/${documento_id}`, {
+    const respuesta = await axiosInstance.get(`/documentos/${documento_id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -36,7 +36,7 @@ export const guardarDocumentoEnBD = async (form: FormData): Promise<Document> =>
   try {
     const token = obtenerTokenDeLocalStorage();
     
-    const res = await axios.post("/documentos/guardar", form, {
+    const res = await axiosInstance.post("/documentos/guardar", form, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`
