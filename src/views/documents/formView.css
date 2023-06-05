@@ -1,0 +1,19 @@
+.form__title {
+  margin: 1em 0 .4em;
+  text-align: center;
+  color: blue;
+  font-weight: 600;
+}
+
+.form__container {
+  width: auto;
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+@media (width < 340) {
+  .form__container {
+    margin-left: .4em;
+    margin-right: .4em;
+  }
+}

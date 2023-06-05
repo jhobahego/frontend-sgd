@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <h1 class="title">Crea tu documento</h1>
+  <section class="form__container">
+    <h1 class="form__title">Crea tu documento</h1>
     <DocumentForm />
   </section>
 </template>
@@ -18,12 +18,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-h1 {
-  margin: 1em 0 .4em;
-}
-
-section {
-  margin-left: 4em;
-  margin-right: 4em;
-}
+@import url(formView.css);
 </style>

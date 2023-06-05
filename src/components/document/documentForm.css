@@ -76,3 +76,10 @@ button {
   border: none;
   border-radius: 4px;
 }
+
+@media (width < 600px) {
+  .form__div {
+    flex-direction: column;
+    gap: 0;
+  }
+}

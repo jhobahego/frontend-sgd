@@ -42,7 +42,7 @@
 
       <label class="label__precio">precio
 
-        <input type="number" v-model="documento.precio">
+        <input class="input__precio" type="number" v-model="documento.precio">
       </label>
     </div>
 
@@ -125,4 +125,6 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>@import url(documentForm.css);</style>
+<style scoped>
+@import url(documentForm.css);
+</style>
