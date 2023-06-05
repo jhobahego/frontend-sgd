@@ -1,49 +1,69 @@
 <template>
   <form class="form__create" @submit.prevent="guardarDocumento()" enctype="multipart/form-data">
 
-    <label>tipo de documento
-    </label>
-    <select v-model="documento.tipo_documento">
-      <option value="fisico">fisico</option>
-      <option value="digital">digital</option>
-    </select>
+    <div class="form__div">
+      <label class="label__tipo">tipo de documento
 
-    <label>autor</label>
-    <input type="text" placeholder="Robert C. Martin, Ana Lopez..." v-model="documento.autor">
+        <select v-model="documento.tipo_documento">
+          <option value="fisico">fisico</option>
+          <option value="digital">digital</option>
+        </select>
+      </label>
 
-    <label>titulo</label>
-    <input type="text" placeholder="Clean code, the pragmatic programmer..." v-model="documento.titulo">
+      <label class="label__categoria">categoria
 
-    <label>descripcion</label>
-    <input type="text" placeholder="A Handbook of Agile Software..." v-model="documento.descripcion">
+        <select name="categoria" v-model="documento.categoria">
+          <option value="desarrollo de software">desarrollo de software</option>
+          <option value="romantico">romantico</option>
+          <option value="contaduria">contaduria</option>
+          <option value="deportes">deportes</option>
+          <option value="comics">comics</option>
+          <option value="anime">anime</option>
+        </select>
+      </label>
+    </div>
 
-    <label>categoria</label>
-    <select name="categoria" v-model="documento.categoria">
-      <option value="desarrollo de software">desarrollo de software</option>
-      <option value="romantico">romantico</option>
-      <option value="contaduria">contaduria</option>
-      <option value="deportes">deportes</option>
-      <option value="comics">comics</option>
-      <option value="anime">anime</option>
-    </select>
+    <label class="label__autor">autor</label>
+    <input class="input__autor" type="text" placeholder="Robert C. Martin, Ana Lopez..." v-model="documento.autor">
 
-    <label>stock</label>
-    <input type="number" v-model="documento.stock">
+    <label class="label__titulo">titulo</label>
+    <input class="input__titulo" type="text" placeholder="Clean code, the pragmatic programmer..."
+      v-model="documento.titulo">
 
-    <label>precio</label>
-    <input type="number" v-model="documento.precio">
+    <label class="label__descripcion">descripcion</label>
+    <input class="input__descripcion" type="text" placeholder="A Handbook of Agile Software..."
+      v-model="documento.descripcion">
 
-    <label>editorial</label>
-    <input type="text" placeholder="Betulia SAS, Bogota-editoriales..." v-model="documento.editorial">
+    <div class="form__div">
+      <label class="label__stock">stock
 
-    <label>idiomas</label>
-    <input type="text" placeholder="Ingles, Español, Portugues..." v-model="documento.idioma">
+        <input class="input__stock" type="number" v-model="documento.stock">
+      </label>
 
-    <label>paginas</label>
-    <input type="number" v-model="documento.paginas">
+      <label class="label__precio">precio
 
-    <label>imagen</label>
-    <input type="file" @change="handleFile">
+        <input type="number" v-model="documento.precio">
+      </label>
+    </div>
+
+    <label class="label__editorial">editorial</label>
+    <input class="input__editorial" type="text" placeholder="Betulia SAS, Bogota-editoriales..."
+      v-model="documento.editorial">
+
+    <div class="form__div">
+      <label class="label__idiomas">idiomas
+
+        <input class="input__idiomas" type="text" placeholder="Ingles, Español, Portugues..." v-model="documento.idioma">
+      </label>
+
+      <label class="label__paginas">paginas
+
+        <input class="input__paginas" type="number" v-model="documento.paginas">
+      </label>
+    </div>
+
+    <label class="label__imagen">imagen</label>
+    <input class="input__imagen" type="file" @change="handleFile">
 
     <button type="submit">agregar documento</button>
   </form>
@@ -105,26 +125,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-.form__create {
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font: inherit;
-  padding: 1.2em;
-  margin: 0 auto;
-}
-
-label {
-  width: 90%;
-}
-
-input,
-select {
-  width: 90%;
-  margin-bottom: .6em;
-}
-</style>
+<style scoped>@import url(documentForm.css);</style>

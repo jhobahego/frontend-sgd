@@ -1,0 +1,58 @@
+.form__create {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  padding: 1.2em;
+  margin: 0 auto;
+}
+
+.form__div {
+  width: 90%;
+  display: flex;
+  gap: 1.4em;
+  align-items: center;
+  justify-content: center;
+}
+
+.label__autor,
+.label__titulo,
+.label__descripcion,
+.label__editorial,
+.label__imagen {
+  width: 90%;
+}
+
+.label__tipo,
+.label__categoria,
+.label__stock,
+.label__precio,
+.label__idiomas,
+.label__paginas,
+
+.input__stock,
+.input__precio,
+.input__idiomas,
+.input__paginas,
+select {
+  width: 100%;
+}
+
+.input__autor,
+.input__titulo,
+.input__descripcion,
+.input__editorial {
+  width: 90%;
+  margin-bottom: .6em;
+}
+
+.label__imagen {
+  margin-top: .4em;
+}
+.input__imagen {
+  width: 90%;
+  margin-bottom: 1.4em;
+}
