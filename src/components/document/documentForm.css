@@ -8,6 +8,9 @@
   font: inherit;
   padding: 1.2em;
   margin: 0 auto;
+  background: var(--light-blue-alpha);
+  border-radius: 8px;
+  color: blue;
 }
 
 .form__div {
@@ -55,4 +58,21 @@ select {
 .input__imagen {
   width: 90%;
   margin-bottom: 1.4em;
+}
+
+input ,
+select {
+  padding: .4em;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: .4em;
+}
+
+button {
+  padding: .6em;
+  color: blue;
+  font-weight: 600;
+  background: var(--green);
+  border: none;
+  border-radius: 4px;
 }
