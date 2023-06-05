@@ -62,8 +62,10 @@
       </label>
     </div>
 
-    <label class="label__imagen">imagen</label>
-    <input class="input__imagen" type="file" @change="handleFile">
+    <div class="imagen__div">
+      <label class="label__imagen" for="imagen">subir imagen</label>
+      <input class="input__imagen" type="file" @change="handleFile" id="imagen">
+    </div>
 
     <button type="submit">agregar documento</button>
   </form>
