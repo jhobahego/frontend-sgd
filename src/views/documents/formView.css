@@ -6,13 +6,13 @@
 }
 
 .form__container {
-  width: auto;
   margin-left: 4em;
   margin-right: 4em;
 }
 
-@media (width < 340) {
+@media (width < 340px) {
   .form__container {
+    margin-top: 1em;
     margin-left: .4em;
     margin-right: .4em;
   }
