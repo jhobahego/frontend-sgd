@@ -66,6 +66,6 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 @import url(styles.css);
 </style>

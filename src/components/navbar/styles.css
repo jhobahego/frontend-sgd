@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: .5em 4em;
+  max-height: 3em;
 }
 
 .navbar__opacity {
@@ -77,6 +78,7 @@
 @media only screen and (max-width: 768px) {
   .navbar__toggle {
     display: block;
+    margin: 0;
   }
   
   .navbar {
