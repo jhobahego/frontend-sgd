@@ -62,6 +62,7 @@
       </label>
     </div>
 
+    <img class="preview" :src="imagePreview" :alt="imagen.name" v-if="imagePreview.length > 0">
     <div class="imagen__div">
       <label class="label__imagen" for="imagen">subir imagen</label>
       <input class="input__imagen" type="file" @change="handleFile" id="imagen">
@@ -84,6 +85,7 @@ export default defineComponent({
     return {
       documento: {} as Document,
       imagen: {} as File,
+      imagePreview: ""
     }
   },
   methods: {
@@ -111,7 +113,7 @@ export default defineComponent({
           duration: 2000,
         })
         setTimeout(() => {
-          this.$router.push(`documento/${id}`)
+          this.$router.push(`/documento/${id}`)
         }, 2000)
       }
     },
@@ -121,6 +123,13 @@ export default defineComponent({
       const file = inputElement.files?.[0];
       if (file) {
         this.imagen = file;
+        const reader = new FileReader();
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+          this.imagePreview = e.target?.result as string;
+        }
+        reader.readAsDataURL(file);
+      } else {
+        this.imagePreview = "";
       }
     },
   }
