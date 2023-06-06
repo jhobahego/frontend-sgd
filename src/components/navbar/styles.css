@@ -56,8 +56,6 @@
 
 .navbar__btn {
   padding: 0.3em;
-  align-items: center;
-  justify-content: center;
   background: var(--light-blue);
   color: blue;
   font-weight: 600;
@@ -84,6 +82,7 @@
   .navbar {
     flex-direction: column;
     justify-content: center;
+    max-height: 100vh;
   }
 
   .navbar__header {

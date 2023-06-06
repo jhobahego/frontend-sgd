@@ -78,7 +78,7 @@ select {
   margin-bottom: .4em;
 }
 
-button {
+.form__btn {
   padding: .6em;
   color: blue;
   font-weight: 600;
