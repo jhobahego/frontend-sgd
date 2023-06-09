@@ -1,9 +1,10 @@
 import { Document } from "@/interfaces/Document"
 import { Registro } from "@/interfaces/Registro";
 import { Solicitud } from "@/interfaces/Solicitud";
-import { obtenerTokenDeLocalStorage, puedesAdquirir } from "./Utils";
+import { puedesAdquirir } from "./Utils";
 import { RegisterUser } from "@/interfaces/User";
 import axiosInstance from "./Axios";
+import { useAuth } from "@/store/authStore";
 
 export const adquirirDocumento = async (documento: Document, solicitud: Solicitud): Promise<boolean> => {
   const puedes = await puedesAdquirir(solicitud, documento);
@@ -21,24 +22,29 @@ export const adquirirDocumento = async (documento: Document, solicitud: Solicitu
   return true;
 }
 
-export const obtenerComprasDeUsuario = async (cliente: RegisterUser): Promise<Registro[] | undefined> => {
-  const token = obtenerTokenDeLocalStorage();
-  if (token == null) return;
+export const obtenerComprasDeUsuario = async (cliente: RegisterUser): Promise<Registro[]> => {
+  const store = useAuth();
+  const token = store.token;
+  if (token.length === 0) return [];
+
   try {
     const res = await axiosInstance.get(`/ventas/usuario/${cliente._id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
+
     return res.data;
   } catch (error) {
-    return;
+    console.log({ compras: "No tienes compras" });
+    return [];
   }
 }
 
 const actualizarDocumento = async (documento: Document): Promise<Document | undefined> => {
-  const token = obtenerTokenDeLocalStorage();
-  if (token == null) return;
+  const store = useAuth();
+  const token = store.token;
+  if (token.length === 0) return;
 
   try {
     const res = await axiosInstance.put(`/documentos/actualizar/${documento._id}`, documento, {
@@ -54,8 +60,9 @@ const actualizarDocumento = async (documento: Document): Promise<Document | unde
 }
 
 const registrarVenta = async (adquisicion: Registro): Promise<Registro | undefined> => {
-  const token = obtenerTokenDeLocalStorage();
-  if (token == null) return;
+  const store = useAuth();
+  const token = store.token;
+  if (token.length === 0) return;
 
   try {
     const respuesta = await axiosInstance.post("/ventas/guardar", adquisicion, {
