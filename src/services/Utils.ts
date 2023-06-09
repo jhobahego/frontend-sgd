@@ -1,18 +1,18 @@
 import { Solicitud } from "@/interfaces/Solicitud";
-import { Document } from "@/interfaces/Document";
-import { obtenerComprasDeUsuario } from "./Purchase";
+import { Documento } from "@/interfaces/Documento";
 import { RegisterUser } from "@/interfaces/User";
 import { Registro } from "@/interfaces/Registro";
 import { Galeria } from "@/interfaces/Galeria";
+import { useRecord } from "@/store/recordsStore";
 
-export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Solicitud, documento: Document): Promise<boolean> => {
+export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Solicitud, documento: Documento): Promise<boolean> => {
   if (documento.stock < 1 || cantidad < 1) return false;
   if (opcion === 'prestamo' && cantidad > 1) return false;
 
   const correoValido = await verificarCorreo(cliente, correo);
   if (!correoValido) return false;
 
-  const yaPresto = await haPrestado(opcion, cliente, documento);
+  const yaPresto = await haPrestado(opcion, documento);
   if (yaPresto) return false;
 
   const compraValida = puedeComprar(cantidad, documento.stock);
@@ -34,11 +34,11 @@ export const obtenerTokenDeLocalStorage = (): string | null => {
   return token;
 }
 
-const haPrestado = async (opcion: string, cliente: RegisterUser, documento: Document): Promise<boolean> => {
+const haPrestado = async (opcion: string, documento: Documento): Promise<boolean> => {
+  const recordStore = useRecord();
   if (opcion !== "prestamo") return false;
 
-  const compras = await obtenerComprasDeUsuario(cliente);
-  if (!compras) return false;
+  const compras = recordStore.registros;
 
   return compras.some(registro =>
     registro.tipo_de_adquisicion === "prestamo" && registro.activo && registro.id_documento === documento._id);

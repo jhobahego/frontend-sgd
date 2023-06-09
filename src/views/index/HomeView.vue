@@ -19,11 +19,11 @@
 
 <script lang="ts">
 import { Registro } from '@/interfaces/Registro';
-import { obtenerComprasDeUsuario } from '@/services/Purchase';
 import { normalizarRegistros } from '@/services/Utils'
 import { defineComponent } from 'vue';
 import Documents_adquired from '@/components/document/Documents_adquired.vue';
 import { useAuth } from '@/store/authStore';
+import { useRecord } from '@/store/recordsStore';
 
 export default defineComponent({
   name: 'HomeView',
@@ -45,6 +45,7 @@ export default defineComponent({
   methods: {
     async obtenerUsuario() {
       const store = useAuth();
+      const recordStore = useRecord();
       await store.profile();
 
       const usuario = store.usuario;
@@ -54,8 +55,10 @@ export default defineComponent({
 
       this.username = usuario.nombres;
 
-      const registro = await obtenerComprasDeUsuario(usuario);
-      if (!registro) return;
+      await recordStore.obtenerRegistros(usuario);
+      const registro = recordStore.registros;
+      
+      if (registro.length === 0) return;
 
       const registrosUnicos = normalizarRegistros(registro);
       this.registros = registrosUnicos ?? [];
