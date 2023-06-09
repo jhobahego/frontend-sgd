@@ -12,8 +12,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { LoginUser } from '@/interfaces/User';
-import { autenticarUsuario } from '@/services/AuthService';
 import { notify } from '@kyvg/vue3-notification';
+import { useAuth } from '@/store/authStore';
 
 export default defineComponent({
   name: "loginForm",
@@ -26,9 +26,13 @@ export default defineComponent({
 
   methods: {
     async iniciarSesion() {
-      const res = await autenticarUsuario(this.credentials);
-      if (res) {
-        localStorage.setItem("token", res.access_token);
+      const store = useAuth();
+
+      await store.login(this.credentials);
+      const token = store.token;
+
+      if (token.length > 0) {
+        localStorage.setItem("token", token);
         this.$router.push("/");
       } else {
         notify({

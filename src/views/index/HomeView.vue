@@ -19,11 +19,11 @@
 
 <script lang="ts">
 import { Registro } from '@/interfaces/Registro';
-import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 import { obtenerComprasDeUsuario } from '@/services/Purchase';
 import { normalizarRegistros } from '@/services/Utils'
 import { defineComponent } from 'vue';
 import Documents_adquired from '@/components/document/Documents_adquired.vue';
+import { useAuth } from '@/store/authStore';
 
 export default defineComponent({
   name: 'HomeView',
@@ -44,12 +44,15 @@ export default defineComponent({
 
   methods: {
     async obtenerUsuario() {
-      const usuario = await obtenerUsuarioAutenticado();
-      this.autenticado = usuario !== undefined;
+      const store = useAuth();
+      await store.profile();
+
+      const usuario = store.usuario;
+      this.autenticado = store.token.length > 0;
 
       if (!usuario) return;
 
-      this.username = usuario?.nombres;
+      this.username = usuario.nombres;
 
       const registro = await obtenerComprasDeUsuario(usuario);
       if (!registro) return;

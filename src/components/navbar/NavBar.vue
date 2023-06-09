@@ -19,8 +19,8 @@
   </nav>
 </template>
 <script lang="ts">
-import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 import { defineComponent } from 'vue';
+import { useAuth } from '@/store/authStore';
 
 export default defineComponent({
   name: "showNavegation",
@@ -37,16 +37,18 @@ export default defineComponent({
     },
 
     async obtenerUsuario() {
-      const usuario = await obtenerUsuarioAutenticado();
-      if (usuario === undefined) return this.autenticado = false;
+      const store = useAuth();
 
-      this.autenticado = true;
+      const token = store.token;
+      this.autenticado = token.length > 0;
     },
 
     cerrarSesion() {
       this.cerrarMenu();
-      localStorage.removeItem("token");
-      localStorage.removeItem("usuario");
+
+      const store = useAuth();
+      store.logout();
+
       this.autenticado = false;
       this.$router.push("/autenticacion");
     },

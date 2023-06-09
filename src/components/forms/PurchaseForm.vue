@@ -34,8 +34,8 @@ import { defineComponent } from 'vue';
 import { Document } from '@/interfaces/Document';
 import { Solicitud } from '@/interfaces/Solicitud';
 import { adquirirDocumento } from '@/services/Purchase';
-import { obtenerUsuarioAutenticado } from '@/services/AuthService';
 import { notify } from '@kyvg/vue3-notification';
+import { useAuth } from '@/store/authStore';
 
 export default defineComponent({
   name: "purchaseForm",
@@ -81,8 +81,10 @@ export default defineComponent({
     },
 
     async obtenerUsuario() {
-      const usuario = await obtenerUsuarioAutenticado();
-      if (usuario) this.solicitud.cliente = usuario
+      const store = useAuth();
+      await store.profile();
+
+      if (store.$state.usuario) this.solicitud.cliente = store.$state.usuario;
     },
   },
 
