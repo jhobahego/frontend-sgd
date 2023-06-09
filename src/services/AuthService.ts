@@ -1,6 +1,5 @@
 import { LoginUser, RegisterUser } from '@/interfaces/User'
-import { Token } from '@/interfaces/Token';
-import { obtenerTokenDeLocalStorage } from './Utils';
+import { Token } from '@/interfaces/Token'
 import axiosInstance from './Axios';
 
 export const registrarUsuario = async (datos: RegisterUser): Promise<RegisterUser | undefined> => {
@@ -31,9 +30,8 @@ export const autenticarUsuario = async (data: LoginUser): Promise<Token | undefi
   }
 }
 
-export const obtenerUsuarioAutenticado = async (): Promise<RegisterUser | undefined> => {
-  const token = obtenerTokenDeLocalStorage();
-  if (token == null) return;
+export const obtenerUsuarioAutenticado = async (token: string | null): Promise<RegisterUser | undefined> => {
+  if (token?.length === 0) return;
 
   try {
     const respuesta = await axiosInstance.get("/usuarios/perfil", {
