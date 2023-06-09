@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Document } from '@/interfaces/Document';
+import { Documento } from '@/interfaces/Documento';
 import { Solicitud } from '@/interfaces/Solicitud';
 import { adquirirDocumento } from '@/services/Purchase';
 import { notify } from '@kyvg/vue3-notification';
@@ -48,7 +48,7 @@ export default defineComponent({
 
   props: {
     documento: {
-      type: Object as () => Document,
+      type: Object as () => Documento,
       required: true
     },
   },

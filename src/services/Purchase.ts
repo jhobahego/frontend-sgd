@@ -1,4 +1,4 @@
-import { Document } from "@/interfaces/Document"
+import { Documento } from "@/interfaces/Documento"
 import { Registro } from "@/interfaces/Registro";
 import { Solicitud } from "@/interfaces/Solicitud";
 import { puedesAdquirir } from "./Utils";
@@ -6,7 +6,7 @@ import { RegisterUser } from "@/interfaces/User";
 import axiosInstance from "./Axios";
 import { useAuth } from "@/store/authStore";
 
-export const adquirirDocumento = async (documento: Document, solicitud: Solicitud): Promise<boolean> => {
+export const adquirirDocumento = async (documento: Documento, solicitud: Solicitud): Promise<boolean> => {
   const puedes = await puedesAdquirir(solicitud, documento);
   if (!puedes) return false;
 
@@ -41,7 +41,7 @@ export const obtenerComprasDeUsuario = async (cliente: RegisterUser): Promise<Re
   }
 }
 
-const actualizarDocumento = async (documento: Document): Promise<Document | undefined> => {
+const actualizarDocumento = async (documento: Documento): Promise<Documento | undefined> => {
   const store = useAuth();
   const token = store.token;
   if (token.length === 0) return;
@@ -77,7 +77,7 @@ const registrarVenta = async (adquisicion: Registro): Promise<Registro | undefin
   }
 }
 
-const registrarAdquisicion = async (solicitud: Solicitud, documentoActualizado: Document) => {
+const registrarAdquisicion = async (solicitud: Solicitud, documentoActualizado: Documento) => {
   const { cantidad, opcion: tipo_de_adquisicion } = solicitud;
   const activo = tipo_de_adquisicion === "prestamo" ? true : false;
 

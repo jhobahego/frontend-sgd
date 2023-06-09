@@ -1,9 +1,9 @@
-import { Document } from "@/interfaces/Document";
+import { Documento } from "@/interfaces/Documento";
 import { obtenerTokenDeLocalStorage } from "./Utils";
 import { notify } from '@kyvg/vue3-notification';
 import axiosInstance from './Axios'
 
-export const obtenerDocumentos = async (): Promise<Document[]> => {
+export const obtenerDocumentos = async (): Promise<Documento[]> => {
   const token = obtenerTokenDeLocalStorage();
   try {
     const respuesta = await axiosInstance.get("/", {
@@ -17,7 +17,7 @@ export const obtenerDocumentos = async (): Promise<Document[]> => {
   }
 }
 
-export const obtenerDocumento = async (documento_id: string | string[]): Promise<Document> => {
+export const obtenerDocumento = async (documento_id: string | string[]): Promise<Documento> => {
   const token = obtenerTokenDeLocalStorage();
   try {
     const respuesta = await axiosInstance.get(`/documentos/${documento_id}`, {
@@ -28,11 +28,11 @@ export const obtenerDocumento = async (documento_id: string | string[]): Promise
     return respuesta.data;
   } catch (error) {
     console.log(error);
-    return {} as Document;
+    return {} as Documento;
   }
 }
 
-export const guardarDocumentoEnBD = async (form: FormData): Promise<Document> => {
+export const guardarDocumentoEnBD = async (form: FormData): Promise<Documento> => {
   try {
     const token = obtenerTokenDeLocalStorage();
     
@@ -53,5 +53,5 @@ export const guardarDocumentoEnBD = async (form: FormData): Promise<Document> =>
       duration: 2000,
     })
   }
-  return {} as Document;
+  return {} as Documento;
 }

@@ -20,14 +20,16 @@
 import { defineComponent } from 'vue';
 import PurchaseForm from '@/components/forms/PurchaseForm.vue'
 import { obtenerDocumento } from '@/services/DocumentService';
-import { Document } from '@/interfaces/Document';
+import { Documento } from '@/interfaces/Documento';
+// import { useRecord } from '@/store/recordsStore';
+// import { Registro } from '@/interfaces/Registro';
 
 export default defineComponent({
   name: "purchaseView",
 
   data() {
     return {
-      documento: {} as Document,
+      documento: {} as Documento,
     }
   },
 
@@ -38,10 +40,14 @@ export default defineComponent({
   methods: {
     async obtenerDocumentoDeLaApi() {
       const documento_id = this.$route.params.id;
-      const response = await obtenerDocumento(documento_id);
+      const documento = await obtenerDocumento(documento_id);
+      
+      // const recordsStore = useRecord();
+      // const documentos = recordsStore.documentos;
+      // const registro = documentos.find(doc => doc.id_documento === documento_id);
 
-      if (response) {
-        this.documento = response;
+      if (documento) {
+        this.documento = documento;
       }
     },
   },

@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Document } from '@/interfaces/Document';
+import { Documento } from '@/interfaces/Documento';
 import { obtenerDocumentos } from '@/services/DocumentService'
 import Documents_item from '@/components/document/Documents_item.vue';
 
@@ -18,7 +18,7 @@ export default defineComponent({
   name: "DocumentView",
   data() {
     return {
-      documentos: {} as Document[]
+      documentos: {} as Documento[]
     };
   },
   methods: {

@@ -1,4 +1,4 @@
-export interface Document {
+export interface Documento {
   _id?: string,
   tipo_documento: string,
   autor: string,

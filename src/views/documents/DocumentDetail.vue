@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Document } from '@/interfaces/Document';
+import { Documento } from '@/interfaces/Documento';
 import { obtenerDocumento } from '@/services/DocumentService'
 import Document_detail from '@/components/document/Document_detail.vue';
 
@@ -17,7 +17,7 @@ export default defineComponent({
 
   data() {
     return {
-      documento: {} as Document,
+      documento: {} as Documento,
     }
   },
 
