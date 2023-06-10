@@ -1,4 +1,4 @@
-import { LoginUser, RegisterUser } from '@/interfaces/User'
+import { LoginUser, RegisterUser, Rol } from '@/interfaces/User'
 import { autenticarUsuario, obtenerUsuarioAutenticado, registrarUsuario } from '@/services/AuthService'
 import { defineStore } from 'pinia'
 
@@ -10,7 +10,7 @@ export const useAuth = defineStore("auth", {
       nombre: "",
       error: "",
       // loading: false,
-      // rol: ""
+      rol: ""
     }
   },
   actions: {
@@ -41,6 +41,7 @@ export const useAuth = defineStore("auth", {
         return;
       }
 
+      this.rol = datos.rol as Rol;
       this.nombre = datos.nombres;
       this.usuario = datos as RegisterUser;
     },
@@ -51,6 +52,6 @@ export const useAuth = defineStore("auth", {
   },
   persist: {
     storage: sessionStorage,
-    paths: ["token", "nombre"]
+    paths: ["token", "usuario", "rol"]
   }
 })

@@ -8,6 +8,9 @@
       <li class="navbar__item navbar__item--first" v-if="autenticado">
         <router-link class="navbar__link" to="/documentos" @click="cerrarMenu">Documentos</router-link>
       </li>
+      <li class="navbar__item" v-if="autenticado && isAdmin">
+        <router-link class="navbar__link" to="/documentos/guardar" @click="cerrarMenu">Registrar documento</router-link>
+      </li>
       <li class="navbar__item">
         <router-link class="navbar__link" to="/about" @click="cerrarMenu">Acerca de</router-link>
       </li>
@@ -27,7 +30,8 @@ export default defineComponent({
   data() {
     return {
       isNavVisible: false,
-      autenticado: false
+      autenticado: false,
+      isAdmin: false
     };
   },
 
@@ -40,6 +44,9 @@ export default defineComponent({
       const store = useAuth();
 
       const token = store.token;
+      const rol = store.rol;
+
+      this.isAdmin = rol === "ADMIN";
       this.autenticado = token.length > 0;
     },
 
