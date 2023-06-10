@@ -21,8 +21,6 @@ import { defineComponent } from 'vue';
 import PurchaseForm from '@/components/forms/PurchaseForm.vue'
 import { obtenerDocumento } from '@/services/DocumentService';
 import { Documento } from '@/interfaces/Documento';
-// import { useRecord } from '@/store/recordsStore';
-// import { Registro } from '@/interfaces/Registro';
 
 export default defineComponent({
   name: "purchaseView",
@@ -41,10 +39,6 @@ export default defineComponent({
     async obtenerDocumentoDeLaApi() {
       const documento_id = this.$route.params.id;
       const documento = await obtenerDocumento(documento_id);
-      
-      // const recordsStore = useRecord();
-      // const documentos = recordsStore.documentos;
-      // const registro = documentos.find(doc => doc.id_documento === documento_id);
 
       if (documento) {
         this.documento = documento;
