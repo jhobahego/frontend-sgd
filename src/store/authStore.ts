@@ -8,7 +8,6 @@ export const useAuth = defineStore("auth", {
     return {
       token: "",
       usuario: {} as RegisterUser,
-      nombre: "",
       error: "",
       // loading: false,
       rol: ""
@@ -22,7 +21,7 @@ export const useAuth = defineStore("auth", {
         return;
       }
 
-      this.nombre = datos.nombres;
+      this.usuario = datos;
     },
 
     async login(usuario: LoginUser) {
@@ -43,7 +42,6 @@ export const useAuth = defineStore("auth", {
       }
 
       this.rol = datos.rol as Rol;
-      this.nombre = datos.nombres;
       this.usuario = datos as RegisterUser;
     },
     logout() {
@@ -52,7 +50,6 @@ export const useAuth = defineStore("auth", {
 
       this.rol = "";
       this.token = "";
-      this.nombre = "";
     }
   },
   persist: {
