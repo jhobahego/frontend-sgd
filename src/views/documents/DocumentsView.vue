@@ -1,8 +1,8 @@
 <template>
   <section class="card__container">
-    <h2 v-if="documentos.length < 0">No hay documentos disponibles de momento</h2>
+    <h2 v-if="documentosDisponibles.length < 0">No hay documentos disponibles de momento</h2>
 
-    <div v-for="documento in documentos" :key="documento._id" v-else>
+    <div v-for="documento in documentosDisponibles" :key="documento._id" v-else>
       <Documents_item :documento="documento" />
     </div>
   </section>
@@ -18,12 +18,13 @@ export default defineComponent({
   name: "DocumentView",
   data() {
     return {
-      documentos: {} as Documento[]
+      documentosDisponibles: {} as Documento[]
     };
   },
   methods: {
     async cargarDocumentos() {
-      this.documentos = await obtenerDocumentos();
+      const documentos = await obtenerDocumentos();
+      this.documentosDisponibles = documentos.filter(documento => documento.stock > 0);
     },
   },
   created() {
