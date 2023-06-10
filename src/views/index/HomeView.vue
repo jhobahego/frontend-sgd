@@ -46,7 +46,6 @@ export default defineComponent({
     async obtenerUsuario() {
       const store = useAuth();
       const recordStore = useRecord();
-      await store.profile();
 
       const usuario = store.usuario;
       this.autenticado = store.token.length > 0;
@@ -55,7 +54,7 @@ export default defineComponent({
 
       this.username = usuario.nombres;
 
-      await recordStore.obtenerRegistros(usuario);
+      await recordStore.obtenerRegistros();
       const registro = recordStore.registros;
       
       if (registro.length === 0) return;
