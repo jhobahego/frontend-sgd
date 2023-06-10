@@ -1,21 +1,21 @@
 <template>
   <nav class="navbar" :class="{ 'navbar__opacity': isNavVisible }">
     <div class="navbar__header">
-      <router-link class="navbar__brand" to="/">Inicio</router-link>
+      <router-link class="navbar__brand" :to="{name: 'home'}">Inicio</router-link>
       <button class="navbar__toggle" @click="toggleNav">☰</button>
     </div>
     <ul class="navbar__items" :class="{ 'navbar__items--visible': isNavVisible }">
       <li class="navbar__item navbar__item--first" v-if="autenticado">
-        <router-link class="navbar__link" to="/documentos" @click="cerrarMenu">Documentos</router-link>
+        <router-link class="navbar__link" :to="{name: 'documentsView'}" @click="cerrarMenu">Documentos</router-link>
       </li>
       <li class="navbar__item" v-if="autenticado && isAdmin">
-        <router-link class="navbar__link" to="/documentos/guardar" @click="cerrarMenu">Registrar documento</router-link>
+        <router-link class="navbar__link" :to="{name: 'documentFormView'}" @click="cerrarMenu">Registrar documento</router-link>
       </li>
       <li class="navbar__item">
-        <router-link class="navbar__link" to="/about" @click="cerrarMenu">Acerca de</router-link>
+        <router-link class="navbar__link" :to="{name: 'about'}" @click="cerrarMenu">Acerca de</router-link>
       </li>
 
-      <router-link class="navbar__btn navbar__btn--link" to="/autenticacion" v-if="!autenticado"
+      <router-link class="navbar__btn navbar__btn--link" :to="{name: 'authView'}" v-if="!autenticado"
         @click="cerrarMenu">Iniciar sesión</router-link>
       <button class="navbar__btn" @click.prevent="cerrarSesion()" v-if="autenticado">Cerrar sesión</button>
     </ul>
@@ -40,7 +40,7 @@ export default defineComponent({
       this.isNavVisible = !this.isNavVisible;
     },
 
-    async obtenerUsuario() {
+    async verificarSesion() {
       const store = useAuth();
 
       const token = store.token;
@@ -66,11 +66,7 @@ export default defineComponent({
   },
 
   created() {
-    this.obtenerUsuario();
-  },
-
-  watch: {
-    $route: "obtenerUsuario",
+    this.verificarSesion();
   },
 })
 </script>
