@@ -1,3 +1,5 @@
+export type Rol = "USER" | "ADMIN";
+
 export interface LoginUser {
   correo: string,
   contra: string,
@@ -9,4 +11,5 @@ export interface RegisterUser extends LoginUser {
   apellidos: string,
   ciudad: string,
   pais: string,
+  rol: Rol,
 }
