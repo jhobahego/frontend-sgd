@@ -2,7 +2,6 @@ import { Documento } from "@/interfaces/Documento"
 import { Registro } from "@/interfaces/Registro";
 import { Solicitud } from "@/interfaces/Solicitud";
 import { puedesAdquirir } from "./Utils";
-import { RegisterUser } from "@/interfaces/User";
 import axiosInstance from "./Axios";
 import { useAuth } from "@/store/authStore";
 
@@ -22,13 +21,14 @@ export const adquirirDocumento = async (documento: Documento, solicitud: Solicit
   return true;
 }
 
-export const obtenerComprasDeUsuario = async (cliente: RegisterUser): Promise<Registro[]> => {
+export const obtenerComprasDeUsuario = async (): Promise<Registro[]> => {
   const store = useAuth();
   const token = store.token;
+  const usuario = store.usuario;
   if (token.length === 0) return [];
 
   try {
-    const res = await axiosInstance.get(`/ventas/usuario/${cliente._id}`, {
+    const res = await axiosInstance.get(`/ventas/usuario/${usuario._id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
