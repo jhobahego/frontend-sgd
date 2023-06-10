@@ -82,9 +82,8 @@ export default defineComponent({
 
     async obtenerUsuario() {
       const store = useAuth();
-      await store.profile();
 
-      if (store.$state.usuario) this.solicitud.cliente = store.$state.usuario;
+      this.solicitud.cliente = store.usuario;
     },
   },
 
