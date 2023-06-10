@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { obtenerComprasDeUsuario } from "@/services/Purchase";
-import { RegisterUser } from "@/interfaces/User";
 import { Registro } from "@/interfaces/Registro";
 
 export const useRecord = defineStore("record", {
@@ -11,8 +10,8 @@ export const useRecord = defineStore("record", {
     }
   },
   actions: {
-    async obtenerRegistros(usuario: RegisterUser) {
-      const compras = await obtenerComprasDeUsuario(usuario);
+    async obtenerRegistros() {
+      const compras = await obtenerComprasDeUsuario();
       if(compras?.length === 0) {
         this.error = "Este usuario no tiene compras";
         return;
