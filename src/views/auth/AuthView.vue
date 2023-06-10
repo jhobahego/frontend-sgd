@@ -33,6 +33,7 @@
 import { defineComponent } from 'vue';
 import LoginForm from '@/components/forms/auth/LoginForm.vue';
 import RegisterForm from '@/components/forms/auth/RegisterForm.vue';
+import { useAuth } from '@/store/authStore';
 
 export default defineComponent({
   name: 'authView',
@@ -52,6 +53,15 @@ export default defineComponent({
       this.register = !this.register;
     },
   },
+
+  mounted() {
+    const authStore = useAuth();
+    const token = authStore.token;
+
+    if(token.length > 0) {
+      this.$router.push("/");
+    }
+  }
 })
 
 </script>
