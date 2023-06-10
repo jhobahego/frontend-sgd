@@ -30,6 +30,7 @@ export default defineComponent({
 
       await store.login(this.credentials);
       const token = store.token;
+      await store.profile();
 
       if (token.length > 0) {
         localStorage.setItem("token", token);
