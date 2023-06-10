@@ -1,6 +1,7 @@
 import { LoginUser, RegisterUser, Rol } from '@/interfaces/User'
 import { autenticarUsuario, obtenerUsuarioAutenticado, registrarUsuario } from '@/services/AuthService'
 import { defineStore } from 'pinia'
+import { useRecord } from './recordsStore'
 
 export const useAuth = defineStore("auth", {
   state: () => {
@@ -46,6 +47,10 @@ export const useAuth = defineStore("auth", {
       this.usuario = datos as RegisterUser;
     },
     logout() {
+      const recordStore = useRecord();
+      recordStore.registros = [];
+
+      this.rol = "";
       this.token = "";
       this.nombre = "";
     }
