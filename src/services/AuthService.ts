@@ -1,13 +1,14 @@
-import { LoginUser, RegisterUser } from '@/interfaces/User'
+import { LoginUser, RegisterUser, UserResponse } from '@/interfaces/User'
 import { Token } from '@/interfaces/Token'
 import axiosInstance from './Axios';
 
-export const registrarUsuario = async (datos: RegisterUser): Promise<RegisterUser | undefined> => {
+export const registrarUsuario = async (datos: RegisterUser): Promise<UserResponse> => {
   try {
     const respuesta = await axiosInstance.post("/usuarios/guardar", datos);
-    return respuesta.data;
+    return respuesta.data as UserResponse;
   } catch (error) {
     console.log(error);
+    return {} as UserResponse;
   }
 }
 
@@ -30,8 +31,8 @@ export const autenticarUsuario = async (data: LoginUser): Promise<Token | undefi
   }
 }
 
-export const obtenerUsuarioAutenticado = async (token: string | null): Promise<RegisterUser | undefined> => {
-  if (token?.length === 0) return;
+export const obtenerUsuarioAutenticado = async (token: string | null): Promise<UserResponse> => {
+  if (token?.length === 0) return {} as UserResponse;
 
   try {
     const respuesta = await axiosInstance.get("/usuarios/perfil", {
@@ -40,11 +41,9 @@ export const obtenerUsuarioAutenticado = async (token: string | null): Promise<R
       },
     })
 
-    const usuario = respuesta.data;
-
-    return usuario;
+    return respuesta.data;
   } catch (error) {
     console.log(`error al obtener usuario autenticado: ${error}`);
-    return;
+    return {} as UserResponse;
   }
 }

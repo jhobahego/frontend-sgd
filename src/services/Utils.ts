@@ -1,6 +1,6 @@
 import { Solicitud } from "@/interfaces/Solicitud";
 import { Documento } from "@/interfaces/Documento";
-import { RegisterUser } from "@/interfaces/User";
+import { UserResponse } from "@/interfaces/User";
 import { Registro } from "@/interfaces/Registro";
 import { Galeria } from "@/interfaces/Galeria";
 import { useRecord } from "@/store/recordsStore";
@@ -21,7 +21,7 @@ export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Soli
   return true;
 }
 
-const verificarCorreo = async (cliente: RegisterUser, correo: string): Promise<boolean> => {
+const verificarCorreo = async (cliente: UserResponse, correo: string): Promise<boolean> => {
   if (correo === cliente.correo) return true;
 
   return false;
