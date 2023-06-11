@@ -23,7 +23,7 @@
   </nav>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch } from 'vue';
 import { useAuth } from '@/store/authStore';
 
 export default defineComponent({
@@ -41,22 +41,23 @@ export default defineComponent({
       this.isNavVisible = !this.isNavVisible;
     },
 
-    async verificarSesion() {
+    verificarSesion() {
       const store = useAuth();
 
-      const token = store.token;
-      const rol = store.rol;
+      const actualizarAutenticado = (nuevoValor: string) => {
+        this.autenticado = nuevoValor.length > 0;
+      };
 
-      this.isAdmin = rol === "ADMIN";
+      const actualizarIsAdmin = (nuevoValor: string) => {
+        this.isAdmin = nuevoValor === "ADMIN";
+      };
 
-      this.$watch(
-        () => store.token,
-        (nuevoValor) => {
-          this.autenticado = nuevoValor.length > 0;
-        }
-      )
+      watch(() => store.token, actualizarAutenticado);
+      watch(() => store.rol, actualizarIsAdmin);
 
-      this.autenticado = token.length > 0;
+      // Actualizar las propiedades inicialmente
+      actualizarAutenticado(store.token);
+      actualizarIsAdmin(store.rol);
     },
 
     cerrarSesion() {
@@ -77,8 +78,68 @@ export default defineComponent({
   created() {
     this.verificarSesion();
   },
-})
-</script>
+});
+
+
+// export default defineComponent({
+//   name: "showNavegation",
+//   data() {
+//     return {
+//       isNavVisible: false,
+//       autenticado: false,
+//       isAdmin: false
+//     };
+//   },
+
+//   methods: {
+//     toggleNav() {
+//       this.isNavVisible = !this.isNavVisible;
+//     },
+
+//     async verificarSesion() {
+//       const store = useAuth();
+
+//       const token = store.token;
+//       const rol = store.rol;
+
+//       this.$watch(
+//         () => store.token,
+//         (nuevoValor) => {
+//           this.autenticado = nuevoValor.length > 0;
+//         }
+//       )
+
+//       this.$watch(
+//         () => store.rol,
+//         (nuevoValor) => {
+//           this.isAdmin = nuevoValor === "ADMIN";
+//         }
+//       )
+
+//       this.isAdmin = rol === "ADMIN";
+//       this.autenticado = token.length > 0;
+//     },
+
+//     cerrarSesion() {
+//       this.cerrarMenu();
+
+//       const store = useAuth();
+//       store.logout();
+
+//       this.autenticado = false;
+//       this.$router.push("/autenticacion");
+//     },
+
+//     cerrarMenu() {
+//       this.isNavVisible = !this.isNavVisible;
+//     },
+//   },
+
+//   created() {
+//     this.verificarSesion();
+//   },
+// })
+// </script>
 
 <style scoped>
 @import url(styles.css);
