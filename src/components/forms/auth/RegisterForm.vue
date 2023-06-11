@@ -34,7 +34,7 @@ export default defineComponent({
     async registrar() {
       const authStore = useAuth();
       await authStore.register(this.usuario);
-      const { usuario: userResponse, token } = authStore.$state;
+      const { usuario: userResponse } = authStore.$state;
 
       if (!userResponse) {
         notify({
@@ -48,8 +48,7 @@ export default defineComponent({
       const { correo, contra } = this.usuario;
       await authStore.login({ correo, contra } as LoginUser);
 
-      const haveToken = token.length > 0;
-
+      const haveToken = authStore.token.length > 0;
       if (haveToken) {
         this.$router.push("/");
       }
