@@ -18,8 +18,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { LoginUser, RegisterUser } from '@/interfaces/User';
-import { autenticarUsuario, registrarUsuario } from '@/services/AuthService';
 import { notify } from '@kyvg/vue3-notification';
+import { useAuth } from '@/store/authStore';
 
 export default defineComponent({
   name: "registerForm",
@@ -32,8 +32,11 @@ export default defineComponent({
 
   methods: {
     async registrar() {
-      const res = await registrarUsuario(this.usuario);
-      if (!res) {
+      const authStore = useAuth();
+      await authStore.register(this.usuario);
+      const { usuario: userResponse, token } = authStore.$state;
+
+      if (!userResponse) {
         notify({
           title: "Problema al registrar",
           text: "Hubo un problema al intentar registrar el usuario",
@@ -43,12 +46,11 @@ export default defineComponent({
       }
 
       const { correo, contra } = this.usuario;
-      const usuario = await autenticarUsuario({ correo, contra } as LoginUser);
-      const token = usuario?.access_token;
+      await authStore.login({ correo, contra } as LoginUser);
 
-      if (token) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("usuario", res.nombres);
+      const haveToken = token.length > 0;
+
+      if (haveToken) {
         this.$router.push("/");
       }
     }
