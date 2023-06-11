@@ -13,3 +13,10 @@ export interface RegisterUser extends LoginUser {
   pais: string,
   rol: Rol,
 }
+
+export interface UserResponse {
+  _id: string,
+  correo: string,
+  nombres: string,
+  rol: Rol,
+}

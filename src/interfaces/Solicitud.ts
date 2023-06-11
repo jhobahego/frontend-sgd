@@ -1,7 +1,7 @@
-import { RegisterUser } from "./User";
+import { UserResponse } from "./User";
 
 export interface Solicitud {
-  cliente: RegisterUser,
+  cliente: UserResponse,
   correo: string,
   opcion: string,
   cantidad: number,
