@@ -9,6 +9,10 @@
         <router-link class="navbar__link" :to="{ name: 'documentsView' }" @click="cerrarMenu">Documentos</router-link>
       </li>
       <li class="navbar__item" v-if="autenticado && isAdmin">
+        <router-link class="navbar__link" :to="{ name: 'usuarios' }" @click="cerrarMenu">usuarios
+        </router-link>
+      </li>
+      <li class="navbar__item" v-if="autenticado && isAdmin">
         <router-link class="navbar__link" :to="{ name: 'documentFormView' }" @click="cerrarMenu">Registrar
           documento</router-link>
       </li>
@@ -79,67 +83,7 @@ export default defineComponent({
     this.verificarSesion();
   },
 });
-
-
-// export default defineComponent({
-//   name: "showNavegation",
-//   data() {
-//     return {
-//       isNavVisible: false,
-//       autenticado: false,
-//       isAdmin: false
-//     };
-//   },
-
-//   methods: {
-//     toggleNav() {
-//       this.isNavVisible = !this.isNavVisible;
-//     },
-
-//     async verificarSesion() {
-//       const store = useAuth();
-
-//       const token = store.token;
-//       const rol = store.rol;
-
-//       this.$watch(
-//         () => store.token,
-//         (nuevoValor) => {
-//           this.autenticado = nuevoValor.length > 0;
-//         }
-//       )
-
-//       this.$watch(
-//         () => store.rol,
-//         (nuevoValor) => {
-//           this.isAdmin = nuevoValor === "ADMIN";
-//         }
-//       )
-
-//       this.isAdmin = rol === "ADMIN";
-//       this.autenticado = token.length > 0;
-//     },
-
-//     cerrarSesion() {
-//       this.cerrarMenu();
-
-//       const store = useAuth();
-//       store.logout();
-
-//       this.autenticado = false;
-//       this.$router.push("/autenticacion");
-//     },
-
-//     cerrarMenu() {
-//       this.isNavVisible = !this.isNavVisible;
-//     },
-//   },
-
-//   created() {
-//     this.verificarSesion();
-//   },
-// })
-// </script>
+</script>
 
 <style scoped>
 @import url(styles.css);

@@ -3,6 +3,7 @@ import HomeView from '@/views/index/HomeView.vue'
 import AboutView from '@/views/about/AboutView.vue'
 import DocumentsView from '@/views/documents/DocumentsView.vue'
 import PurchaseView from '@/views/documents/PurchaseView.vue'
+import UsersView from '@/views/usuarios/usersView.vue'
 import DocumentDetail from '@/views/documents/DocumentDetail.vue'
 import DocumentForm from '@/views/documents/DocumentFormView.vue'
 import AuthView from '@/views/auth/AuthView.vue'
@@ -67,6 +68,15 @@ const routes: Array<RouteRecordRaw> = [
     path: '/documentos/guardar',
     name: 'documentFormView',
     component: DocumentForm,
+    meta: {
+      requireAuth: true,
+      rolNecesario: "ADMIN"
+    }
+  },
+  {
+    path: '/usuarios',
+    name: 'usuarios',
+    component: UsersView,
     meta: {
       requireAuth: true,
       rolNecesario: "ADMIN"
