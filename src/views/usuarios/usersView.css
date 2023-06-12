@@ -1,0 +1,34 @@
+.title {
+  color: blue;
+  font-weight: 600;
+  text-align: center;
+  margin: .8em 0 1.2em;
+  font-size: 2em;
+}
+
+.users__title {
+  text-align: center;
+  color: blue;
+  font-weight: 600;
+  background: #0006;
+  padding: .6em 0;
+}
+
+.users__list {
+  width: 100%;
+  /* max-width: 400px; */
+  background: var(--light-blue-alpha);
+  margin: 0 auto;
+}
+
+.user__item {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  list-style: none;
+  padding: .6em 0;
+  border-bottom: 1px solid #0008;
+  color: blue;
+  font-weight: 400;
+  opacity: .8;
+}
