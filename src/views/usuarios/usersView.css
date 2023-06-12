@@ -10,8 +10,27 @@
   text-align: center;
   color: blue;
   font-weight: 600;
-  background: #0006;
   padding: .6em 0;
+}
+
+.list__header {
+  background: #0006;
+  display: flex;
+  justify-content: space-evenly;
+  place-items: center;
+}
+
+.search__label {
+  display: flex;
+  color: blue;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+.user__filter {
+  font: inherit;
+  color: blue;
+  font-weight: 600;
 }
 
 .users__list {
