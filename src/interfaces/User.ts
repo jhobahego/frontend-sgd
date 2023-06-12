@@ -20,3 +20,7 @@ export interface UserResponse {
   nombres: string,
   rol: Rol,
 }
+
+export interface UsuarioFiltrado extends RegisterUser {
+  encontrado: boolean;
+}
