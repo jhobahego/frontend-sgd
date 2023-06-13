@@ -65,3 +65,14 @@
   align-items: center;
   text-align: left;
 }
+
+@media (width < 480px) {
+  .list__header {
+    flex-direction: column;
+    padding: 1em 0;
+  }
+
+  .user__info {
+    flex-direction: column;
+  }
+}
