@@ -4,17 +4,16 @@
   <div class="list__header">
     <label class="search__label">
       criterio
-      <select class="search__type">
+      <select class="search__type" v-model="criterio">
         <option value="nombre">nombre</option>
         <option value="correo">correo</option>
-        <option value="libre">libre</option>
       </select>
     </label>
     <h2 class="users__title">Usuarios registrados</h2>
     <form class="user__filter">
       <label>
         buscar
-        <input type="text" placeholder="Jhon Hernandez" v-model="nombre">
+        <input type="text" placeholder="Jhon Hernandez" v-model="busqueda">
       </label>
     </form>
   </div>
@@ -34,7 +33,8 @@ import { RegisterUser, UsuarioFiltrado } from '@/interfaces/User';
 const title: Ref<string> = ref('');
 const usuarios: Ref<RegisterUser[]> = ref([]);
 const usuariosFiltrados: Ref<UsuarioFiltrado[]> = ref([]);
-const nombre: Ref<string> = ref('');
+const busqueda: Ref<string> = ref('');
+const criterio: Ref<string> = ref('nombre');
 
 onMounted(async () => {
   usuarios.value = await obtenerUsuarios();
@@ -46,10 +46,11 @@ onMounted(async () => {
 const filtrarUsuario = () => {
   usuariosFiltrados.value = usuarios.value.map(usuario => ({
     ...usuario,
-    encontrado: usuario.nombres.startsWith(nombre.value.trim()) || usuario.nombres.includes(nombre.value.trim())
+    encontrado: (criterio.value === 'nombre' && (usuario.nombres.startsWith(busqueda.value.trim()) || usuario.nombres.includes(busqueda.value.trim()))) ||
+      (criterio.value === 'correo' && (usuario.correo.startsWith(busqueda.value.trim()) || usuario.correo.includes(busqueda.value.trim())))
   }));
 
-  if (nombre.value.trim().length === 0) {
+  if (busqueda.value.trim().length === 0) {
     title.value = "Listado de usuarios";
   } else if (usuariosFiltrados.value.some(usuario => usuario.encontrado)) {
     title.value = "Usuarios encontrados";
@@ -58,10 +59,11 @@ const filtrarUsuario = () => {
   }
 };
 
-watch(nombre, filtrarUsuario);
+watch(busqueda, filtrarUsuario);
+watch(criterio, filtrarUsuario);
 
 const usuariosMostrados = computed(() => {
-  if (nombre.value.trim().length === 0) {
+  if (busqueda.value.trim().length === 0) {
     return usuarios.value;
   }
 
