@@ -78,4 +78,6 @@ async function editarUsuario() {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+@import url(editView.css);
+</style>

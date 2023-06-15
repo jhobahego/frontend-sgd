@@ -1,0 +1,71 @@
+.edit__title {
+  text-align: center;
+  color: blue;
+  margin: .6em 0 1em;
+}
+
+.edit__form {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  width: 80%;
+  max-width: 500px;
+  padding: 10px;
+  margin: 0 auto;
+  border: 1px solid blue;
+  border-radius: 6px;
+  background: var(--light-blue-alpha);
+}
+
+.nombres__joiner {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: .4em;
+  margin-top: .6em;
+}
+
+.nombres__joiner label input {
+  width: 100%;
+}
+
+.edit__form label {
+  width: 90%;
+}
+
+.edit__form>label>input {
+  width: 100%;
+}
+
+.form__buttons {
+  display: flex;
+  gap: 1em;
+  margin: .6em 0;
+}
+.submit__btn,
+.cancel__btn {
+  padding: .4em .6em;
+}
+
+.submit__btn {
+  background: var(--light-blue-alpha);
+  color: blue;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cancel__btn {
+  background: #bdc2e8;
+  color: blue;
+  font-weight: 600;
+}
+
+@media (width < 450px) {
+  .nombres__joiner {
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+  }
+}
