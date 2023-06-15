@@ -57,6 +57,9 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.eliminar__btn {
+  background: rgba(231, 2, 2, 0.829);
+}
 .cancel__btn {
   background: #bdc2e8;
   color: blue;
