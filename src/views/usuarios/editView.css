@@ -44,10 +44,11 @@
   margin: .6em 0;
 }
 .submit__btn,
+.eliminar__btn,
 .cancel__btn {
   padding: .4em .6em;
 }
-
+.eliminar__btn,
 .submit__btn {
   background: var(--light-blue-alpha);
   color: blue;
