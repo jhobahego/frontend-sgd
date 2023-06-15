@@ -2,6 +2,7 @@ import { useAuth } from "@/store/authStore";
 import axiosInstance from "./Axios";
 import { RegisterUser } from "@/interfaces/User";
 import { AxiosError } from "axios";
+import { ApiErrorMessage, UpdateResponse, DeleteResponse } from "@/types";
 
 export async function obtenerUsuarios(): Promise<RegisterUser[]> {
   const authStore = useAuth();
@@ -52,17 +53,16 @@ export async function actualizarUsuario(usuario: RegisterUser): Promise<UpdateRe
         Authorization: `Bearer ${token}`
       }
     });
-    
+
     apiResponse.message = "";
     apiResponse.user = respuesta.data;
     return apiResponse;
   } catch (error) {
     const status = (error as AxiosError).response?.status;
-    // console.log(status);
     if (status === 404 || status === 401) {
       const apiError = (error as AxiosError).response?.data as ApiErrorMessage;
 
-      apiResponse.message = apiError.detail === "Not authenticated" ? "Sesión expirada, inicia sesión nuevamente": apiError.detail;
+      apiResponse.message = apiError.detail === "Not authenticated" ? "Sesión expirada, inicia sesión nuevamente" : apiError.detail;
       return apiResponse;
     }
 
@@ -71,9 +71,30 @@ export async function actualizarUsuario(usuario: RegisterUser): Promise<UpdateRe
   }
 }
 
-interface UpdateResponse {
-  user: RegisterUser,
-  message: string
+export async function eliminarUsuario(usuario_id: string): Promise<DeleteResponse> {
+  const authStore = useAuth();
+  const token = authStore.token;
+
+  try {
+    const respuesta = await axiosInstance.delete(`/usuarios/eliminar/${usuario_id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const exit = respuesta.status === 204;
+    return { status: exit, message: "usuario eliminado correctamente" } as DeleteResponse;
+  } catch (error) {
+    const status = (error as AxiosError).response?.status;
+
+    if (status === 404 || status === 401) {
+      const apiError = (error as AxiosError).response?.data as ApiErrorMessage;
+
+      const message = apiError.detail === "Not authenticated" ? "Sesión expirada, inicia sesión nuevamente" : apiError.detail;
+      return { status: false, message } as DeleteResponse;
+    }
+
+    return { status: false, message: "Error en la red, intentelo mas tarde" } as DeleteResponse;
+  }
 }
 
-type ApiErrorMessage = { detail: string }

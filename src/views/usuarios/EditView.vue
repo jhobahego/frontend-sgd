@@ -1,6 +1,6 @@
 <template>
-  <h1 class="edit__title">Editar usuario</h1>
-  <form class="edit__form" @submit.prevent="editarUsuario()">
+  <h1 class="edit__title">Manejo de usuarios</h1>
+  <form class="edit__form">
     <div class="nombres__joiner">
       <label class="label__nombres">
         nombres
@@ -31,7 +31,8 @@
       </select>
     </label>
     <div class="form__buttons">
-      <button class="submit__btn" type="submit">Editar usuario</button>
+      <button class="eliminar__btn" @click.prevent="borrarUsuario(usuario._id)">Eliminar usuario</button>
+      <button class="submit__btn" @click.prevent="editarUsuario()">Editar usuario</button>
       <router-link class="cancel__btn" :to="{ name: 'usuarios' }">Volver</router-link>
     </div>
   </form>
@@ -42,7 +43,7 @@
 import { Ref, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { RegisterUser } from '@/interfaces/User';
-import { obtenerUsuario, actualizarUsuario } from '@/services/userService';
+import { obtenerUsuario, actualizarUsuario, eliminarUsuario } from '@/services/userService';
 import { notify } from '@kyvg/vue3-notification';
 
 const usuario: Ref<RegisterUser> = ref({} as RegisterUser);
@@ -71,6 +72,30 @@ async function editarUsuario() {
   notify({
     title: "Usuario actualizado",
     text: `Usuario con nombre ${usuarioActualizado.nombres} actualizado correctamente`,
+    type: "success",
+    duration: 3000,
+  })
+}
+
+async function borrarUsuario(usuario_id: string) {
+  if (!confirm("¿Seguro quieres eliminar el usuario?")) {
+    return;
+  }
+
+  const respuesta = await eliminarUsuario(usuario_id);
+  if (respuesta.status === false) {
+    notify({
+      title: "Ha ocurrido un error",
+      text: `${respuesta.message}`,
+      type: "error",
+      duration: 3000,
+    })
+    return;
+  } 
+
+  notify({
+    title: "Usuario eliminado",
+    text: `${respuesta.message}`,
     type: "success",
     duration: 3000,
   })
