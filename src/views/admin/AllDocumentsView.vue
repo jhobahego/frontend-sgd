@@ -20,4 +20,5 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+@import url(allDocumentsView.css);
 </style>
