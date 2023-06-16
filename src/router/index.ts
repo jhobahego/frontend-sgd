@@ -8,6 +8,8 @@ import EditView from '@/views/usuarios/EditView.vue'
 import DocumentDetail from '@/views/documents/DocumentDetail.vue'
 import DocumentForm from '@/views/documents/DocumentFormView.vue'
 import AuthView from '@/views/auth/AuthView.vue'
+import AllDocuments from '@/views/admin/AllDocumentsView.vue'
+import DocumentDetailAdmin from '@/views/admin/DocumentDetailView.vue'
 import { useAuth } from '@/store/authStore'
 
 const routes: Array<RouteRecordRaw> = [
@@ -92,6 +94,24 @@ const routes: Array<RouteRecordRaw> = [
       rolNecesario: "ADMIN"
     }
   },
+  {
+    path: '/admin/documentos',
+    name: 'AllDocumentsAdmin',
+    component: AllDocuments,
+    meta: {
+      requireAuth: true,
+      rolNecesario: "ADMIN"
+    }
+  },
+  {
+    path: '/admin/documentos/:id',
+    name: 'DocumentDetailAdmin',
+    component: DocumentDetailAdmin,
+    meta: {
+      requireAuth: true,
+      rolNecesario: "ADMIN"
+    }
+  },
 ]
 
 const router = createRouter({
@@ -102,10 +122,10 @@ const router = createRouter({
 export default router
 router.beforeEach((to, from, next) => {
   const authStore = useAuth();
-  
+
   const { token, rol } = authStore.$state;
   const isAuth = token.length > 0;
-  
+
   const { requireAuth, rolNecesario } = to.meta;
   const requiereAdmin = rolNecesario === "ADMIN";
 
