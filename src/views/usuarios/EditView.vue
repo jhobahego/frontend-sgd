@@ -58,7 +58,7 @@ onMounted(async () => {
 async function editarUsuario() {
   const res = await actualizarUsuario(usuario.value);
 
-  const { message: mensaje, user: usuarioActualizado } = res;
+  const { message: mensaje, body: usuarioActualizado } = res;
   if (mensaje.length > 0) {
     notify({
       title: "Fallo al editar",
