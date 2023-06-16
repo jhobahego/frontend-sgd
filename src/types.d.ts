@@ -1,7 +1,9 @@
 export type ApiErrorMessage = { detail: string }
 
+type Body = RegisterUser | Documento
+
 export interface UpdateResponse {
-  user: RegisterUser,
+  body: Body,
   message: string
 }
 

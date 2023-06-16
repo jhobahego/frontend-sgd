@@ -55,7 +55,7 @@ export async function actualizarUsuario(usuario: RegisterUser): Promise<UpdateRe
     });
 
     apiResponse.message = "";
-    apiResponse.user = respuesta.data;
+    apiResponse.body = respuesta.data;
     return apiResponse;
   } catch (error) {
     const status = (error as AxiosError).response?.status;
