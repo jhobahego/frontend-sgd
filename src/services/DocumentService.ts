@@ -20,7 +20,7 @@ export const obtenerDocumentos = async (): Promise<Documento[]> => {
   }
 }
 
-export const obtenerDocumento = async (documento_id: string | string[]): Promise<Documento> => {
+export const obtenerDocumento = async (documento_id: string | string[]): Promise<UpdateResponse> => {
   const token = obtenerTokenDeLocalStorage();
   try {
     const respuesta = await axiosInstance.get(`/documentos/${documento_id}`, {
@@ -28,10 +28,16 @@ export const obtenerDocumento = async (documento_id: string | string[]): Promise
         Authorization: `Bearer ${token}`
       }
     });
-    return respuesta.data;
+
+    const documento = respuesta.data;
+    return { body: documento, message: "" } as UpdateResponse;
   } catch (error) {
-    console.log(error);
-    return {} as Documento;
+    const status = (error as AxiosError).response?.status;
+    if (status === 404) {
+      const apiError = (error as AxiosError).response?.data as ApiErrorMessage;
+      return { message: apiError.detail } as UpdateResponse;
+    }
+    return { body: {}, message: "Error en la red intentalo nuevamente mas tarde" } as UpdateResponse;
   }
 }
 

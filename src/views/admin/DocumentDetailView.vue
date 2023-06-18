@@ -65,7 +65,18 @@ onMounted(async () => {
   const route = useRoute();
   const id = route.params.id;
 
-  documento.value = await obtenerDocumento(id);
+  const { body, message } = await obtenerDocumento(id);
+  if(message.length > 0) {
+    notify({
+      title: "Documento no encontrado",
+      text: `${message}`,
+      type: "error",
+      duration: 3000,
+    })
+    return;
+  }
+
+  documento.value = body;
 })
 
 async function editarDocumento(documento: Documento) {

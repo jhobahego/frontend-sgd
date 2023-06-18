@@ -3,7 +3,7 @@
   <section class="document__container" v-else>
     <Document_detail :documento="documento" />
   </section>
-  
+  <notifications position="bottom right" animation-type="css" width="50vw" />
 </template>
 
 <script lang="ts">
@@ -29,11 +29,18 @@ export default defineComponent({
     async verDocumento() {
       const documento_id = this.$route.params.id;
 
-      const response = await obtenerDocumento(documento_id);
+      const { body, message } = await obtenerDocumento(documento_id);
 
-      if (response) {
-        this.documento = response;
+      if (message.length > 0) {
+        this.$notify({
+          title: "Fallo al editar",
+          text: `${message}`,
+          type: "error",
+          duration: 3000,
+        })
+        return;
       }
+      this.documento = body;
     },
 
     adquirir() {

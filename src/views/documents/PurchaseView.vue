@@ -14,6 +14,7 @@
     </header>
     <PurchaseForm :documento="documento" />
   </section>
+  <notifications position="bottom right" animation-type="css" width="50vw" />
 </template>
 
 <script lang="ts">
@@ -38,11 +39,18 @@ export default defineComponent({
   methods: {
     async obtenerDocumentoDeLaApi() {
       const documento_id = this.$route.params.id;
-      const documento = await obtenerDocumento(documento_id);
+      const { body, message } = await obtenerDocumento(documento_id);
 
-      if (documento) {
-        this.documento = documento;
+      if (message.length > 0) {
+        this.$notify({
+          title: "Fallo al editar",
+          text: `${message}`,
+          type: "error",
+          duration: 3000,
+        })
+        return;
       }
+      this.documento = body;
     },
   },
 
