@@ -26,7 +26,6 @@
       </form>
     </div>
   </article>
-  <notifications position="bottom right" animation-type="css" width="500px"/>
 </template>
 
 <script lang="ts">
