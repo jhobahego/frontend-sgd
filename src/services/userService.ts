@@ -2,7 +2,7 @@ import { useAuth } from "@/store/authStore";
 import axiosInstance from "./Axios";
 import { RegisterUser } from "@/interfaces/User";
 import { AxiosError } from "axios";
-import { ApiErrorMessage, UpdateResponse, DeleteResponse } from "@/types";
+import { ApiErrorMessage, ApiResponse, DeleteResponse } from "@/types";
 
 export async function obtenerUsuarios(): Promise<RegisterUser[]> {
   const authStore = useAuth();
@@ -42,11 +42,11 @@ export async function obtenerUsuario(nombres: string | string[]): Promise<Regist
   }
 }
 
-export async function actualizarUsuario(usuario: RegisterUser): Promise<UpdateResponse> {
+export async function actualizarUsuario(usuario: RegisterUser): Promise<ApiResponse> {
   const authStore = useAuth();
   const token = authStore.token;
 
-  const apiResponse = {} as UpdateResponse;
+  const apiResponse = {} as ApiResponse;
   try {
     const respuesta = await axiosInstance.put(`/usuarios/actualizar/${usuario._id}`, usuario, {
       headers: {

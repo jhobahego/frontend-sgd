@@ -4,7 +4,7 @@ import { notify } from '@kyvg/vue3-notification';
 import axiosInstance from './Axios'
 import { useAuth } from "@/store/authStore";
 import { AxiosError } from "axios";
-import { ApiErrorMessage, UpdateResponse } from "@/types";
+import { ApiErrorMessage, ApiResponse } from "@/types";
 
 export const obtenerDocumentos = async (): Promise<Documento[]> => {
   const token = obtenerTokenDeLocalStorage();
@@ -20,7 +20,7 @@ export const obtenerDocumentos = async (): Promise<Documento[]> => {
   }
 }
 
-export const obtenerDocumento = async (documento_id: string | string[]): Promise<UpdateResponse> => {
+export const obtenerDocumento = async (documento_id: string | string[]): Promise<ApiResponse> => {
   const token = obtenerTokenDeLocalStorage();
   try {
     const respuesta = await axiosInstance.get(`/documentos/${documento_id}`, {
@@ -30,14 +30,14 @@ export const obtenerDocumento = async (documento_id: string | string[]): Promise
     });
 
     const documento = respuesta.data;
-    return { body: documento, message: "" } as UpdateResponse;
+    return { body: documento, message: "" } as ApiResponse;
   } catch (error) {
     const status = (error as AxiosError).response?.status;
     if (status === 404) {
       const apiError = (error as AxiosError).response?.data as ApiErrorMessage;
-      return { message: apiError.detail } as UpdateResponse;
+      return { message: apiError.detail } as ApiResponse;
     }
-    return { body: {}, message: "Error en la red intentalo nuevamente mas tarde" } as UpdateResponse;
+    return { body: {}, message: "Error en la red intentalo nuevamente mas tarde" } as ApiResponse;
   }
 }
 
@@ -65,7 +65,7 @@ export const guardarDocumentoEnBD = async (form: FormData): Promise<Documento> =
   return {} as Documento;
 }
 
-export async function actualizarDocumento(documento: Documento): Promise<UpdateResponse> {
+export async function actualizarDocumento(documento: Documento): Promise<ApiResponse> {
   const authStore = useAuth();
   const token = authStore.token;
 
@@ -76,14 +76,14 @@ export async function actualizarDocumento(documento: Documento): Promise<UpdateR
       }
     })
 
-    return { body: respuesta.data, message: "" } as UpdateResponse;
+    return { body: respuesta.data, message: "" } as ApiResponse;
   } catch (error) {
     const status = (error as AxiosError).response?.status;
     if (status === 401 || status === 404) {
       const apiError = (error as AxiosError).response?.data as ApiErrorMessage;
-      return { message: apiError.detail } as UpdateResponse;
+      return { message: apiError.detail } as ApiResponse;
     }
 
-    return { message: "Error en la red, intentelo mas tarde" } as UpdateResponse;
+    return { message: "Error en la red, intentelo mas tarde" } as ApiResponse;
   }
 }
