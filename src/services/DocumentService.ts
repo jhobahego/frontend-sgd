@@ -1,12 +1,13 @@
 import { Documento } from "@/interfaces/Documento";
-import { obtenerTokenDeLocalStorage } from "./Utils";
 import axiosInstance from './Axios'
 import { useAuth } from "@/store/authStore";
 import { AxiosError } from "axios";
 import { ApiErrorMessage, ApiResponse } from "@/types";
 
 export const obtenerDocumentos = async (): Promise<Documento[]> => {
-  const token = obtenerTokenDeLocalStorage();
+  const authStore = useAuth();
+  const token = authStore.token;
+
   try {
     const respuesta = await axiosInstance.get("/", {
       headers: {
@@ -20,7 +21,9 @@ export const obtenerDocumentos = async (): Promise<Documento[]> => {
 }
 
 export const obtenerDocumento = async (documento_id: string | string[]): Promise<ApiResponse> => {
-  const token = obtenerTokenDeLocalStorage();
+  const authStore = useAuth();
+  const token = authStore.token;
+
   try {
     const respuesta = await axiosInstance.get(`/documentos/${documento_id}`, {
       headers: {
@@ -41,9 +44,10 @@ export const obtenerDocumento = async (documento_id: string | string[]): Promise
 }
 
 export const guardarDocumentoEnBD = async (form: FormData): Promise<ApiResponse> => {
+  const authStore = useAuth();
+  const token = authStore.token;
+  
   try {
-    const token = obtenerTokenDeLocalStorage();
-
     const res = await axiosInstance.post("/documentos/guardar", form, {
       headers: {
         "Content-Type": "multipart/form-data",

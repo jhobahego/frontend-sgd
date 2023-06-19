@@ -27,13 +27,6 @@ const verificarCorreo = async (cliente: UserResponse, correo: string): Promise<b
   return false;
 }
 
-export const obtenerTokenDeLocalStorage = (): string | null => {
-  const token = localStorage.getItem("token");
-  if (token == null) return null;
-
-  return token;
-}
-
 const haPrestado = async (opcion: string, documento: Documento): Promise<boolean> => {
   const recordStore = useRecord();
   if (opcion !== "prestamo") return false;
