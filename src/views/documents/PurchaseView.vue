@@ -39,9 +39,9 @@ export default defineComponent({
   methods: {
     async obtenerDocumentoDeLaApi() {
       const documento_id = this.$route.params.id;
-      const { body, message } = await obtenerDocumento(documento_id);
+      const { success, body, message } = await obtenerDocumento(documento_id);
 
-      if (message.length > 0) {
+      if (!success) {
         this.$notify({
           title: "Fallo al editar",
           text: `${message}`,

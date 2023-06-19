@@ -103,11 +103,11 @@ export default defineComponent({
       form.append("paginas", this.documento.paginas.toString())
       form.append("imagen", this.imagen)
 
-      const { body: documento, message } = await guardarDocumentoEnBD(form);
-      if (message.length > 0) {
+      const { success, body: documento, message } = await guardarDocumentoEnBD(form);
+      if (!success) {
         notify({
           title: "Error al guardar",
-          text: `${message}`,
+          text: message,
           type: "error",
           duration: 3000,
         })
@@ -118,7 +118,7 @@ export default defineComponent({
       if (id) {
         notify({
           title: "Documento guardado",
-          text: `El documento ${documento.titulo} se ha guardado correctamente`,
+          text: message,
           type: "success",
           duration: 2000,
         })

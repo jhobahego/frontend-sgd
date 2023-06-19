@@ -65,11 +65,11 @@ onMounted(async () => {
   const route = useRoute();
   const id = route.params.id;
 
-  const { body, message } = await obtenerDocumento(id);
-  if(message.length > 0) {
+  const { success, body, message } = await obtenerDocumento(id);
+  if(!success) {
     notify({
       title: "Documento no encontrado",
-      text: `${message}`,
+      text: message,
       type: "error",
       duration: 3000,
     })
@@ -80,12 +80,12 @@ onMounted(async () => {
 })
 
 async function editarDocumento(documento: Documento) {
-  const respuesta = await actualizarDocumento(documento);
+  const { success, message } = await actualizarDocumento(documento);
 
-  if (respuesta.message.length > 0) {
+  if (!success) {
     notify({
       title: "Fallo al editar",
-      text: `${respuesta.message}`,
+      text: message,
       type: "error",
       duration: 3000,
     })
@@ -94,7 +94,7 @@ async function editarDocumento(documento: Documento) {
 
   notify({
     title: "Documento actualizado",
-    text: `Documento con titulo ${respuesta.body.titulo} actualizado correctamente`,
+    text: message,
     type: "success",
     duration: 3000,
   })

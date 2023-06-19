@@ -29,12 +29,12 @@ export default defineComponent({
     async verDocumento() {
       const documento_id = this.$route.params.id;
 
-      const { body, message } = await obtenerDocumento(documento_id);
+      const { success, body, message } = await obtenerDocumento(documento_id);
 
-      if (message.length > 0) {
+      if (!success) {
         this.$notify({
           title: "Fallo al editar",
-          text: `${message}`,
+          text: message,
           type: "error",
           duration: 3000,
         })
@@ -55,12 +55,6 @@ export default defineComponent({
   created() {
     this.verDocumento();
   },
-
-  // computed: {
-  //   mensaje() {
-  //     return Object.keys(this.documento).length === 0;
-  //   },
-  // },
 })
 </script>
 
