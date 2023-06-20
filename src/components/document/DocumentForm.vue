@@ -2,17 +2,17 @@
   <form class="form__create" @submit.prevent="guardarDocumento()" enctype="multipart/form-data">
 
     <div class="form__div">
-      <label class="label__tipo">tipo de documento
-
-        <select v-model="documento.tipo_documento">
+      <label>
+        tipo de documento
+        <select class="select__tipo" v-model="documento.tipo_documento">
           <option value="fisico">fisico</option>
           <option value="digital">digital</option>
         </select>
       </label>
 
-      <label class="label__categoria">categoria
-
-        <select name="categoria" v-model="documento.categoria">
+      <label class="label__categoria form__label">
+        categoria
+        <select class="select__categoria" v-model="documento.categoria">
           <option value="desarrollo de software">desarrollo de software</option>
           <option value="romantico">romantico</option>
           <option value="contaduria">contaduria</option>
@@ -23,42 +23,42 @@
       </label>
     </div>
 
-    <label class="label__autor">autor</label>
-    <input class="input__autor" type="text" placeholder="Robert C. Martin, Ana Lopez..." v-model="documento.autor">
+    <label class="form__label">autor</label>
+    <input class="form__input" type="text" placeholder="Robert C. Martin, Ana Lopez..." v-model="documento.autor">
 
-    <label class="label__titulo">titulo</label>
-    <input class="input__titulo" type="text" placeholder="Clean code, the pragmatic programmer..."
+    <label class="form__label">titulo</label>
+    <input class="form__input" type="text" placeholder="Clean code, the pragmatic programmer..."
       v-model="documento.titulo">
 
-    <label class="label__descripcion">descripcion</label>
-    <input class="input__descripcion" type="text" placeholder="A Handbook of Agile Software..."
+    <label class="form__label">descripcion</label>
+    <input class="form__input" type="text" placeholder="A Handbook of Agile Software..."
       v-model="documento.descripcion">
 
     <div class="form__div">
-      <label class="label__stock">stock
-
-        <input class="input__stock" type="number" v-model="documento.stock">
+      <label>
+        stock
+        <input class="form__input" type="number" v-model="documento.stock">
       </label>
 
-      <label class="label__precio">precio
-
-        <input class="input__precio" type="number" v-model="documento.precio">
+      <label>
+        precio
+        <input class="form__input" type="number" v-model="documento.precio">
       </label>
     </div>
 
-    <label class="label__editorial">editorial</label>
-    <input class="input__editorial" type="text" placeholder="Betulia SAS, Bogota-editoriales..."
+    <label class="form__label">editorial</label>
+    <input class="form__input" type="text" placeholder="Betulia SAS, Bogota-editoriales..."
       v-model="documento.editorial">
 
     <div class="form__div">
-      <label class="label__idiomas">idiomas
-
-        <input class="input__idiomas" type="text" placeholder="Ingles, Español, Portugues..." v-model="documento.idioma">
+      <label>
+        idiomas
+        <input class="form__input" type="text" placeholder="Ingles, Español, Portugues..." v-model="documento.idioma">
       </label>
 
-      <label class="label__paginas">paginas
-
-        <input class="input__paginas" type="number" v-model="documento.paginas">
+      <label>
+        paginas
+        <input class="form__input" type="number" v-model="documento.paginas">
       </label>
     </div>
 
