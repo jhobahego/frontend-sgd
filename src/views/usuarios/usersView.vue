@@ -19,7 +19,7 @@
   </div>
   <ul class="users__list">
     <li class="user__item" v-for="usuario in usuariosMostrados" :key="usuario._id">
-      <router-link class="user__info" :to="{ name: 'EditarUsuario', params: { id: usuario.nombres } }">
+      <router-link class="user__info" :to="{ name: 'EditarUsuario', params: { id: usuario.correo } }">
         <h4 class="user__nombres">nombre: {{ usuario.nombres }} {{ usuario.apellidos }}</h4>
         <h4 class="user__correo">correo: {{ usuario.correo }}</h4>
       </router-link>

@@ -50,9 +50,9 @@ const usuario: Ref<RegisterUser> = ref({} as RegisterUser);
 
 onMounted(async () => {
   const route = useRoute();
-  const nombres = route.params.id;
+  const correo = route.params.id;
 
-  usuario.value = await obtenerUsuario(nombres);
+  usuario.value = await obtenerUsuario(correo);
 })
 
 async function editarUsuario() {

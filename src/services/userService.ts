@@ -23,13 +23,13 @@ export async function obtenerUsuarios(): Promise<RegisterUser[]> {
   }
 }
 
-export async function obtenerUsuario(nombres: string | string[]): Promise<RegisterUser> {
+export async function obtenerUsuario(correo: string | string[]): Promise<RegisterUser> {
   const authStore = useAuth();
   const token = authStore.token;
   if (token.length === 0) return {} as RegisterUser;
 
   try {
-    const respuesta = await axiosInstance.get(`/usuarios/nombre/${nombres}`, {
+    const respuesta = await axiosInstance.get(`/usuarios/correo/${correo}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
