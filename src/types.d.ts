@@ -12,3 +12,8 @@ export interface DeleteResponse {
   status: boolean,
   message: string
 }
+
+export interface PurchaseValidationResult {
+  canBuy: boolean = false,
+  message: string
+}
