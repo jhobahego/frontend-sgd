@@ -13,8 +13,8 @@
         </router-link>
       </li>
       <li class="navbar__item" v-if="autenticado && isAdmin">
-        <router-link class="navbar__link" :to="{ name: 'documentFormView' }" @click="cerrarMenu">Registrar
-          documento</router-link>
+        <router-link class="navbar__link" :to="{ name: 'AllDocumentsAdmin' }" @click="cerrarMenu">Manejo de
+          documentos</router-link>
       </li>
       <li class="navbar__item">
         <router-link class="navbar__link" :to="{ name: 'about' }" @click="cerrarMenu">Acerca de</router-link>
