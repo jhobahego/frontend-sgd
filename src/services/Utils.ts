@@ -4,21 +4,48 @@ import { UserResponse } from "@/interfaces/User";
 import { Registro } from "@/interfaces/Registro";
 import { Galeria } from "@/interfaces/Galeria";
 import { useRecord } from "@/store/recordsStore";
+import { PurchaseValidationResult } from "@/types";
 
-export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Solicitud, documento: Documento): Promise<boolean> => {
-  if (documento.stock < 1 || cantidad < 1) return false;
-  if (opcion === 'prestamo' && cantidad > 1) return false;
+export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Solicitud, documento: Documento): Promise<PurchaseValidationResult> => {
+  const validator = {} as PurchaseValidationResult;
+  
+  if (documento.stock < 1 || cantidad < 1) {
+    validator.message = "No puedes adquirir cantidades negativas";
+    
+    return validator;
+  }
+
+  if (opcion === 'prestamo' && cantidad > 1) {
+    validator.message = "Solo puedes prestar un documento por persona";
+
+    return validator;
+  }
 
   const correoValido = await verificarCorreo(cliente, correo);
-  if (!correoValido) return false;
+  if (!correoValido) {
+    validator.message = "Debes usar tu correo electronico";
+
+    return validator;
+  }
 
   const yaPresto = await haPrestado(opcion, documento);
-  if (yaPresto) return false;
+  if (yaPresto) {
+    validator.message = "Ya has prestado este documento";
+    
+    return validator;
+  }
 
   const compraValida = puedeComprar(cantidad, documento.stock);
-  if (opcion === 'compra' && !compraValida) return false;
+  if (opcion === 'compra' && !compraValida) {
+    validator.message = "No puedes comprar mas documentos de los que hay disponibles";
+    
+    return validator;
+  }
 
-  return true;
+  validator.canBuy = true;
+  validator.message = `${cantidad} articulos de ${documento.titulo} agregados a tu galeria`;
+  
+  return validator;
 }
 
 const verificarCorreo = async (cliente: UserResponse, correo: string): Promise<boolean> => {

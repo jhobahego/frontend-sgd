@@ -54,25 +54,28 @@ export default defineComponent({
 
   methods: {
     async comprar() {
-      const documento = await adquirirDocumento(this.documento, this.solicitud);
-      if (documento === false) {
+      const respuesta = await adquirirDocumento(this.documento, this.solicitud);
+      const { canBuy: exito, message } = respuesta;
+
+      console.log(respuesta);
+      if (!exito) {
         notify({
-          title: "Fallo al comprar",
-          text: "No se pudo adquirir el documento",
+          title: "Fallo al adquirir",
+          text: message,
           type: "error",
-          duration: 2000,
+          duration: 3000,
         })
         return;
       }
       notify({
-        title: "Compra exitosa",
-        text: "Documento agregado a tu galeria",
+        title: "Transacción existosa",
+        text: message,
         type: "success",
-        duration: 2000,
+        duration: 3000,
       })
       setTimeout(() => {
         this.$router.push(`/documentos`)
-      }, 2000) 
+      }, 3000)
     },
 
     cancelar() {

@@ -4,21 +4,34 @@ import { Solicitud } from "@/interfaces/Solicitud";
 import { puedesAdquirir } from "./Utils";
 import axiosInstance from "./Axios";
 import { useAuth } from "@/store/authStore";
+import { PurchaseValidationResult } from "@/types";
 
-export const adquirirDocumento = async (documento: Documento, solicitud: Solicitud): Promise<boolean> => {
-  const puedes = await puedesAdquirir(solicitud, documento);
-  if (!puedes) return false;
+export const adquirirDocumento = async (documento: Documento, solicitud: Solicitud): Promise<PurchaseValidationResult> => {
+  const validador = await puedesAdquirir(solicitud, documento);
+  if (!validador.canBuy) {
+    return validador;
+  }
 
   const nuevoDocumento = { ...documento };
   nuevoDocumento.stock -= solicitud.cantidad;
 
   const documentoActualizado = await actualizarDocumento(nuevoDocumento);
-  if (!documentoActualizado) return false;
+  if (!documentoActualizado) {
+    validador.canBuy = false;
+    validador.message = "No se pudo actualizar el stock";
+    
+    return validador;
+  }
 
   const registro = await registrarAdquisicion(solicitud, documentoActualizado);
-  if (!registro) return false;
+  if (!registro) {
+    validador.canBuy = false;
+    validador.message = "No se pudo registrar la adquisición";
+    
+    return validador;
+  }
 
-  return true;
+  return validador;
 }
 
 export const obtenerComprasDeUsuario = async (): Promise<Registro[]> => {
