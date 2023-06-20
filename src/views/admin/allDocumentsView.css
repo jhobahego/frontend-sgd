@@ -1,3 +1,63 @@
+.documents__manage {
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
+}
+
+.documentsCreate__form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8em;
+  padding: 0 1.4em;
+  margin-bottom: 1em;
+}
+
+.documents__searchlabel {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4em;
+}
+
+.documents__searchinput {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createDocument__btn,
+.search__btn {
+  max-width: 200px;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  background: var(--green);
+  color: blue;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.createDocument__btn {
+  padding: .3em .6em;
+  margin-top: 2em;
+  margin: 0 auto;
+}
+.search__btn {
+  padding: .2em .3em;
+}
+
+
+.list__title {
+  text-align: center;
+  font-weight: 600;
+  color: blue;
+  margin: 2em 0 .4em;
+}
+
 .documents__info {
   width: 100%;
   display: flex;
@@ -21,4 +81,5 @@
 
 .document__title {
   text-decoration: none;
+  font-weight: 400;
 }
