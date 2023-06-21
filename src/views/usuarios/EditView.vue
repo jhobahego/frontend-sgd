@@ -4,28 +4,28 @@
     <div class="nombres__joiner">
       <label class="label__nombres">
         nombres
-        <input type="text" placeholder="jhon" v-model="usuario.nombres">
+        <input class="nombres__input" type="text" placeholder="jhon" v-model="usuario.nombres">
       </label>
       <label class="label__apellidos">
         apellidos
-        <input type="text" placeholder="hernandez" v-model="usuario.apellidos">
+        <input class="apellidos__input" type="text" placeholder="hernandez" v-model="usuario.apellidos">
       </label>
     </div>
-    <label>
+    <label class="edituser__label">
       correo
-      <input type="text" placeholder="jhoba@gmail.com" v-model="usuario.correo">
+      <input class="editUser__input" type="text" placeholder="jhoba@gmail.com" v-model="usuario.correo">
     </label>
-    <label>
+    <label class="edituser__label">
       pais
-      <input type="text" placeholder="Colombia, peru, venezuela..." v-model="usuario.pais">
+      <input class="editUser__input" type="text" placeholder="Colombia, peru, venezuela..." v-model="usuario.pais">
     </label>
-    <label>
+    <label class="edituser__label">
       ciudad
-      <input type="text" placeholder="Bogota, lima, caracas..." v-model="usuario.ciudad">
+      <input class="editUser__input" type="text" placeholder="Bogota, lima, caracas..." v-model="usuario.ciudad">
     </label>
-    <label>
+    <label class="edituser__label">
       rol
-      <select v-model="usuario.rol">
+      <select class="editUser__input" v-model="usuario.rol">
         <option>USER</option>
         <option>ADMIN</option>
       </select>

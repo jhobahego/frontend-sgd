@@ -15,6 +15,7 @@
   border: 1px solid blue;
   border-radius: 6px;
   background: var(--light-blue-alpha);
+  color: blue;
 }
 
 .nombres__joiner {
@@ -26,16 +27,26 @@
   margin-top: .6em;
 }
 
-.nombres__joiner label input {
-  width: 100%;
-}
-
-.edit__form label {
+.label__nombres,
+.label__apellidos,
+.edituser__label {
   width: 90%;
+  font-weight: 600;
 }
 
-.edit__form>label>input {
+.nombres__input,
+.apellidos__input,
+.editUser__input {
   width: 100%;
+  padding: .4em;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: .6em;
+
+  font: inherit;
+  font-weight: 300;
+  color: rgba(0, 0, 255, 0.685);
+  outline: none;
 }
 
 .form__buttons {
@@ -69,7 +80,6 @@
 
 @media (width < 450px) {
   .nombres__joiner {
-    width: 100%;
     flex-direction: column;
     gap: 0;
   }
