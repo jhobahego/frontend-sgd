@@ -1,22 +1,22 @@
 <template>
   <h1 class="title">Gestión de usuarios</h1>
 
-  <div class="list__header">
-    <label class="label__type">
+  <header class="list__header">
+    <label class="header__label">
       criterio
-      <select v-model="criterio">
+      <select class="select__criterio" v-model="criterio">
         <option value="nombre">nombre</option>
         <option value="correo">correo</option>
       </select>
     </label>
     <h2 class="users__title">Usuarios registrados</h2>
-    <form class="user__filter">
-      <label>
+    <form class="form__filter">
+      <label class="header__label">
         buscar
         <input class="search__input" type="text" placeholder="Jhon Hernandez" v-model="busqueda">
       </label>
     </form>
-  </div>
+  </header>
   <ul class="users__list">
     <li class="user__item" v-for="usuario in usuariosMostrados" :key="usuario._id">
       <router-link class="user__info" :to="{ name: 'EditarUsuario', params: { id: usuario.correo } }">
