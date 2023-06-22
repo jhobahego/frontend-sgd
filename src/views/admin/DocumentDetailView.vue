@@ -1,34 +1,34 @@
 <template>
-  <h1>gestionar documento</h1>
-  <form>
-    <label class="label__titulo">
+  <h1 class="title">gestionar documento</h1>
+  <form class="editform">
+    <label class="editform__label">
       titulo
-      <input type="text" class="input__titulo" placeholder="clean code" v-model="documento.titulo">
+      <input type="text" class="editform__input" placeholder="clean code" v-model="documento.titulo">
     </label>
 
     <div class="div__joiner">
-      <label type="text" class="label__stock">
+      <label class="editform__label">
         stock
-        <input type="number" class="input__stock" placeholder="24" v-model="documento.stock">
+        <input type="number" class="editform__input" placeholder="24" v-model="documento.stock">
       </label>
-      <label type="number" class="label__precio">
+      <label class="editform__label">
         precio
-        <input type="text" class="input__precio" placeholder="64" v-model="documento.precio">
+        <input type="number" class="editform__input" placeholder="64" v-model="documento.precio">
       </label>
     </div>
 
     <div class="div__joiner">
-      <label>
+      <label class="editform__label">
         tipo
-        <select v-model="documento.tipo_documento">
+        <select class="editform__select" v-model="documento.tipo_documento">
           <option value="fisico">fisico</option>
           <option value="digital">digital</option>
         </select>
       </label>
 
-      <label>
+      <label class="editform__label">
         categoria
-        <select v-model="documento.categoria">
+        <select class="editform__select" v-model="documento.categoria">
           <option value="desarrollo de software">desarrollo de software</option>
           <option value="romantico">romantico</option>
           <option value="contaduria">contaduria</option>
@@ -39,14 +39,14 @@
       </label>
     </div>
 
-    <label class="label__editorial">
+    <label class="editform__label">
       editorial
-      <input type="text" class="input__editorial" placeholder="bogota sas, london-edits..." v-model="documento.editorial">
+      <input type="text" class="editform__input" placeholder="bogota sas, london-edits..." v-model="documento.editorial">
     </label>
 
     <div class="buttons__container">
-      <button @click.prevent="editarDocumento(documento)">Actualizar</button>
-      <router-link :to="{ name: 'AllDocumentsAdmin' }">Volver</router-link>
+      <button class="form__button" @click.prevent="editarDocumento(documento)">Actualizar</button>
+      <router-link class="form__button cancel__btn" :to="{ name: 'AllDocumentsAdmin' }">Volver</router-link>
     </div>
   </form>
   <notifications position="bottom right" animation-type="css" width="50vw" />
@@ -101,3 +101,7 @@ async function editarDocumento(documento: Documento) {
 }
 
 </script>
+
+<style scoped>
+@import url(documentDetailView.css);
+</style>
