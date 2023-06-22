@@ -64,3 +64,16 @@
   text-decoration: none;
   background: #bdc2e8;
 }
+
+@media (width < 450px) {
+  .div__joiner {
+    flex-direction: column;
+    gap: 0;
+  }
+  .div__joiner > label {
+    width: 100%;
+  }
+  .title {
+    font-size: 26px;
+  }
+}
