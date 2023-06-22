@@ -10,6 +10,7 @@
   margin: 0 auto;
   background: var(--light-blue-alpha);
   border-radius: 8px;
+  border: 1px solid blue;
   color: blue;
 }
 

@@ -9,6 +9,7 @@
   background: var(--light-blue-alpha);
   padding: 1.2em;
   border-radius: 8px;
+  border: 1px solid blue;
   color: blue;
   font: inherit;
   font-weight: 600;
