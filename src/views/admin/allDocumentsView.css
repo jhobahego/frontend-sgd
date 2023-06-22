@@ -21,6 +21,8 @@
   align-items: center;
   justify-content: center;
   gap: .4em;
+  color: blue;
+  font-weight: 600;
 }
 
 .type__select,
@@ -29,18 +31,18 @@
   padding: .2em;
   border: none;
   border-radius: 4px;
-  
+
   font: inherit;
   font-weight: 300;
   color: rgba(0, 0, 255, 0.685);
   outline: none;
 }
+
 .type__select {
-  width: auto;
+  width: 100%;
 }
 
 .createDocument__btn {
-  
   padding: .2em .6em;
   text-decoration: none;
   border: none;
@@ -83,4 +85,18 @@
 .document__title {
   text-decoration: none;
   font-weight: 400;
+}
+
+@media (width < 450px) {
+  .documentsCreate__form {
+    flex-direction: column;
+    gap: 1em;
+    padding: 1.2em 2em;
+  }
+  .createDocument__btn {
+    width: 100%;
+    padding: .4em 0;
+    text-align: center;
+  }
+ 
 }
