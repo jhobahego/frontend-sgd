@@ -104,5 +104,5 @@ async function borrarUsuario(usuario_id: string) {
 </script>
 
 <style scoped>
-@import url(editView.css);
+@import url(editUserView.css);
 </style>
