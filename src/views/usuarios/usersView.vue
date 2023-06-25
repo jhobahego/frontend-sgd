@@ -12,11 +12,11 @@
       </label>
       <label class="header__label">
         buscar
-        <input class="search__input" type="text" placeholder="Jhon Hernandez" v-model="busqueda">
+        <input class="search__input" type="text" placeholder="Jhon Bairo, Rafael Santos, Maria Jose..." v-model="busqueda">
       </label>
     </form>
   </header>
-  <h2 class="users__title">Usuarios registrados</h2>
+  <h2 class="users__title">{{ title }}</h2>
   <ul class="users__list">
     <li class="user__item" v-for="usuario in usuariosMostrados" :key="usuario._id">
       <router-link class="user__info" :to="{ name: 'EditarUsuario', params: { id: usuario.correo } }">
@@ -28,15 +28,15 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref, ref, onMounted, watch, computed } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { obtenerUsuarios } from '@/services/userService';
 import { RegisterUser, UsuarioFiltrado } from '@/interfaces/User';
 
-const title: Ref<string> = ref('');
-const usuarios: Ref<RegisterUser[]> = ref([]);
-const usuariosFiltrados: Ref<UsuarioFiltrado[]> = ref([]);
-const busqueda: Ref<string> = ref('');
-const criterio: Ref<string> = ref('nombre');
+const title = ref('');
+const usuarios = ref<RegisterUser[]>([]);
+const usuariosFiltrados = ref<UsuarioFiltrado[]>([]);
+const busqueda = ref('');
+const criterio = ref('nombre');
 
 onMounted(async () => {
   usuarios.value = await obtenerUsuarios();
@@ -61,8 +61,7 @@ const filtrarUsuario = () => {
   }
 };
 
-watch(busqueda, filtrarUsuario);
-watch(criterio, filtrarUsuario);
+watch([busqueda, criterio], filtrarUsuario);
 
 const usuariosMostrados = computed(() => {
   if (busqueda.value.trim().length === 0) {
