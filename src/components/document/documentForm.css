@@ -71,7 +71,6 @@
   border-radius: 6px;
 }
 
-
 .form__btn {
   padding: .6em;
   color: blue;
@@ -79,6 +78,16 @@
   background: var(--green);
   border: none;
   border-radius: 4px;
+}
+.cancel__btn {
+  padding: .4em .6em;
+}
+
+.buttons__div {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  /* margin: .6em 0; */
   margin-top: 1.4em;
 }
 
@@ -86,5 +95,13 @@
   .form__div {
     flex-direction: column;
     gap: 0;
+  }
+  .buttons__div {
+    width: 100%;
+    flex-direction: column;
+  }
+  .cancel__btn, 
+  .form__btn {
+    width: 90%;
   }
 }
