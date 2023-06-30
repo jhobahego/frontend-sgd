@@ -68,7 +68,10 @@
       <input class="input__imagen" type="file" @change="handleFile" id="imagen">
     </div>
 
-    <button class="form__btn" type="submit">agregar documento</button>
+    <div class="buttons__div">
+      <button class="form__btn" type="submit">agregar documento</button>
+      <router-link class="cancel__btn" :to="{name: 'AllDocumentsAdmin'}">volver</router-link>
+    </div>
   </form>
   <notifications position="bottom right" animation-type="css" width="500px" />
 </template>
