@@ -1,10 +1,8 @@
 <template>
-  <h1 style="text-align: center;">vista de administración</h1>
+  <h1 class="adminview__title">vista de administración</h1>
   <section>
-
     <ListOfDocuments :titulo="titulo" :documentos="documentos" :limite="5" />
     <ListOfUsers :titulo="titulo" :usuarios="usuarios" :limite="10" />
-
   </section>
 </template>
 
@@ -26,3 +24,7 @@ onMounted(async () => {
   usuarios.value = await obtenerUsuarios()
 })
 </script>
+
+<style scoped>
+@import url(adminView.css);
+</style>
