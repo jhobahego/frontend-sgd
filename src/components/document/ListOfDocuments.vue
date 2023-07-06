@@ -1,14 +1,14 @@
 <template>
-  <article style="padding: .4em 2em">
-    <header style="display: flex; align-items: center; justify-content: space-between;">
+  <article class="list__documents">
+    <header class="documentlist__header">
       <h2>{{ titulo }}</h2>
-      <router-link class="navbar__link" :to="{ name: 'AllDocumentsAdmin' }">Manejo de
+      <router-link class="documentlist__link" :to="{ name: 'AllDocumentsAdmin' }">Manejo de
         documentos</router-link>
       </header>
-      <ul class="lista" v-for="documento in documentosLimitados" :key="documento._id">
-        <li class="item-lista">
-          <h4>{{ documento.titulo }}</h4>
-          <p>{{ documento.descripcion }}</p>
+      <ul class="documentslist" v-for="documento in documentosLimitados" :key="documento._id">
+        <li class="documentslist__item">
+          <h4 class="item__title">{{ documento.titulo }}</h4>
+          <p class="item__description">{{ documento.descripcion }}</p>
       </li>
     </ul>
   </article>
@@ -51,6 +51,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
+@import url(listOfDocuments.css);
 .lista {
   padding: .2em 0;
 }

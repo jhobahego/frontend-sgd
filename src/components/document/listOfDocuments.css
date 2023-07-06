@@ -1,0 +1,50 @@
+.list__documents {
+  padding: .4em 4em;
+  margin: 1em 0;
+}
+
+.documentlist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .6em 1em;
+  /* background: var(--gray); */
+  background: var(--green);
+  color: blue;
+}
+
+.documentlist__link {
+  text-decoration: none;
+  /* background: var(--green); */
+  background: var(--light-blue);
+  padding: .3em .8em;
+  border-radius: 4px;
+  color: blue;
+  font-weight: 600;
+}
+
+.documentslist {
+  padding: .3em 0;
+  list-style: none;
+  background: var(--light-blue-alpha);
+  padding: .6em 1em;
+}
+
+.documentlist__item {
+  line-height: 1.4em;
+  color: blue;
+}
+
+.item__title {
+  color: blue;
+  font-weight: 600;
+  padding-bottom: .2em;
+}
+
+.item__description {
+  color: blue;
+  border-bottom: none;
+  opacity: .8;
+  font-weight: 300;
+  max-width: 50%;
+}
