@@ -8,6 +8,7 @@ import EditUserView from '@/views/admin/users/EditUserView.vue'
 import DocumentDetail from '@/views/documents/DocumentDetail.vue'
 import DocumentForm from '@/views/documents/DocumentFormView.vue'
 import AuthView from '@/views/auth/AuthView.vue'
+import AdminView from '@/views/admin/AdminView.vue'
 import AllDocuments from '@/views/admin/documents/AllDocumentsView.vue'
 import DocumentDetailAdmin from '@/views/admin/documents/DocumentDetailView.vue'
 import { useAuth } from '@/store/authStore'
@@ -89,6 +90,15 @@ const routes: Array<RouteRecordRaw> = [
     path: '/usuarios/:id',
     name: 'EditarUsuario',
     component: EditUserView,
+    meta: {
+      requireAuth: true,
+      rolNecesario: "ADMIN"
+    }
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: AdminView,
     meta: {
       requireAuth: true,
       rolNecesario: "ADMIN"

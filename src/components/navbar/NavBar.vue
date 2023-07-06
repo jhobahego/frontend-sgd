@@ -9,13 +9,17 @@
         <router-link class="navbar__link" :to="{ name: 'documentsView' }" @click="cerrarMenu">Documentos</router-link>
       </li>
       <li class="navbar__item" v-if="autenticado && isAdmin">
+        <router-link class="navbar__link" :to="{ name: 'admin' }" @click="cerrarMenu">Admin
+        </router-link>
+      </li>
+      <!-- <li class="navbar__item" v-if="autenticado && isAdmin">
         <router-link class="navbar__link" :to="{ name: 'usuarios' }" @click="cerrarMenu">usuarios
         </router-link>
       </li>
       <li class="navbar__item" v-if="autenticado && isAdmin">
         <router-link class="navbar__link" :to="{ name: 'AllDocumentsAdmin' }" @click="cerrarMenu">Manejo de
           documentos</router-link>
-      </li>
+      </li> -->
       <li class="navbar__item">
         <router-link class="navbar__link" :to="{ name: 'about' }" @click="cerrarMenu">Acerca de</router-link>
       </li>
