@@ -7,7 +7,7 @@
 
   interface Redirect {
     name: string,
-    params?: { id: string }
+    params?: { id?: string }
   }
 
   export default defineComponent({
