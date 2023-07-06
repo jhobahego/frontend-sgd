@@ -46,7 +46,8 @@
 
     <div class="buttons__container">
       <button class="form__button" @click.prevent="editarDocumento(documento)">Actualizar</button>
-      <router-link class="form__button cancel__btn" :to="{ name: 'AllDocumentsAdmin' }">Volver</router-link>
+      <!-- <router-link class="form__button cancel__btn" :to="{ name: 'AllDocumentsAdmin' }">Volver</router-link> -->
+      <CancelBtn text="Volver" :redirect="{ name: 'AllDocumentsAdmin' }" />
     </div>
   </form>
   <notifications position="bottom right" animation-type="css" width="50vw" />
@@ -58,6 +59,7 @@ import { useRoute } from 'vue-router';
 import { Documento } from '@/interfaces/Documento';
 import { obtenerDocumento, actualizarDocumento } from '@/services/DocumentService';
 import { notify } from '@kyvg/vue3-notification';
+import CancelBtn from '@/components/botones/CancelBtn.vue'
 
 const documento: Ref<Documento> = ref({} as Documento);
 
