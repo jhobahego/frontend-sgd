@@ -17,7 +17,7 @@
 }
 
 .list__header {
-  background: #0006;
+  background: var(--gray);
   display: flex;
   justify-content: center;
   padding: 1.2em 4em;
@@ -57,7 +57,7 @@
 
 .users__list {
   width: 100%;
-  border-top: 1px solid #0006;
+  border-top: 1px solid var(--gray);
   background: var(--light-blue-alpha);
   margin: 0 auto;
 }
@@ -68,7 +68,7 @@
   text-decoration: none;
   list-style: none;
   padding: .6em 0;
-  border-bottom: 1px solid #0008;
+  border-bottom: 1px solid var(--gray);
   color: blue;
   font-weight: 400;
   opacity: .8;
