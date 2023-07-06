@@ -13,12 +13,27 @@
   border-radius: 6px;
 }
 
-.form__container {
+.purchaseform__container {
   padding: .4em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 90%;
+}
+.purchaseform__info {
+  padding: .4em;
+  color: blue;
+}
+.purchaseform__title {
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: .6em;
+}
+.purchaseform__description {
+  text-align: center;
+  opacity: .7;
+  font-weight: 300;
 }
 
 .form__body {
@@ -27,6 +42,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: .6em 0;
 }
 
 .form__email,
@@ -64,7 +80,9 @@
 .buttons {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-around;
+  gap: 1em;
+  margin: .6em 0;
 }
 
 @media screen and (max-width: 600px) {

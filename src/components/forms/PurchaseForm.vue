@@ -4,16 +4,15 @@
       <img class="document__img" :src="documento.imagen" :alt="documento.titulo" />
     </figure>
 
-    <div class="form__container">
-      <header class="document__info">
-        <h3 class="document__title">{{ documento.titulo }}</h3>
-        <p class="document__description">Quedan {{ documento.stock }} unidades</p>
-        <p class="document__description">precio: {{ documento.precio }}$</p>
+    <div class="purchaseform__container">
+      <header class="purchaseform__info">
+        <h3 class="purchaseform__title">{{ documento.titulo }}</h3>
+        <p class="purchaseform__description">Quedan {{ documento.stock }} unidades</p>
+        <p class="purchaseform__description">precio: {{ documento.precio }}$</p>
       </header>
       <form class="form__body">
-
-        <input class="form__email" type="text" placeholder="Correo electronico..." v-model="solicitud.correo">
-        <input class="form__quantity" type="number" placeholder="Cantidad..." v-model="solicitud.cantidad">
+        <input class="form__email" type="text" placeholder="correo@correo.com" v-model="solicitud.correo">
+        <input class="form__quantity" type="number" placeholder="12" v-model="solicitud.cantidad">
         <select class="form__select" v-model="solicitud.opcion">
           <option value="compra">compra</option>
           <option value="prestamo">prestamo</option>
@@ -98,6 +97,6 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 @import url(purchase.css);
 </style>
