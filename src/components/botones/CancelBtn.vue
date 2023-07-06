@@ -1,18 +1,22 @@
 <template>
-  <router-link class="cancel__btn" :to="props.redirect">{{ props.text }}</router-link>
+  <router-link class="cancel__btn" :to="redirect">{{ text }}</router-link>
 </template>
 
-<script setup lang="ts">
-  import { defineProps } from 'vue';
+<script lang="ts">
+  import { defineComponent } from 'vue';
 
   interface Redirect {
     name: string,
     params?: { id: string }
   }
 
-  const props = defineProps({
-    text: String,
-    redirect: Object as () => Redirect
+  export default defineComponent({
+    name: 'CancelBtn',
+
+    props: {
+      text: String,
+      redirect: Object as () => Redirect
+    }
   })
 </script>
 
