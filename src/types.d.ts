@@ -1,3 +1,4 @@
+import { Documento } from "./interfaces/Documento"
 export type ApiErrorMessage = { detail: string }
 
 type Body = RegisterUser | Documento
