@@ -1,14 +1,19 @@
 <template>
-  <article style="padding: .4em 2em">
-    <header style="display: flex; align-items: center; justify-content: space-between;">
+  <article class="list__users">
+    <header class="userslist__header">
       <h2>{{ titulo }}</h2>
-      <router-link class="navbar__link" :to="{ name: 'usuarios' }">Manejo de usuarios
+      <router-link class="userslist__link" :to="{ name: 'usuarios' }">Manejo de usuarios
       </router-link>
     </header>
-    <ul class="lista" v-for="usuario in usuariosLimitados" :key="usuario._id">
-      <li class="item-lista">
-        <p><strong>Nombres:</strong> {{ usuario.nombres }}</p>
-        <p><strong>Correo:</strong> {{ usuario.correo }}</p>
+    <ul class="userslist" v-for="usuario in usuariosLimitados" :key="usuario._id">
+      <li class="userslist__item">
+        <p class="userslist__detail">
+          <strong>Nombres: <span class="userslist__data">{{ usuario.nombres }}</span></strong>
+        </p>
+
+        <p class="userslist__detail">
+          <strong>Correo: <span class="userslist__data">{{ usuario.correo }}</span></strong>
+        </p>
       </li>
     </ul>
   </article>
@@ -51,7 +56,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.lista {
-  padding: .2em 0;
-}
+@import url(listOfUsers.css);
 </style>
