@@ -47,12 +47,12 @@
   align-items: center;
   justify-content: center;
   gap: 1em;
+  margin: .8em 0 .6em;
 }
 
 .form__button {
-  margin: .8em 0 .6em;
   border: none;
-  padding: .4em .8em;
+  padding: .4em .6em;
   border-radius: 6px;
   background: var(--green);
   color: blue;
