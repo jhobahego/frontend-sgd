@@ -10,7 +10,7 @@
         <p class="document__description">Quedan {{ documento.stock }} unidades</p>
         <p class="document__description">precio: {{ documento.precio }}$</p>
       </header>
-      <form class="form__body" @submit.prevent="comprar()">
+      <form class="form__body">
 
         <input class="form__email" type="text" placeholder="Correo electronico..." v-model="solicitud.correo">
         <input class="form__quantity" type="number" placeholder="Cantidad..." v-model="solicitud.cantidad">
@@ -20,7 +20,8 @@
         </select>
 
         <div class="buttons">
-          <button type="submit" class="purchase__btn">adquirir</button>
+          <!-- <button type="submit" class="purchase__btn">adquirir</button> -->
+          <SubmitBtn title="Adquirir" :action="comprar" />
           <button @click.prevent="cancelar()" class="cancel__btn">Cancelar</button>
         </div>
       </form>
@@ -35,6 +36,7 @@ import { Solicitud } from '@/interfaces/Solicitud';
 import { adquirirDocumento } from '@/services/Purchase';
 import { notify } from '@kyvg/vue3-notification';
 import { useAuth } from '@/store/authStore';
+import SubmitBtn from '@/components/botones/SubmitBtn.vue'
 
 export default defineComponent({
   name: "purchaseForm",
@@ -50,6 +52,10 @@ export default defineComponent({
       type: Object as () => Documento,
       required: true
     },
+  },
+
+  components: {
+    SubmitBtn
   },
 
   methods: {

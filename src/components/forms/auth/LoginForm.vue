@@ -3,9 +3,9 @@
     <input v-model="credentials.correo" class="login__input login__input--first" type="email"
       placeholder="correo electronico...">
     <input v-model="credentials.contra" class="login__input" type="password" placeholder="contraseña...">
-    <button @click.prevent="iniciarSesion()" type="submit" class="btn__login">Iniciar sesión</button>
+    <SubmitBtn title="Iniciar sesion" :action="iniciarSesion" />
     <span>¿olvidaste tu contraseña?</span>
-    <notifications position="top right" width="400px" animation-type="css" classes="notify__topright--error"/>
+    <notifications position="top right" width="400px" animation-type="css" classes="notify__topright--error" />
   </form>
 </template>
 
@@ -14,6 +14,7 @@ import { defineComponent } from 'vue';
 import { LoginUser } from '@/interfaces/User';
 import { notify } from '@kyvg/vue3-notification';
 import { useAuth } from '@/store/authStore';
+import SubmitBtn from '@/components/botones/SubmitBtn.vue'
 
 export default defineComponent({
   name: "loginForm",
@@ -22,6 +23,10 @@ export default defineComponent({
     return {
       credentials: {} as LoginUser,
     }
+  },
+
+  components: {
+    SubmitBtn
   },
 
   methods: {
@@ -35,14 +40,15 @@ export default defineComponent({
       if (token.length > 0) {
         localStorage.setItem("token", token);
         this.$router.push("/");
-      } else {
-        notify({
+        return;
+      }
+      
+      notify({
         title: "Fallo al iniciar sesión",
         text: "Correo electronico o contraseña invalidos",
         type: "error",
         closeOnClick: true,
       })
-      }
     },
   },
 })

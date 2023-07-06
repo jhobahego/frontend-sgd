@@ -32,7 +32,10 @@
     </label>
     <div class="form__buttons">
       <button class="eliminar__btn" @click.prevent="borrarUsuario(usuario._id)">Eliminar usuario</button>
-      <button class="submit__btn" @click.prevent="editarUsuario()">Editar usuario</button>
+      <!-- <SubmitBtn title="Eliminar usuario" :action="borrarUsuario" /> -->
+
+      <!-- <button class="submit__btn" @click.prevent="editarUsuario()">Editar usuario</button> -->
+      <SubmitBtn title="Editar usuario" :action="editarUsuario" />
       <router-link class="cancel__btn" :to="{ name: 'usuarios' }">Volver</router-link>
     </div>
   </form>
@@ -45,6 +48,7 @@ import { useRoute } from 'vue-router';
 import { RegisterUser } from '@/interfaces/User';
 import { obtenerUsuario, actualizarUsuario, eliminarUsuario } from '@/services/userService';
 import { notify } from '@kyvg/vue3-notification';
+import SubmitBtn from '@/components/botones/SubmitBtn.vue'
 
 const usuario: Ref<RegisterUser> = ref({} as RegisterUser);
 

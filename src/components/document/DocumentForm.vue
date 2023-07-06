@@ -1,5 +1,5 @@
 <template>
-  <form class="form__create" @submit.prevent="guardarDocumento()" enctype="multipart/form-data">
+  <form class="form__create" enctype="multipart/form-data">
 
     <div class="form__div">
       <label>
@@ -69,7 +69,7 @@
     </div>
 
     <div class="buttons__div">
-      <button class="form__btn" type="submit">agregar documento</button>
+      <SubmitBtn title="Agregar documento" :action="guardarDocumento" />
       <router-link class="cancel__btn" :to="{name: 'AllDocumentsAdmin'}">volver</router-link>
     </div>
   </form>
@@ -81,6 +81,7 @@ import { defineComponent } from 'vue';
 import { Documento } from '@/interfaces/Documento';
 import { guardarDocumentoEnBD } from '@/services/DocumentService';
 import { notify } from '@kyvg/vue3-notification';
+import SubmitBtn from '@/components/botones/SubmitBtn.vue'
 
 export default defineComponent({
   name: "DocumentForm",
@@ -90,6 +91,9 @@ export default defineComponent({
       imagen: {} as File,
       imagePreview: ""
     }
+  },
+  components: {
+    SubmitBtn
   },
   methods: {
     async guardarDocumento() {

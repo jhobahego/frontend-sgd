@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="registrar()" class="form__register">
+  <form class="form__register">
     <div class="register__div register__div--first">
       <input v-model="usuario.nombres" class="register__input" type="text" placeholder="nombres...">
       <input v-model="usuario.apellidos" class="register__input" type="text" placeholder="apellidos...">
@@ -10,7 +10,8 @@
       <input v-model="usuario.ciudad" class="register__input" type="text" placeholder="ciudad...">
       <input v-model="usuario.pais" class="register__input" type="text" placeholder="país...">
     </div>
-    <button type="submit" class="btn__register">Registrarse</button>
+    <!-- <button type="submit" class="btn__register">Registrarse</button> -->
+    <SubmitBtn title="Registrarse" :action="registrar" />
     <notifications position="top right" width="200px" animation-type="css" classes="notify__topright--error" />
   </form>
 </template>
@@ -20,6 +21,7 @@ import { defineComponent } from 'vue';
 import { LoginUser, RegisterUser } from '@/interfaces/User';
 import { notify } from '@kyvg/vue3-notification';
 import { useAuth } from '@/store/authStore';
+import SubmitBtn from '@/components/botones/SubmitBtn.vue'
 
 export default defineComponent({
   name: "registerForm",
@@ -28,6 +30,10 @@ export default defineComponent({
     return {
       usuario: {} as RegisterUser
     }
+  },
+
+  components: {
+    SubmitBtn
   },
 
   methods: {
