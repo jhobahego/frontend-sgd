@@ -43,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/documento/:id',
-    name: 'documentDetalView',
+    name: 'documentDetail',
     component: DocumentDetail,
     meta: {
       requireAuth: true,
