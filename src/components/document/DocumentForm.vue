@@ -70,7 +70,7 @@
 
     <div class="buttons__div">
       <SubmitBtn title="Agregar documento" :action="guardarDocumento" />
-      <router-link class="cancel__btn" :to="{name: 'AllDocumentsAdmin'}">volver</router-link>
+      <CancelBtn text="Volver" :redirect="{name: 'AllDocumentsAdmin'}" />
     </div>
   </form>
   <notifications position="bottom right" animation-type="css" width="500px" />
@@ -82,6 +82,7 @@ import { Documento } from '@/interfaces/Documento';
 import { guardarDocumentoEnBD } from '@/services/DocumentService';
 import { notify } from '@kyvg/vue3-notification';
 import SubmitBtn from '@/components/botones/SubmitBtn.vue'
+import CancelBtn from '@/components/botones/CancelBtn.vue'
 
 export default defineComponent({
   name: "DocumentForm",
@@ -93,7 +94,8 @@ export default defineComponent({
     }
   },
   components: {
-    SubmitBtn
+    SubmitBtn,
+    CancelBtn
   },
   methods: {
     async guardarDocumento() {

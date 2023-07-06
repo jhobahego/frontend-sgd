@@ -32,11 +32,8 @@
     </label>
     <div class="form__buttons">
       <button class="eliminar__btn" @click.prevent="borrarUsuario(usuario._id)">Eliminar usuario</button>
-      <!-- <SubmitBtn title="Eliminar usuario" :action="borrarUsuario" /> -->
-
-      <!-- <button class="submit__btn" @click.prevent="editarUsuario()">Editar usuario</button> -->
       <SubmitBtn title="Editar usuario" :action="editarUsuario" />
-      <router-link class="cancel__btn" :to="{ name: 'usuarios' }">Volver</router-link>
+      <CancelBtn text="Volver" :redirect="{ name: 'usuarios' }" />
     </div>
   </form>
   <notifications position="bottom right" animation-type="css" width="50vw" />
@@ -49,6 +46,7 @@ import { RegisterUser } from '@/interfaces/User';
 import { obtenerUsuario, actualizarUsuario, eliminarUsuario } from '@/services/userService';
 import { notify } from '@kyvg/vue3-notification';
 import SubmitBtn from '@/components/botones/SubmitBtn.vue'
+import CancelBtn from '@/components/botones/CancelBtn.vue'
 
 const usuario: Ref<RegisterUser> = ref({} as RegisterUser);
 

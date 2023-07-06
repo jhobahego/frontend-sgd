@@ -20,9 +20,8 @@
         </select>
 
         <div class="buttons">
-          <!-- <button type="submit" class="purchase__btn">adquirir</button> -->
           <SubmitBtn title="Adquirir" :action="comprar" />
-          <button @click.prevent="cancelar()" class="cancel__btn">Cancelar</button>
+          <CancelBtn text="Cancelar" :redirect="{ name: 'documentDetail', params: { id: documento._id } }" />
         </div>
       </form>
     </div>
@@ -37,6 +36,7 @@ import { adquirirDocumento } from '@/services/Purchase';
 import { notify } from '@kyvg/vue3-notification';
 import { useAuth } from '@/store/authStore';
 import SubmitBtn from '@/components/botones/SubmitBtn.vue'
+import CancelBtn from '@/components/botones/CancelBtn.vue'
 
 export default defineComponent({
   name: "purchaseForm",
@@ -55,7 +55,8 @@ export default defineComponent({
   },
 
   components: {
-    SubmitBtn
+    SubmitBtn,
+    CancelBtn
   },
 
   methods: {
@@ -82,10 +83,6 @@ export default defineComponent({
       setTimeout(() => {
         this.$router.push(`/documentos`)
       }, 3000)
-    },
-
-    cancelar() {
-      this.$router.push(`/documento/${this.documento._id}`)
     },
 
     async obtenerUsuario() {

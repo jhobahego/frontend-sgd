@@ -13,7 +13,7 @@ import { obtenerDocumento } from '@/services/DocumentService'
 import Document_detail from '@/components/document/Document_detail.vue';
 
 export default defineComponent({
-  name: 'documentDetalView',
+  name: 'documentDetail',
 
   data() {
     return {
@@ -45,10 +45,6 @@ export default defineComponent({
 
     adquirir() {
       this.$router.push(`/documentos/comprar/${this.documento._id}`);
-    },
-
-    cancelar() {
-      this.$router.push("/documentos");
     },
   },
 

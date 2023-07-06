@@ -15,7 +15,7 @@
         idioma: {{ documento.idioma }}
       </p>
       <button class="buy__btn" @click.prevent="adquirir()">adquirir</button>
-      <button class="cancel__btn" @click.prevent="cancelar()">cancelar</button>
+      <CancelBtn text="Cancelar" :redirect="{ name: 'documentsView' }" />
     </div>
   </article>
 </template>
@@ -23,6 +23,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { Documento } from '@/interfaces/Documento';
+import CancelBtn from '@/components/botones/CancelBtn.vue'
 
 export default defineComponent({
   props: {
@@ -32,14 +33,14 @@ export default defineComponent({
     }
   },
 
+  components: {
+    CancelBtn
+  },
+
   methods: {
     adquirir() {
       this.$router.push(`/documentos/comprar/${this.documento._id}`);
     },
-
-    cancelar() {
-      this.$router.push("/documentos");
-    }
   }
 })
 </script>
