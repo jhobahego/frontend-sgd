@@ -1,5 +1,11 @@
 .adminview__title {
   text-align: center;
   color: blue;
-  padding: .4em 4em;
+}
+
+@media (width < 450px) {
+  .adminview__title{
+    font-size: 26px;
+    margin: .6em 0;
+  }
 }

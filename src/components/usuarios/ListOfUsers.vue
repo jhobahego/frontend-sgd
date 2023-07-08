@@ -1,7 +1,7 @@
 <template>
   <article class="list__users">
     <header class="userslist__header">
-      <h2>{{ titulo }}</h2>
+      <h2 class="userslist__title">{{ titulo }}</h2>
       <router-link class="userslist__link" :to="{ name: 'usuarios' }">Manejo de usuarios
       </router-link>
     </header>

@@ -15,7 +15,7 @@
 
 .userslist__link {
   text-decoration: none;
-  /* background: var(--green); */
+  text-align: center;
   background: var(--light-blue);
   padding: .3em .8em;
   border-radius: 4px;
@@ -42,4 +42,23 @@
   border-bottom: none;
   opacity: .8;
   font-weight: 300;
+}
+
+@media (width < 750px) {
+  .userslist__title {
+    font-size: 20px;
+    text-align: center;
+  }
+  .userslist__detail {
+    width: 60%;
+    margin-bottom: .4em;
+    font-size: 16px;
+  }
+}
+
+@media (width < 460px) {
+  .userslist__header {
+    flex-direction: column;
+    gap: .6em;
+  }
 }

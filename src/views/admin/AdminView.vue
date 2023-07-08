@@ -2,7 +2,7 @@
   <h1 class="adminview__title">vista de administración</h1>
   <section>
     <ListOfDocuments :titulo="titulo" :documentos="documentos" :limite="5" />
-    <ListOfUsers :titulo="titulo" :usuarios="usuarios" :limite="10" />
+    <ListOfUsers :titulo="titulo" :usuarios="usuarios" :limite="5" />
   </section>
 </template>
 
