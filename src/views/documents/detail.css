@@ -16,15 +16,6 @@
   align-items: center;
 }
 
-.document__img {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  width: 100%;
-  height: auto;
-}
-
 .document__info {
   display: flex;
   flex-direction: column;
@@ -59,8 +50,12 @@
 @media screen and (max-width: 700px) {
   .document__card {
     grid-template-columns: 1fr;
+    width: 60%;
   }
-  .document__title {
-    text-align: center;
+  .document__description {
+    font-size: 16px;
+  }
+  .buy__btn {
+    margin-top: .8em;
   }
 }
