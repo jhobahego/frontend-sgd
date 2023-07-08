@@ -58,8 +58,7 @@
 .eliminar__btn {
   padding: .4em .6em;
 }
-.eliminar__btn,
-.submit__btn {
+.eliminar__btn {
   background: var(--light-blue-alpha);
   color: blue;
   font-weight: 600;

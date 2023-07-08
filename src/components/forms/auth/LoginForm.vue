@@ -3,7 +3,7 @@
     <input v-model="credentials.correo" class="login__input login__input--first" type="email"
       placeholder="correo electronico...">
     <input v-model="credentials.contra" class="login__input" type="password" placeholder="contraseña...">
-    <SubmitBtn title="Iniciar sesion" :action="iniciarSesion" />
+    <SubmitBtn class="login__btn" title="Iniciar sesion" :action="iniciarSesion" />
     <span>¿olvidaste tu contraseña?</span>
     <notifications position="top right" width="400px" animation-type="css" classes="notify__topright--error" />
   </form>
