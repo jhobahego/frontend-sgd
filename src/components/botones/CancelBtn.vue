@@ -34,9 +34,4 @@
   cursor: pointer;
 }
 
-@media (width < 600px) {
-  .cancel__btn {
-    width: 90%;
-  }
-}
 </style>
