@@ -8,7 +8,6 @@
   align-items: center;
   justify-content: space-between;
   padding: .6em 1em;
-  /* background: var(--gray); */
   background: var(--green);
   color: blue;
 }
@@ -31,7 +30,30 @@
 }
 
 .userslist__item {
-  line-height: 1.4em;
+  display: grid;
+  grid-template-columns: auto max-content;
+  grid-template-areas: "detalles vermas";
+  justify-content: space-between;
+  align-content: center;
+}
+
+.userslist__nombres {
+  color: blue;
+  grid-area: detalles;
+}
+
+.user__details {
+  grid-area: vermas;
+  text-align: center;
+  padding: .4em .6em;
+  background: var(--light-blue);
+  border: none;
+  border-radius: 6px;
+  color: blue;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 1em;
 }
 
 .userslist__detail > strong {
@@ -50,7 +72,6 @@
     text-align: center;
   }
   .userslist__detail {
-    width: 60%;
     margin-bottom: .4em;
     font-size: 16px;
   }
@@ -60,5 +81,19 @@
   .userslist__header {
     flex-direction: column;
     gap: .6em;
+  }
+
+  .userslist__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .userslist__detail,
+  .userslist__nombres {
+    text-align: center;
+    margin-bottom: .2em;
+  }
+  .user__details {
+    margin-top: .6em;
   }
 }
