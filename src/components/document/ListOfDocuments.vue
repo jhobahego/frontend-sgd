@@ -9,6 +9,7 @@
       <li class="documentslist__item">
         <h4 class="item__title">{{ documento.titulo }}</h4>
         <p class="item__description">{{ documento.descripcion }}</p>
+        <button class="item__details" @click="verDetalle(documento._id)">Ver mas detalles</button>
       </li>
     </ul>
   </article>
@@ -16,6 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { Documento } from '@/interfaces/Documento';
 
 export default defineComponent({
@@ -33,7 +35,16 @@ export default defineComponent({
       require: false
     }
   },
+
   setup(props) {
+    const router = useRouter();
+
+    const verDetalle = (documento_id: string | undefined) => {
+      if (documento_id != undefined) {
+        router.push({ name: 'documentDetail', params: { id: documento_id } });
+      }
+    }
+
     const documentosLimitados = computed(() => {
       if (props.limite && props.documentos.length > props.limite) {
         return props.documentos.slice(0, props.limite);
@@ -43,7 +54,8 @@ export default defineComponent({
     });
 
     return {
-      documentosLimitados
+      documentosLimitados,
+      verDetalle
     };
   }
 })
@@ -52,8 +64,4 @@ export default defineComponent({
 
 <style scoped>
 @import url(listOfDocuments.css);
-
-.lista {
-  padding: .2em 0;
-}
 </style>
