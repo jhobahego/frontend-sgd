@@ -10,11 +10,7 @@ export async function obtenerUsuarios(): Promise<RegisterUser[]> {
   if (token.length === 0) return [];
 
   try {
-    const respuesta = await axiosInstance.get("/usuarios", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const respuesta = await axiosInstance.get("/usuarios");
 
     return respuesta.data as RegisterUser[];
   } catch (error) {
@@ -29,11 +25,7 @@ export async function obtenerUsuario(correo: string | string[]): Promise<Registe
   if (token.length === 0) return {} as RegisterUser;
 
   try {
-    const respuesta = await axiosInstance.get(`/usuarios/correo/${correo}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const respuesta = await axiosInstance.get(`/usuarios/correo/${correo}`);
 
     return respuesta.data as RegisterUser;
   } catch (error) {
@@ -48,11 +40,7 @@ export async function actualizarUsuario(usuario: RegisterUser): Promise<ApiRespo
 
   const apiResponse = {} as ApiResponse;
   try {
-    const respuesta = await axiosInstance.put(`/usuarios/actualizar/${usuario._id}`, usuario, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const respuesta = await axiosInstance.put(`/usuarios/actualizar/${usuario._id}`, usuario);
 
     apiResponse.message = "";
     apiResponse.body = respuesta.data;
@@ -72,15 +60,8 @@ export async function actualizarUsuario(usuario: RegisterUser): Promise<ApiRespo
 }
 
 export async function eliminarUsuario(usuario_id: string): Promise<DeleteResponse> {
-  const authStore = useAuth();
-  const token = authStore.token;
-
   try {
-    const respuesta = await axiosInstance.delete(`/usuarios/eliminar/${usuario_id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const respuesta = await axiosInstance.delete(`/usuarios/eliminar/${usuario_id}`);
 
     const exit = respuesta.status === 204;
     return { status: exit, message: "usuario eliminado correctamente" } as DeleteResponse;

@@ -1,9 +1,15 @@
-import axios, { AxiosInstance } from 'axios';
-// import dotenv from 'dotenv'
+import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
+import { useAuth } from "@/store/authStore";
 
-// dotenv.config();
+const setTokenInHeaders = (request: InternalAxiosRequestConfig) => {
+  const authStore = useAuth()
+  const token = authStore.token
 
-// const API_URL = process.env.API_URL;
+  if (token.length > 0) {
+    request.headers.Authorization = `Bearer ${token}`
+  }
+  return request
+}
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: /*"https://mintic-api.onrender.com",*/ "http://localhost:8000",
@@ -11,5 +17,9 @@ const axiosInstance: AxiosInstance = axios.create({
     "Content-Type": "application/json",
   }
 });
+
+axiosInstance.interceptors.request.use((request: InternalAxiosRequestConfig) => {
+  return setTokenInHeaders(request)
+})
 
 export default axiosInstance;

@@ -1,19 +1,11 @@
 import { Documento } from "@/interfaces/Documento";
 import axiosInstance from './Axios'
-import { useAuth } from "@/store/authStore";
 import { AxiosError } from "axios";
 import { ApiErrorMessage, ApiResponse } from "@/types";
 
 export const obtenerDocumentos = async (): Promise<Documento[]> => {
-  const authStore = useAuth();
-  const token = authStore.token;
-
   try {
-    const respuesta = await axiosInstance.get("/", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const respuesta = await axiosInstance.get("/");
     return respuesta.data;
   } catch (error) {
     return [];
@@ -21,15 +13,8 @@ export const obtenerDocumentos = async (): Promise<Documento[]> => {
 }
 
 export const obtenerDocumento = async (documento_id: string | string[]): Promise<ApiResponse> => {
-  const authStore = useAuth();
-  const token = authStore.token;
-
   try {
-    const respuesta = await axiosInstance.get(`/documentos/${documento_id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const respuesta = await axiosInstance.get(`/documentos/${documento_id}`);
 
     const documento = respuesta.data;
     return { success: true, body: documento, message: "Documento creado correctamente" } as ApiResponse;
@@ -44,16 +29,8 @@ export const obtenerDocumento = async (documento_id: string | string[]): Promise
 }
 
 export const guardarDocumentoEnBD = async (form: FormData): Promise<ApiResponse> => {
-  const authStore = useAuth();
-  const token = authStore.token;
-
   try {
-    const res = await axiosInstance.post("/documentos/guardar", form, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const res = await axiosInstance.post("/documentos/guardar", form);
 
     const documento = res.data;
     return { success: true, body: documento, message: `El documento ${documento.titulo} se ha guardado correctamente` } as ApiResponse;
@@ -68,15 +45,8 @@ export const guardarDocumentoEnBD = async (form: FormData): Promise<ApiResponse>
 }
 
 export async function actualizarDocumento(documento: Documento): Promise<ApiResponse> {
-  const authStore = useAuth();
-  const token = authStore.token;
-
   try {
-    const respuesta = await axiosInstance.put(`/documentos/actualizar/${documento._id}`, documento, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const respuesta = await axiosInstance.put(`/documentos/actualizar/${documento._id}`, documento);
 
     return { success: true, body: respuesta.data, message: `Documento ${respuesta.data.titulo} actualizado correctamente` } as ApiResponse;
   } catch (error) {

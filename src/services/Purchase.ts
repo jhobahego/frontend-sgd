@@ -41,11 +41,7 @@ export const obtenerComprasDeUsuario = async (): Promise<Registro[]> => {
   if (token.length === 0) return [];
 
   try {
-    const res = await axiosInstance.get(`/ventas/usuario/${usuario._id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    const res = await axiosInstance.get(`/ventas/usuario/${usuario._id}`);
 
     return res.data;
   } catch (error) {
@@ -60,11 +56,7 @@ const actualizarDocumento = async (documento: Documento): Promise<Documento | un
   if (token.length === 0) return;
 
   try {
-    const res = await axiosInstance.put(`/documentos/actualizar/${documento._id}`, documento, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-    });
+    const res = await axiosInstance.put(`/documentos/actualizar/${documento._id}`, documento);
 
     return res.data;
   } catch (error) {
@@ -78,11 +70,7 @@ const registrarVenta = async (adquisicion: Registro): Promise<Registro | undefin
   if (token.length === 0) return;
 
   try {
-    const respuesta = await axiosInstance.post("/ventas/guardar", adquisicion, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const respuesta = await axiosInstance.post("/ventas/guardar", adquisicion);
 
     return respuesta.data;
   } catch (error) {

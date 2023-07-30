@@ -35,11 +35,7 @@ export const obtenerUsuarioAutenticado = async (token: string | null): Promise<U
   if (token?.length === 0) return {} as UserResponse;
 
   try {
-    const respuesta = await axiosInstance.get("/usuarios/perfil", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    const respuesta = await axiosInstance.get("/usuarios/perfil")
 
     return respuesta.data;
   } catch (error) {

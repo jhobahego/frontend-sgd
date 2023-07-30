@@ -38,9 +38,7 @@ export default defineComponent({
       await store.profile();
 
       if (token.length > 0) {
-        localStorage.setItem("token", token);
-        this.$router.push("/");
-        return;
+        return this.$router.push("/");
       }
       
       notify({
