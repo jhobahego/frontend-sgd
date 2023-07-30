@@ -20,7 +20,7 @@
 
         <div class="buttons">
           <SubmitBtn title="Adquirir" :action="comprar" />
-          <CancelBtn text="Cancelar" :redirect="{ name: 'documentDetail', params: { id: $route.params.id } }" />
+          <CancelBtn text="Cancelar" :redirect="{ name: 'documentDetail', params: { id: documento._id } }" />
         </div>
       </form>
     </div>
