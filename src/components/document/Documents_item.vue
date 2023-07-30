@@ -34,3 +34,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+@import url(documentItem.css);
+</style>

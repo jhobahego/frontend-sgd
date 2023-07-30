@@ -13,6 +13,21 @@
   border-radius: 6px;
 }
 
+.img__container {
+  display: inline-block;
+  margin: 8px;
+  border-radius: 6px;
+}
+
+.document__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  width: 100%;
+  height: auto;
+}
+
 .purchaseform__container {
   padding: .4em;
   display: flex;

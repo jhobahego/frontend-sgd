@@ -44,3 +44,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+@import url(documentDetail.css);
+</style>

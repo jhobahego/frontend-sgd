@@ -18,7 +18,7 @@ export default defineComponent({
   name: "DocumentView",
   data() {
     return {
-      documentosDisponibles: {} as Documento[]
+      documentosDisponibles: [] as Documento[]
     };
   },
   methods: {
