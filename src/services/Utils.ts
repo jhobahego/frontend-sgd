@@ -4,7 +4,7 @@ import { UserResponse } from "@/interfaces/User";
 import { Registro } from "@/interfaces/Registro";
 import { Galeria } from "@/interfaces/Galeria";
 import { useRecord } from "@/store/recordsStore";
-import { PurchaseValidationResult } from "@/types";
+import { PurchaseValidationResult, TypeWithKey } from "@/types";
 
 export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Solicitud, documento: Documento): Promise<PurchaseValidationResult> => {
   const validator = {} as PurchaseValidationResult;
@@ -99,4 +99,23 @@ export const normalizarRegistros = (registros: Registro[]): Registro[] => {
   }
 
   return registrosUnicos.compras.concat(registrosUnicos.prestamos);
+}
+
+export const getValidationError = (status: number) => {
+  const codeMatcher: TypeWithKey<string> = {
+    401: 'Correo electronico o contraseña invalidos',
+    404: 'Recurso no encontrado',
+    422: 'Datos incorrectos, intentelo nuevamente'
+  }
+
+  return codeMatcher[status];
+}
+
+export const getResponseMessage = (status: number) => {
+  const codeMatcher: TypeWithKey<string> = {
+    301: 'Documento creado correctamente',
+    200: 'Operacion existosa'
+  }
+
+  return codeMatcher[status];
 }
