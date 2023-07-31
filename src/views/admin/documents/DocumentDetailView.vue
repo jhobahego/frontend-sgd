@@ -1,6 +1,6 @@
 <template>
-  <h1 class="title">gestionar documento</h1>
-  <form class="editform">
+  <h1 class="title">{{ title }}</h1>
+  <form class="editform" v-if="!fail">
     <label class="editform__label">
       titulo
       <input type="text" class="editform__input" placeholder="clean code" v-model="documento.titulo">
@@ -55,51 +55,35 @@
 
 <script lang="ts" setup>
 import { Ref, ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { Documento } from '@/interfaces/Documento';
 import { obtenerDocumento, actualizarDocumento } from '@/services/DocumentService';
-import { notify } from '@kyvg/vue3-notification';
 import CancelBtn from '@/components/botones/CancelBtn.vue'
+import { notificationUtilities } from '@/services/notificationService';
 
 const documento: Ref<Documento> = ref({} as Documento);
+const title = ref('Gestionar documento')
+const fail = ref(false)
 
 onMounted(async () => {
   const route = useRoute();
   const id = route.params.id;
 
-  const { success, body, message } = await obtenerDocumento(id);
-  if(!success) {
-    notify({
-      title: "Documento no encontrado",
-      text: message,
-      type: "error",
-      duration: 3000,
-    })
-    return;
-  }
+  try {
+    const { data } = await obtenerDocumento(id);
 
-  documento.value = body;
+    documento.value = data;
+  } catch (error) {
+    title.value = "oops ha habido un error";
+    fail.value = true
+  }
 })
 
 async function editarDocumento(documento: Documento) {
-  const { success, message } = await actualizarDocumento(documento);
-
-  if (!success) {
-    notify({
-      title: "Fallo al editar",
-      text: message,
-      type: "error",
-      duration: 3000,
-    })
-    return;
+  const { status } = await actualizarDocumento(documento);
+  if (status === 200) {
+    notificationUtilities.success("Documento actualizado correctamente");
   }
-
-  notify({
-    title: "Documento actualizado",
-    text: message,
-    type: "success",
-    duration: 3000,
-  })
 }
 
 </script>

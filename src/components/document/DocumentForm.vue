@@ -31,8 +31,7 @@
       v-model="documento.titulo">
 
     <label class="form__label">descripcion</label>
-    <input class="form__input" type="text" placeholder="A Handbook of Agile Software..."
-      v-model="documento.descripcion">
+    <input class="form__input" type="text" placeholder="A Handbook of Agile Software..." v-model="documento.descripcion">
 
     <div class="form__div">
       <label>
@@ -47,8 +46,7 @@
     </div>
 
     <label class="form__label">editorial</label>
-    <input class="form__input" type="text" placeholder="Betulia SAS, Bogota-editoriales..."
-      v-model="documento.editorial">
+    <input class="form__input" type="text" placeholder="Betulia SAS, Bogota-editoriales..." v-model="documento.editorial">
 
     <div class="form__div">
       <label>
@@ -70,7 +68,7 @@
 
     <div class="buttons__div">
       <SubmitBtn title="Agregar documento" :action="guardarDocumento" />
-      <CancelBtn text="Volver" :redirect="{name: 'AllDocumentsAdmin'}" />
+      <CancelBtn text="Volver" :redirect="{ name: 'AllDocumentsAdmin' }" />
     </div>
   </form>
   <notifications position="bottom right" animation-type="css" width="500px" />
@@ -112,29 +110,12 @@ export default defineComponent({
       form.append("paginas", this.documento.paginas.toString())
       form.append("imagen", this.imagen)
 
-      const { success, body: documento, message } = await guardarDocumentoEnBD(form);
-      if (!success) {
-        notify({
-          title: "Error al guardar",
-          text: message,
-          type: "error",
-          duration: 3000,
-        })
-        return;
-      }
+      const { data } = await guardarDocumentoEnBD(form);
+      const id = data._id
 
-      const id = documento._id;
-      if (id) {
-        notify({
-          title: "Documento guardado",
-          text: message,
-          type: "success",
-          duration: 2000,
-        })
-        setTimeout(() => {
-          this.$router.push(`/documento/${id}`)
-        }, 2000)
-      }
+      setTimeout(() => {
+        this.$router.push(`/documento/${id}`)
+      }, 2000)
     },
 
     handleFile(event: Event) {

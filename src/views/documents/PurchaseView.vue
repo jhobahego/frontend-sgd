@@ -1,5 +1,6 @@
 <template>
-  <section class="purchase__container">
+  <h1 class="title" v-if="Object.keys(documento).length === 0">oops no se encontro el documento</h1>
+  <section class="purchase__container" v-else>
     <header class="purchase__info">
       <h1 class="purchase__title">Tener en cuenta!</h1>
 
@@ -39,18 +40,9 @@ export default defineComponent({
   methods: {
     async obtenerDocumentoDeLaApi() {
       const documento_id = this.$route.params.id;
-      const { success, body, message } = await obtenerDocumento(documento_id);
+      const { data } = await obtenerDocumento(documento_id);
 
-      if (!success) {
-        this.$notify({
-          title: "Fallo al editar",
-          text: `${message}`,
-          type: "error",
-          duration: 3000,
-        })
-        return;
-      }
-      this.documento = body;
+      this.documento = data;
     },
   },
 
