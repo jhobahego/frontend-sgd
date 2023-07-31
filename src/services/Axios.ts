@@ -1,5 +1,7 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { useAuth } from "@/store/authStore";
+import { getResponseMessage, getValidationError } from './Utils';
+import { notificationUtilities } from './notificationService';
 
 const setTokenInHeaders = (request: InternalAxiosRequestConfig) => {
   const authStore = useAuth()
@@ -21,5 +23,22 @@ const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use((request: InternalAxiosRequestConfig) => {
   return setTokenInHeaders(request)
 })
+
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse) => {
+    const { status } = response
+    if (status === 200) return response;
+
+    notificationUtilities.success(getResponseMessage(status));
+    return response
+  },
+  (error: AxiosError) => {
+    const status = error.response?.status
+    if (status) {
+      notificationUtilities.error(getValidationError(status))
+    }
+    return Promise.reject(error);
+  }
+)
 
 export default axiosInstance;
