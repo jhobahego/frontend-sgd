@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import { Ref, ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { RegisterUser } from '@/interfaces/User';
 import { obtenerUsuario, actualizarUsuario, eliminarUsuario } from '@/services/userService';
 import { notify } from '@kyvg/vue3-notification';
@@ -49,34 +49,31 @@ import SubmitBtn from '@/components/botones/SubmitBtn.vue'
 import CancelBtn from '@/components/botones/CancelBtn.vue'
 
 const usuario: Ref<RegisterUser> = ref({} as RegisterUser);
+const router = useRouter();
 
 onMounted(async () => {
   const route = useRoute();
   const correo = route.params.id;
 
-  usuario.value = await obtenerUsuario(correo);
+  const { data } = await obtenerUsuario(correo);
+  usuario.value = data;
 })
 
 async function editarUsuario() {
-  const res = await actualizarUsuario(usuario.value);
+  const { data, status } = await actualizarUsuario(usuario.value);
 
-  const { message: mensaje, body: usuarioActualizado } = res;
-  if (mensaje.length > 0) {
+  if (status === 200) {
     notify({
-      title: "Fallo al editar",
-      text: `${mensaje}`,
-      type: "error",
+      title: "Usuario actualizado",
+      text: `Usuario ${data.nombres} actualizado correctamente`,
+      type: "success",
       duration: 3000,
     })
-    return;
-  }
 
-  notify({
-    title: "Usuario actualizado",
-    text: `Usuario con nombre ${usuarioActualizado.nombres} actualizado correctamente`,
-    type: "success",
-    duration: 3000,
-  })
+    setTimeout(() => {
+      router.push("/usuarios");
+    }, 3000)
+  }
 }
 
 async function borrarUsuario(usuario_id: string) {
@@ -84,23 +81,21 @@ async function borrarUsuario(usuario_id: string) {
     return;
   }
 
-  const respuesta = await eliminarUsuario(usuario_id);
-  if (respuesta.status === false) {
+  const { status } = await eliminarUsuario(usuario_id);
+
+  if (status === 204) {
     notify({
-      title: "Ha ocurrido un error",
-      text: `${respuesta.message}`,
-      type: "error",
+      title: "Usuario eliminado",
+      text: `Usuario con id ${usuario_id} eliminado correctamente`,
+      type: "success",
       duration: 3000,
     })
-    return;
-  } 
 
-  notify({
-    title: "Usuario eliminado",
-    text: `${respuesta.message}`,
-    type: "success",
-    duration: 3000,
-  })
+    setTimeout(() => {
+      router.push("/usuarios");
+    }, 3000)
+  }
+
 }
 
 </script>
