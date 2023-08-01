@@ -27,7 +27,7 @@ axiosInstance.interceptors.request.use((request: InternalAxiosRequestConfig) => 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     const { status } = response
-    if (status === 200) return response;
+    if (status === 200 || status === 204) return response;
 
     notificationUtilities.success(getResponseMessage(status));
     return response
