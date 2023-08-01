@@ -1,4 +1,4 @@
-import { LoginUser, RegisterUser, Rol, UserResponse } from '@/interfaces/User'
+import { LoginUser, RegisterUser, UserResponse } from '@/interfaces/User'
 import { autenticarUsuario, obtenerUsuarioAutenticado, registrarUsuario } from '@/services/AuthService'
 import { defineStore } from 'pinia'
 import { useRecord } from './recordsStore'
@@ -8,41 +8,43 @@ export const useAuth = defineStore("auth", {
     return {
       token: "",
       usuario: {} as UserResponse,
-      error: "",
+      hasError: false,
       // loading: false,
       rol: ""
     }
   },
   actions: {
     async register(usuario: RegisterUser) {
-      const datos = await registrarUsuario(usuario);
-      if (!datos) {
-        this.error = "problema al registrar usuario";
-        return;
-      }
+      try {
+        const { data } = await registrarUsuario(usuario);
 
-      this.usuario = datos as UserResponse;
+        this.usuario = data;
+      } catch (error) {
+        this.hasError = true;
+      }
     },
 
     async login(usuario: LoginUser) {
-      const datos = await autenticarUsuario(usuario);
-      if (!datos) {
-        this.error = "problema al iniciar sesion";
-        return;
-      }
+      try {
+        const { data } = await autenticarUsuario(usuario);
 
-      this.token = datos.access_token;
+        this.token = data.access_token;
+      } catch (error) {
+        this.hasError = true;
+      }
     },
-
+    
     async profile() {
-      const datos = await obtenerUsuarioAutenticado(this.token);
-      if (!datos) {
-        this.error = "problema al obtener el perfil del usuario";
-        return;
-      }
+      if (this.token.length === 0) return;
 
-      this.rol = datos.rol as Rol;
-      this.usuario = datos as UserResponse;
+      try {
+        const { data } = await obtenerUsuarioAutenticado();
+
+        this.rol = data.rol;
+        this.usuario = data;
+      } catch (error) {
+        this.hasError = true;
+      }
     },
     logout() {
       const recordStore = useRecord();
@@ -50,6 +52,7 @@ export const useAuth = defineStore("auth", {
 
       this.rol = "";
       this.token = "";
+      this.hasError = false;
       this.usuario = {} as UserResponse;
     }
   },

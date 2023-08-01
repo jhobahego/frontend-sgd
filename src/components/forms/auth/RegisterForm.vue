@@ -10,16 +10,14 @@
       <input v-model="usuario.ciudad" class="register__input" type="text" placeholder="ciudad...">
       <input v-model="usuario.pais" class="register__input" type="text" placeholder="país...">
     </div>
-    <!-- <button type="submit" class="btn__register">Registrarse</button> -->
     <SubmitBtn title="Registrarse" :action="registrar" />
-    <notifications position="top right" width="200px" animation-type="css" classes="notify__topright--error" />
+    <notifications position="top right" animation-type="css" style="margin-top: 4em;" />
   </form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { LoginUser, RegisterUser } from '@/interfaces/User';
-import { notify } from '@kyvg/vue3-notification';
 import { useAuth } from '@/store/authStore';
 import SubmitBtn from '@/components/botones/SubmitBtn.vue'
 
@@ -40,24 +38,14 @@ export default defineComponent({
     async registrar() {
       const authStore = useAuth();
       await authStore.register(this.usuario);
-      const { usuario: userResponse } = authStore.$state;
 
-      if (!userResponse) {
-        notify({
-          title: "Problema al registrar",
-          text: "Hubo un problema al intentar registrar el usuario",
-          duration: 4000,
-        })
-        return;
-      }
+      const { hasError } = authStore.$state;
+      if (hasError) return;
 
       const { correo, contra } = this.usuario;
       await authStore.login({ correo, contra } as LoginUser);
 
-      const haveToken = authStore.token.length > 0;
-      if (haveToken) {
-        this.$router.push("/");
-      }
+      this.$router.push("/");
     }
   },
 

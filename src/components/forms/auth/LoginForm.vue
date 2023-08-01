@@ -5,14 +5,13 @@
     <input v-model="credentials.contra" class="login__input" type="password" placeholder="contraseña...">
     <SubmitBtn class="login__btn" title="Iniciar sesion" :action="iniciarSesion" />
     <span>¿olvidaste tu contraseña?</span>
-    <notifications position="top right" width="400px" animation-type="css" classes="notify__topright--error" />
+    <notifications position="top right" width="400px" animation-type="css" style="margin-top: 4em;" />
   </form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { LoginUser } from '@/interfaces/User';
-import { notify } from '@kyvg/vue3-notification';
 import { useAuth } from '@/store/authStore';
 import SubmitBtn from '@/components/botones/SubmitBtn.vue'
 
@@ -34,19 +33,12 @@ export default defineComponent({
       const store = useAuth();
 
       await store.login(this.credentials);
-      const token = store.token;
-      await store.profile();
 
-      if (token.length > 0) {
-        return this.$router.push("/");
-      }
-      
-      notify({
-        title: "Fallo al iniciar sesión",
-        text: "Correo electronico o contraseña invalidos",
-        type: "error",
-        closeOnClick: true,
-      })
+      const { hasError } = store.$state;
+      if (hasError) return;
+
+      await store.profile();
+      return this.$router.push("/");
     },
   },
 })
