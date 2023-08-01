@@ -87,24 +87,6 @@
   opacity: .8;
 }
 
-.notify__topright--success {
-  margin-top: 4em;
-  color: blue;
-  background: var(--green);
-  padding: .8em;
-  opacity: .9;
-  border-radius: 4px;
-}
-
-.notify__topright--error {
-  margin-top: 4em;
-  color: rgba(0, 0, 0, 0.733);
-  background: rgba(255, 0, 0, 0.884);
-  padding: .8em;
-  /* opacity: 4; */
-  border-radius: 4px;
-}
-
 .notification-title {
   font: inherit;
   padding-bottom: .4em;
