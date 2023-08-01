@@ -39,7 +39,9 @@ const busqueda = ref('');
 const criterio = ref('nombre');
 
 onMounted(async () => {
-  usuarios.value = await obtenerUsuarios();
+  const { data } = await obtenerUsuarios();
+  usuarios.value = data;
+
   if (usuarios.value.length > 1) {
     title.value = "Listado de usuarios";
   }
