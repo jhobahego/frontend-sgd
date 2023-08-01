@@ -21,7 +21,8 @@ const usuarios: Ref<UserResponse[]> = ref([])
 
 onMounted(async () => {
   documentos.value = await obtenerDocumentos()
-  usuarios.value = await obtenerUsuarios()
+  const { data } = await obtenerUsuarios()
+  usuarios.value = data
 })
 </script>
 
