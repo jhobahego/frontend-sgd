@@ -55,8 +55,8 @@
 }
 
 .btn__switch {
-  max-width: fit-content;
-  margin: 1.2em auto;
+  width: 85%;
+  margin: 1em auto;
   padding: .8em .8em;
   color: blue;
   background: #bdc2e8;
@@ -68,15 +68,25 @@
 }
 
 .btn__container {
-  width: 85;
+  width: 85%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-top: .8em;
+  gap: .2em;
+  margin: .8em auto 0;
+  border-top: 1px solid blue;
+}
+
+.btn__container span {
+  color: blue;
 }
 
 .btn__switch--register {
+  width: 100%;
   padding: .6em .6em;
+  margin: .6em 0 1.2em 0;
 }
 
 @media screen and (max-width: 900px) {
