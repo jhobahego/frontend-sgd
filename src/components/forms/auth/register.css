@@ -24,14 +24,8 @@
   font: inherit;
 }
 
-.btn__register {
+.register__btn {
   width: 85%;
+  padding: .8em .8em;
   margin: .6em 0;
-  border: none;
-  border-radius: 4px;
-  background: var(--green);
-  font: inherit;
-  color: blue;
-  padding: .6em .6em;
-  font-weight: 600;
 }

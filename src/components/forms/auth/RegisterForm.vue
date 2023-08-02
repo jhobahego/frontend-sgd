@@ -10,7 +10,7 @@
       <input v-model="usuario.ciudad" class="register__input" type="text" placeholder="ciudad...">
       <input v-model="usuario.pais" class="register__input" type="text" placeholder="país...">
     </div>
-    <SubmitBtn title="Registrarse" :action="registrar" />
+    <SubmitBtn title="Registrarse" class="register__btn" :action="registrar" />
     <notifications position="top right" animation-type="css" style="margin-top: 4em;" />
   </form>
 </template>
@@ -52,6 +52,6 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 @import url(register.css);
 </style>

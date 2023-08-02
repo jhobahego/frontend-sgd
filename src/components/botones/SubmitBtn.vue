@@ -21,7 +21,7 @@
 
 <style scoped>
 .submit__btn {
-  background: var(--light-blue-alpha);
+  background: var(--green);
   color: blue;
   font-weight: 600;
   border: none;

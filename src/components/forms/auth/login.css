@@ -21,14 +21,7 @@
 .login__btn {
   width: 85%;
   padding: .8em .8em;
-  border: none;
   margin: .6em 0;
-  border-radius: 4px;
-  background: var(--green);
-  color: blue;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
 }
 
 span {

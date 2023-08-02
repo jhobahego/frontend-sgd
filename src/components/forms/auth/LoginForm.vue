@@ -44,6 +44,6 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 @import url(login.css);
 </style>
