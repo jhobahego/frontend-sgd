@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { obtenerComprasDeUsuario } from "@/services/Purchase";
+import { obtenerComprasDeUsuario } from "@/services/PurchaseService";
 import { Registro } from "@/interfaces/Registro";
 
 export const useRecord = defineStore("record", {
@@ -11,12 +11,13 @@ export const useRecord = defineStore("record", {
   },
   actions: {
     async obtenerRegistros() {
-      const compras = await obtenerComprasDeUsuario();
-      if(compras?.length === 0) {
+      try {
+        const { data } = await obtenerComprasDeUsuario();
+
+        this.registros = data;
+      } catch (error) {
         this.error = "Este usuario no tiene compras";
-        return;
       }
-      this.registros = compras;
     }
   },
   persist: {

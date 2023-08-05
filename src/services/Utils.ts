@@ -8,10 +8,10 @@ import { PurchaseValidationResult, TypeWithKey } from "@/types";
 
 export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Solicitud, documento: Documento): Promise<PurchaseValidationResult> => {
   const validator = {} as PurchaseValidationResult;
-  
+
   if (documento.stock < 1 || cantidad < 1) {
     validator.message = "No puedes adquirir cantidades negativas";
-    
+
     return validator;
   }
 
@@ -31,20 +31,20 @@ export const puedesAdquirir = async ({ cliente, correo, opcion, cantidad }: Soli
   const yaPresto = await haPrestado(opcion, documento);
   if (yaPresto) {
     validator.message = "Ya has prestado este documento";
-    
+
     return validator;
   }
 
   const compraValida = puedeComprar(cantidad, documento.stock);
   if (opcion === 'compra' && !compraValida) {
     validator.message = "No puedes comprar mas documentos de los que hay disponibles";
-    
+
     return validator;
   }
 
   validator.canBuy = true;
   validator.message = `${cantidad} articulos de ${documento.titulo} agregados a tu galeria`;
-  
+
   return validator;
 }
 
@@ -58,6 +58,7 @@ const haPrestado = async (opcion: string, documento: Documento): Promise<boolean
   const recordStore = useRecord();
   if (opcion !== "prestamo") return false;
 
+  await recordStore.obtenerRegistros();
   const compras = recordStore.registros;
 
   return compras.some(registro =>
@@ -71,7 +72,7 @@ const puedeComprar = (cantidad: number, stock: number): boolean => {
 }
 
 export const normalizarRegistros = (registros: Registro[]): Registro[] => {
-  const registrosUnicos: Galeria = {compras: [], prestamos: []};
+  const registrosUnicos: Galeria = { compras: [], prestamos: [] };
 
   const registrosCompraUnicos = registros.filter(
     (registro) => registro.tipo_de_adquisicion === "compra" && !registro.activo
