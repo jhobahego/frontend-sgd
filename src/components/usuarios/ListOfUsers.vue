@@ -13,7 +13,7 @@
         <p class="userslist__detail">
           <strong>Correo: <span class="userslist__data">{{ usuario.correo }}</span></strong>
         </p>
-        <button class="user__details" @click="verDetalle(usuario._id)">Ver mas detalles</button>
+        <button class="user__details" @click="verDetalle(usuario.correo)">Ver mas detalles</button>
       </li>
     </ul>
   </article>
@@ -42,9 +42,9 @@ export default defineComponent({
   setup(props) {
     const router = useRouter();
 
-    const verDetalle = (usuario_id: string | undefined) => {
-      if (usuario_id != undefined) {
-        router.push({ name: 'EditarUsuario', params: { id: usuario_id} })
+    const verDetalle = (correo: string) => {
+      if (correo != undefined) {
+        router.push({ name: 'EditarUsuario', params: { id: correo } })
       }
     }
     const usuariosLimitados = computed(() => {
