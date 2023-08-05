@@ -31,7 +31,7 @@
 import { defineComponent } from 'vue';
 import { Documento } from '@/interfaces/Documento';
 import { Solicitud } from '@/interfaces/Solicitud';
-import { adquirirDocumento } from '@/services/Purchase';
+import { adquirirDocumento } from '@/services/PurchaseService';
 import { notify } from '@kyvg/vue3-notification';
 import { useAuth } from '@/store/authStore';
 import SubmitBtn from '@/components/botones/SubmitBtn.vue'
@@ -99,4 +99,4 @@ export default defineComponent({
 
 <style scoped>
 @import url(purchase.css);
-</style>
+</style>@/services/PurchaseService
