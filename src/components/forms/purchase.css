@@ -69,6 +69,7 @@
   margin-bottom: .8em;
   border-radius: 4px;
   font: inherit;
+  outline: none;
 }
 
 .form__select{
@@ -79,6 +80,7 @@
   border: none;
   margin-bottom: .4em;
   border-radius: 4px;
+  outline: none;
 }
 
 .purchase__btn {
