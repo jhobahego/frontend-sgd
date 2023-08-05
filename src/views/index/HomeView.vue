@@ -14,6 +14,7 @@
     <div class="records" v-if="autenticado">
       <Documents_adquired :registros="registros" />
     </div>
+    <notifications position="top right" animation-type="css" style="margin-top: 4em;" />
   </section>
 </template>
 
