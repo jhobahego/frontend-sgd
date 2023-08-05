@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { useAuth } from "@/store/authStore";
-import { getResponseMessage, getValidationError } from './Utils';
+import { getValidationError } from './Utils';
 import { notificationUtilities } from './notificationService';
 
 const setTokenInHeaders = (request: InternalAxiosRequestConfig) => {
@@ -26,10 +26,6 @@ axiosInstance.interceptors.request.use((request: InternalAxiosRequestConfig) => 
 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
-    const { status } = response
-    if (status === 200 || status === 204 || status === 301) return response;
-
-    notificationUtilities.success(getResponseMessage(status));
     return response
   },
   (error: AxiosError) => {

@@ -111,12 +111,3 @@ export const getValidationError = (status: number) => {
 
   return codeMatcher[status];
 }
-
-export const getResponseMessage = (status: number) => {
-  const codeMatcher: TypeWithKey<string> = {
-    201: 'Documento creado correctamente',
-    200: 'Operacion existosa'
-  }
-
-  return codeMatcher[status];
-}
