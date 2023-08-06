@@ -8,7 +8,7 @@ export const useAuth = defineStore("auth", {
     return {
       token: "",
       usuario: {} as UserResponse,
-      hasError: false,
+      hasError: true,
       // loading: false,
       rol: ""
     }
@@ -19,6 +19,7 @@ export const useAuth = defineStore("auth", {
         const { data } = await registrarUsuario(usuario);
 
         this.usuario = data;
+        this.hasError = false;
       } catch (error) {
         this.hasError = true;
       }
@@ -29,11 +30,12 @@ export const useAuth = defineStore("auth", {
         const { data } = await autenticarUsuario(usuario);
 
         this.token = data.access_token;
+        this.hasError = false;
       } catch (error) {
         this.hasError = true;
       }
     },
-    
+
     async profile() {
       if (this.token.length === 0) return;
 
@@ -42,6 +44,7 @@ export const useAuth = defineStore("auth", {
 
         this.rol = data.rol;
         this.usuario = data;
+        this.hasError = false;
       } catch (error) {
         this.hasError = true;
       }
@@ -52,7 +55,7 @@ export const useAuth = defineStore("auth", {
 
       this.rol = "";
       this.token = "";
-      this.hasError = false;
+      this.hasError = true;
       this.usuario = {} as UserResponse;
     }
   },

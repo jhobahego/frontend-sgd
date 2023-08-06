@@ -48,16 +48,16 @@ export default defineComponent({
       const store = useAuth();
       const recordStore = useRecord();
 
-      const usuario = store.usuario;
+      const { usuario, hasError } = store;
       this.autenticado = store.token.length > 0;
 
-      if (!usuario) return;
+      if (hasError) return;
 
       this.username = usuario.nombres;
 
       await recordStore.obtenerRegistros();
       const registro = recordStore.registros;
-      
+
       if (registro.length === 0) return;
 
       const registrosUnicos = normalizarRegistros(registro);
