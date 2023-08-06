@@ -11,6 +11,7 @@ import AuthView from '@/views/auth/AuthView.vue'
 import AdminView from '@/views/admin/AdminView.vue'
 import AllDocuments from '@/views/admin/documents/AllDocumentsView.vue'
 import DocumentDetailAdmin from '@/views/admin/documents/DocumentDetailView.vue'
+import NotFound from '@/views/notfound/NotFound.vue'
 import { useAuth } from '@/store/authStore'
 
 const routes: Array<RouteRecordRaw> = [
@@ -122,6 +123,11 @@ const routes: Array<RouteRecordRaw> = [
       rolNecesario: "ADMIN"
     }
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFoundView',
+    component: NotFound
+  }
 ]
 
 const router = createRouter({
