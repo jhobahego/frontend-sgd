@@ -4,7 +4,7 @@
   margin: 1em 0 2em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  
+
   align-items: center;
   justify-content: center;
 
@@ -37,15 +37,18 @@
   width: 90%;
   margin: 0 auto;
 }
+
 .purchaseform__info {
   padding: .4em;
   color: blue;
 }
+
 .purchaseform__title {
   text-align: center;
   font-weight: 600;
   padding-bottom: .6em;
 }
+
 .purchaseform__description {
   text-align: center;
   opacity: .7;
@@ -59,28 +62,45 @@
   align-items: center;
   justify-content: center;
   margin: .6em 0;
+  padding: 0 .8em;
+}
+
+.form__body label {
+  width: 100%;
+  color: blue;
+  font-weight: 600;
+  margin-bottom: .4em;
 }
 
 .form__email,
-.form__quantity{
-  width: 90%;
+.form__quantity {
+  width: 100%;
   padding: .1em .4em;
   border: none;
-  margin-bottom: .8em;
+  margin: .1em auto;
   border-radius: 4px;
   font: inherit;
   outline: none;
+  color: blue;
+  font-weight: 400;
 }
 
-.form__select{
-  width: 90%;
+.form__email::placeholder,
+.form__quantity::placeholder {
+  color: blue;
+  opacity: .6;
+}
+
+.form__select {
+  width: 100%;
   font: inherit;
-  color: rgba(0, 0, 0, 0.6);
+  color: blue;
   padding: .1em;
   border: none;
   margin-bottom: .4em;
   border-radius: 4px;
   outline: none;
+  font-weight: 400;
 }
 
 .purchase__btn {
@@ -88,7 +108,7 @@
   border: none;
   padding: .4em .8em;
   border-radius: 6px;
-  background: var(--green); 
+  background: var(--green);
   color: blue;
   font-weight: 600;
   cursor: pointer;
