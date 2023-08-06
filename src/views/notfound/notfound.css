@@ -1,0 +1,14 @@
+.title {
+  margin-top: .6em;
+}
+
+.home__link {
+  text-decoration: none;
+  padding: .4em .8em;
+  background: var(--green);
+  color: blue;
+  border-radius: 6px;
+  display: block;
+  margin: .6em auto;
+  width: fit-content;
+}
