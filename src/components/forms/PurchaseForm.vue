@@ -11,12 +11,21 @@
         <p class="purchaseform__description">precio: {{ documento.precio }}$</p>
       </header>
       <form class="form__body">
-        <input class="form__email" type="text" placeholder="correo@correo.com" v-model="solicitud.correo">
-        <input class="form__quantity" type="number" placeholder="12" v-model="solicitud.cantidad">
-        <select class="form__select" v-model="solicitud.opcion">
-          <option value="compra">compra</option>
-          <option value="prestamo">prestamo</option>
-        </select>
+        <label>
+          Digita tu correo:
+          <input class="form__email" type="text" placeholder="correo@correo.com" v-model="solicitud.correo">
+        </label>
+        <label>
+          cantidad:
+          <input class="form__quantity" type="number" placeholder="12" v-model="solicitud.cantidad">
+        </label>
+        <label>
+          tipo de adquisición:
+          <select class="form__select" v-model="solicitud.opcion">
+            <option value="compra">compra</option>
+            <option value="prestamo">prestamo</option>
+          </select>
+        </label>
 
         <div class="buttons">
           <SubmitBtn title="Adquirir" :action="comprar" />
@@ -42,7 +51,9 @@ export default defineComponent({
 
   data() {
     return {
-      solicitud: {} as Solicitud,
+      solicitud: {
+        opcion: "compra",
+      } as Solicitud,
     }
   },
 
