@@ -1,8 +1,11 @@
 <template>
   <section class="card__container">
-    <h2 v-if="documentosDisponibles.length < 0">No hay documentos disponibles de momento</h2>
+    <div v-if="documentosDisponibles.length === 0" class="empty-state">
+      <h2>No hay documentos disponibles</h2>
+      <p>En este momento no hay documentos disponibles para mostrar.</p>
+    </div>
 
-    <div v-for="documento in documentosDisponibles" :key="documento._id" v-else>
+    <div v-else v-for="documento in documentosDisponibles" :key="documento._id">
       <Documents_item :documento="documento" />
     </div>
   </section>
