@@ -15,7 +15,11 @@ export const obtenerDocumento = async (documento_id: string | string[]) => {
 }
 
 export const guardarDocumentoEnBD = async (form: FormData) => {
-  return await axiosInstance.post("/documentos/guardar", form);
+  return await axiosInstance.post("/documentos/guardar", form, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
 }
 
 export async function actualizarDocumento(documento: Documento) {

@@ -60,7 +60,7 @@
       </label>
     </div>
 
-    <img class="preview" :src="imagePreview" :alt="imagen.name" v-if="imagePreview.length > 0">
+    <img class="preview" :src="imagePreview" :alt="imagen?.name || 'Imagen seleccionada'" v-if="imagePreview.length > 0">
     <div class="imagen__div">
       <label class="label__imagen" for="imagen">subir imagen</label>
       <input class="input__imagen" type="file" @change="handleFile" id="imagen">
@@ -86,8 +86,20 @@ export default defineComponent({
   name: "DocumentForm",
   data() {
     return {
-      documento: {} as Documento,
-      imagen: {} as File,
+      documento: {
+        tipo_documento: "digital",
+        autor: "",
+        titulo: "",
+        descripcion: "",
+        imagen: "",
+        categoria: "desarrollo de software",
+        stock: 1,
+        precio: 0,
+        editorial: "",
+        idioma: "",
+        paginas: 0
+      } as Documento,
+      imagen: null as File | null,
       imagePreview: ""
     }
   },
@@ -97,25 +109,51 @@ export default defineComponent({
   },
   methods: {
     async guardarDocumento() {
-      const form = new FormData();
-      form.append("tipo_documento", this.documento.tipo_documento)
-      form.append("autor", this.documento.autor)
-      form.append("titulo", this.documento.titulo)
-      form.append("descripcion", this.documento.descripcion)
-      form.append("categoria", this.documento.categoria)
-      form.append("stock", this.documento.stock.toString())
-      form.append("precio", this.documento.precio.toString())
-      form.append("editorial", this.documento.editorial)
-      form.append("idioma", this.documento.idioma)
-      form.append("paginas", this.documento.paginas.toString())
-      form.append("imagen", this.imagen)
+      // Validar que todos los campos requeridos estén completos
+      if (!this.documento.titulo || !this.documento.autor || !this.documento.descripcion || 
+          !this.documento.editorial || !this.documento.idioma || !this.imagen) {
+        notify({
+          title: "Error",
+          text: "Por favor completa todos los campos requeridos, incluyendo la imagen",
+          type: "error"
+        });
+        return;
+      }
 
-      const { data } = await guardarDocumentoEnBD(form);
-      const id = data._id
+      try {
+        const form = new FormData();
+        form.append("tipo_documento", this.documento.tipo_documento);
+        form.append("autor", this.documento.autor);
+        form.append("titulo", this.documento.titulo);
+        form.append("descripcion", this.documento.descripcion);
+        form.append("categoria", this.documento.categoria);
+        form.append("stock", this.documento.stock.toString());
+        form.append("precio", this.documento.precio.toString());
+        form.append("editorial", this.documento.editorial);
+        form.append("idioma", this.documento.idioma);
+        form.append("paginas", this.documento.paginas.toString());
+        form.append("imagen", this.imagen);
 
-      setTimeout(() => {
-        this.$router.push(`/documento/${id}`)
-      }, 2000)
+        const { data } = await guardarDocumentoEnBD(form);
+        const id = data._id;
+
+        notify({
+          title: "Éxito",
+          text: "Documento guardado correctamente",
+          type: "success"
+        });
+
+        setTimeout(() => {
+          this.$router.push(`/documento/${id}`);
+        }, 2000);
+      } catch (error) {
+        console.error("Error al guardar documento:", error);
+        notify({
+          title: "Error",
+          text: "No se pudo guardar el documento. Verifica tu conexión y los datos ingresados.",
+          type: "error"
+        });
+      }
     },
 
     handleFile(event: Event) {
@@ -129,6 +167,7 @@ export default defineComponent({
         }
         reader.readAsDataURL(file);
       } else {
+        this.imagen = null;
         this.imagePreview = "";
       }
     },
