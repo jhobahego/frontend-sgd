@@ -19,6 +19,19 @@ export default defineConfig(({ mode }) => {
     // Puedes exponer las variables de entorno aquí si necesitas más control
     define: {
       'process.env': env
-    }
+    },
+    build: {
+      outDir: 'dist',
+      assetsDir: 'assets',
+      sourcemap: true,
+      // minify: 'terser',
+      // terserOptions: {
+      //   compress: {
+      //     drop_console: true,
+      //     drop_debugger: true
+      //   }              
+      // },
+      // chunkSizeWarningLimit: 2000
+    },
   }
 })
