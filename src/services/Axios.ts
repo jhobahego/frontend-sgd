@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { useAuth } from "@/store/authStore";
 import { getValidationError } from './Utils';
-import { notificationUtilities } from './notificationService';
+import { toastUtilities } from './toastNotificationService';
 
 const setTokenInHeaders = (request: InternalAxiosRequestConfig) => {
   const authStore = useAuth()
@@ -13,8 +13,13 @@ const setTokenInHeaders = (request: InternalAxiosRequestConfig) => {
   return request
 }
 
+// Determinar la URL base según el entorno
+const baseURL = import.meta.env.MODE === 'production' 
+  ? import.meta.env.VITE_PRODUCTION_API_URL 
+  : import.meta.env.VITE_API_URL;
+
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: /*"https://mintic-api.onrender.com",*/ "http://localhost:8000",
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   }
@@ -31,7 +36,7 @@ axiosInstance.interceptors.response.use(
   (error: AxiosError) => {
     const status = error.response?.status
     if (status) {
-      notificationUtilities.error(getValidationError(status))
+      toastUtilities.error(getValidationError(status))
     }
     return Promise.reject(error);
   }
