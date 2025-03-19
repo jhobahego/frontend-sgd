@@ -12,6 +12,7 @@ import AdminView from '@/views/admin/AdminView.vue'
 import AllDocuments from '@/views/admin/documents/AllDocumentsView.vue'
 import DocumentDetailAdmin from '@/views/admin/documents/DocumentDetailView.vue'
 import NotFound from '@/views/notfound/NotFound.vue'
+import IAView from '@/views/AI/IAView.vue'
 import { useAuth } from '@/store/authStore'
 
 const routes: Array<RouteRecordRaw> = [
@@ -121,6 +122,15 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       requireAuth: true,
       rolNecesario: "ADMIN"
+    }
+  },
+  {
+    path: '/ia',
+    name: 'IA',
+    component: IAView,
+    meta: { 
+      requireAuth: true,
+      title: 'Asistente IA'
     }
   },
   {
