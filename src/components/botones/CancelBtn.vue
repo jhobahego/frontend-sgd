@@ -1,5 +1,5 @@
 <template>
-  <router-link class="cancel__btn" :to="redirect">{{ text }}</router-link>
+  <router-link class="cancel__btn" :to="redirect || { name: 'documentsView' }">{{ text }}</router-link>
 </template>
 
 <script lang="ts">
