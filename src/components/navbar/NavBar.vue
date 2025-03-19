@@ -24,6 +24,12 @@
         <router-link class="navbar__link" :to="{ name: 'about' }" @click="cerrarMenu">Acerca de</router-link>
       </li>
 
+      <li class="navbar__item">
+        <div class="search-container">
+          <BusquedaSemantica />
+        </div>
+      </li>
+
       <router-link class="navbar__btn navbar__btn--link" :to="{ name: 'authView' }" v-if="!autenticado"
         @click="cerrarMenu">Iniciar sesión</router-link>
       <button class="navbar__btn" @click.prevent="cerrarSesion()" v-if="autenticado">Cerrar sesión</button>
@@ -31,8 +37,9 @@
   </nav>
 </template>
 <script lang="ts">
-import { defineComponent, watch } from 'vue';
+import { defineComponent, watch, computed, ref } from 'vue';
 import { useAuth } from '@/store/authStore';
+import BusquedaSemantica from '@/components/search/BusquedaSemantica.vue';
 
 export default defineComponent({
   name: "showNavegation",
@@ -42,6 +49,10 @@ export default defineComponent({
       autenticado: false,
       isAdmin: false
     };
+  },
+
+  components: {
+    BusquedaSemantica
   },
 
   methods: {
