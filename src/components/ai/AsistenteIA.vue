@@ -218,7 +218,7 @@ export default defineComponent({
 
     // Formatear mensaje con Markdown y sanitizar HTML
     const formatearMensaje = (texto: string) => {
-      const htmlSinSanitizar = marked(texto);
+      const htmlSinSanitizar = marked.parse(texto, { async: false });
       return DOMPurify.sanitize(htmlSinSanitizar);
     };
 
