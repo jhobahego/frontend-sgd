@@ -24,7 +24,7 @@
         <router-link class="navbar__link" :to="{ name: 'about' }" @click="cerrarMenu">Acerca de</router-link>
       </li>
 
-      <li class="navbar__item">
+      <li class="navbar__item" v-if="autenticado">
         <div class="search-container">
           <BusquedaSemantica />
         </div>
